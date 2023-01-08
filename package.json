@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider HOST=0 nuxt",
     "build": "NODE_OPTIONS=--openssl-legacy-provider nuxt build",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider nuxt start",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider PORT=5000 nuxt start",
     "generate": "NODE_OPTIONS=--openssl-legacy-provider nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",

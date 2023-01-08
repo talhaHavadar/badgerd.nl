@@ -74,8 +74,4 @@ export default {
     },
     download: false,
   },
-
-  server: {
-    host: '0',
-  },
 }
