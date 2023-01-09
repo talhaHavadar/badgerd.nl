@@ -3,9 +3,9 @@
     class="items-top relative flex min-h-[calc(100vh-3rem)] justify-center bg-zinc-100 subpixel-antialiased sm:items-center sm:pt-0"
   >
     <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
-      <div class="flex flex-row items-center p-4">
+      <div class="flex flex-row flex-wrap items-center p-4 lg:flex-nowrap">
         <div class="flex flex-col px-2">
-          <div id="carouselIndicators" class="slide carousel relative w-[50vw]" data-bs-ride="carousel">
+          <div id="carouselIndicators" class="slide carousel relative lg:w-[50vw]" data-bs-ride="carousel">
             <div class="carousel-indicators absolute right-0 bottom-0 left-0 mb-4 flex justify-center p-0">
               <button
                 type="button"
@@ -59,7 +59,7 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
-          <div class="flex pt-4 font-light">
+          <div class="pt-4 font-light">
             <a
               href="https://docs.dasharo.com/transparent-validation/sd-wire/usage-validation/#environment-preparation"
               target="_blank"
