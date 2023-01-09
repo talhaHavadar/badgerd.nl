@@ -22,3 +22,6 @@ jobs:
 
       - name: Build application
         run: yarn build
+
+      - name: Restart Server App
+        run: pm2 restart badgerd-nl

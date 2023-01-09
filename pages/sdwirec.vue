@@ -111,7 +111,8 @@
               like in the muxPi product.
               <br />
               <br />
-              Compatible with SDWire v1.4
+              Based on Tizen SDWire:
+              <a href="https://wiki.tizen.org/SDWire" target="_blank" class="text-blue-500 hover:text-blue-700">Wiki</a>
             </p>
           </div>
         </div>
