@@ -45,6 +45,7 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    '@nuxtjs/proxy',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -73,5 +74,13 @@ export default {
       },
     },
     download: false,
+  },
+  proxy: {
+    '/gif': {
+      target: 'https://media.giphy.com',
+      pathRewrite: {
+        '^/gif': '/',
+      },
+    },
   },
 }
