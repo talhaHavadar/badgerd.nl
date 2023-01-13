@@ -75,11 +75,20 @@ export default {
     },
     download: false,
   },
+  axios: {
+    proxy: true,
+  },
   proxy: {
     '/gif': {
       target: 'https://media.giphy.com',
       pathRewrite: {
         '^/gif': '/',
+      },
+    },
+    '/api': {
+      target: 'https://governor.badgerd.nl',
+      pathRewrite: {
+        '^/api': '',
       },
     },
   },

@@ -29,7 +29,7 @@ export default {
 
     if (qCodename) {
       console.log(`looking for ${qCodename}`)
-      const products = (await this.$axios.get(`https://governor.badgerd.nl/stripe/products`)).data
+      const products = (await this.$axios.get(`/api/stripe/products`)).data
       this.product = products.find((p) => p.codename === qCodename)
     }
     this.celebrationGif = this.getRandomGif()

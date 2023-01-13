@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="flex flex-col p-4">
-          <form action="https://governor.badgerd.nl/stripe/checkout" method="post">
+          <form action="/api/stripe/checkout" method="post">
             <div class="flex">
               <div class="flex flex-col">
                 <div class="flex items-center text-lg font-semibold">
@@ -167,7 +167,7 @@
 <script>
 export default {
   async asyncData({ $axios }) {
-    const products = (await $axios.get(`https://governor.badgerd.nl/stripe/products`)).data
+    const products = (await $axios.get(`/api/stripe/products`)).data
     const product = products.find((p) => p.codename === 'badgerd_sdwirec')
     return { product }
   },
