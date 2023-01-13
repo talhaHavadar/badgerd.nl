@@ -131,7 +131,7 @@
             <div v-if="product.reserved_stock > 0" class="text-xs font-normal text-red-600">
               {{ product.reserved_stock }} items reserved, might be yours, try again in 30 minutes
             </div>
-            <p class="text-xs font-light">
+            <p v-if="product.current_stock > 0 || product.ignore_stock" class="text-xs font-light">
               <span class="font-semibold">Living in EU?</span>
               <br />
               Then try this
