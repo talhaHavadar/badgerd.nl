@@ -6,7 +6,8 @@
         <h2 class="mt-10 text-center text-4xl font-extrabold">Thank You!</h2>
         <h2 class="my-2 text-center text-lg font-bold">Order# {{ orderId }}</h2>
         <p class="mt-2 w-[80%] text-center">
-          You made us this happy by just buying this <a :href="product.url" class="text-blue-500">beauty</a>. <br />
+          You made us this happy by just buying this <a :href="product.url" class="text-blue-500">beauty</a>.
+          <br />
           Please keep your order number safe. Your shipping confirmation will be send to your email.
         </p>
       </div>
