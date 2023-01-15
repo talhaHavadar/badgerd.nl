@@ -21,7 +21,7 @@
                     style="background: hsla(0, 0%, 100%, 0.55); backdrop-filter: blur(30px); z-index: 1"
                   >
                     <div class="mb-6 flex items-center">
-                      <h2 class="text-3xl font-bold">Badgerd SDWireC</h2>
+                      <h1 class="text-3xl font-bold">Badgerd SDWireC</h1>
                       <NuxtLink
                         to="/sdwirec"
                         class="ml-4 text-2xl font-bold text-blue-500 transition-all ease-in-out after:content-[attr(after)] hover:text-[1.6rem] hover:text-blue-600"
@@ -130,7 +130,9 @@
                   <img
                     :src="require('~/assets/sdwirec/badgerd-sdwirec-cad.png')"
                     class="rotate-lg-6 w-full rounded-lg shadow-lg"
-                    alt=""
+                    alt="SDWireC"
+                    title="SDWireC"
+                    loading="eager"
                   />
                   <!-- <img
                 src="https://mdbootstrap.com/img/new/ecommerce/vertical/121.jpg"
@@ -165,6 +167,59 @@ export default {
     const page = await $content('hello').fetch()
     return {
       page,
+    }
+  },
+  head() {
+    return {
+      title: 'Nest | Badgerd Technologies',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Discover our innovative solutions for interesting problems in our life. Buy one of our products to support us!',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Badgerd Technologies',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            'Discover our innovative solutions for interesting problems in our life. Buy one of our products to support us!',
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: '',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `${this.$config.baseURL}${this.$route.path}`,
+        },
+        {
+          hid: 'og:locale',
+          property: 'og:locale',
+          content: 'en_US',
+        },
+      ],
+    }
+  },
+  jsonld() {
+    return {
+      '@context': 'http://schema.org',
+      '@id': 'https://badgerd.nl/#webpage',
+      '@type': 'WebPage',
+      url: 'https://badgerd.nl/',
+      name: 'Badgerd Technologies',
     }
   },
 }

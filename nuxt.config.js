@@ -9,8 +9,12 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Discover our innovative solutions for interesting problems in our life. Buy one of our products to support us!',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -18,6 +22,7 @@ export default {
       { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
       { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
       { rel: 'manifest', href: '/site.webmanifest' },
+      { hid: 'canonical', rel: 'canonical', href: 'https://badgerd.nl' },
     ],
   },
 
@@ -25,7 +30,7 @@ export default {
   css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/node_modules/tw-elements', mode: 'client' }],
+  plugins: [{ src: '~/node_modules/tw-elements', mode: 'client' }, '~/plugins/jsonld'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -46,6 +51,8 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@nuxtjs/proxy',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -75,6 +82,7 @@ export default {
     },
     download: false,
   },
+
   axios: {
     proxy: true,
   },
@@ -91,5 +99,15 @@ export default {
         '^/api': '',
       },
     },
+  },
+
+  robots: {
+    UserAgent: '*',
+    Disallow: '',
+    Sitemap: 'https://badgerd.nl/sitemap.xml',
+  },
+
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || 'https://badgerd.nl',
   },
 }

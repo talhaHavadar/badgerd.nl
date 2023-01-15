@@ -31,7 +31,13 @@
             <div class="carousel-inner relative w-full overflow-hidden">
               <div class="carousel-item active float-left w-full">
                 <!-- active -->
-                <img :src="require('~/assets/sdwirec/badgerd-sdwirec-cad.png')" class="w-full" alt="KiCAD" />
+                <img
+                  :src="require('~/assets/sdwirec/badgerd-sdwirec-cad.png')"
+                  class="w-full"
+                  alt="KiCAD 3D View"
+                  title="KiCAD 3D View"
+                  loading="lazy"
+                />
               </div>
               <!-- <div class="carousel-item float-left w-full">
                 <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="block w-full" alt="Camera" />
@@ -63,6 +69,7 @@
             <a
               href="https://docs.dasharo.com/transparent-validation/sd-wire/usage-validation/#environment-preparation"
               target="_blank"
+              rel="external"
               class="text-zinc-700 hover:text-zinc-900"
               >Docs</a
             >
@@ -73,7 +80,7 @@
             <div class="flex">
               <div class="flex flex-col">
                 <div class="flex items-center text-lg font-semibold">
-                  <div>SDWireC</div>
+                  <h1>SDWireC</h1>
                   <div
                     v-if="product.current_stock < 10 && product.current_stock > 0"
                     class="pl-2 text-xs font-normal text-orange-600"
@@ -117,7 +124,6 @@
                   type="submit"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
-                  href="https://buy.stripe.com/00gaFH5ZJ2Ez05q6ow"
                   :disabled="product.current_stock == 0 && !product.ignore_stock"
                   class="ml-4 inline-block min-w-[6rem] rounded border border-zinc-700 bg-zinc-100 px-6 py-2.5 text-xs font-semibold uppercase leading-tight text-zinc-700 shadow-md transition duration-150 ease-in-out hover:bg-zinc-200 hover:shadow-lg focus:bg-zinc-700 focus:text-zinc-200 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-zinc-800 active:shadow-lg disabled:border-zinc-200 disabled:text-zinc-400"
                 >
@@ -135,8 +141,13 @@
               <span class="font-semibold">Living in EU?</span>
               <br />
               Then try this
-              <a href="https://buy.stripe.com/dR6013dsb0wr8BWbIR" class="text-blue-500 hover:text-blue-700">link</a> for
-              different shipping rates.
+              <a
+                href="https://buy.stripe.com/dR6013dsb0wr8BWbIR"
+                rel="external"
+                class="text-blue-500 hover:text-blue-700"
+                >link</a
+              >
+              for different shipping rates.
             </p>
             <hr class="mt-4" />
           </div>
@@ -155,7 +166,13 @@
               <br />
               <br />
               Based on Tizen SDWire:
-              <a href="https://wiki.tizen.org/SDWire" target="_blank" class="text-blue-500 hover:text-blue-700">Wiki</a>
+              <a
+                href="https://wiki.tizen.org/SDWire"
+                target="_blank"
+                rel="external"
+                class="text-blue-500 hover:text-blue-700"
+                >Wiki</a
+              >
             </p>
           </div>
         </div>
@@ -170,6 +187,69 @@ export default {
     const products = (await $axios.get(`/api/stripe/products`)).data
     const product = products.find((p) => p.codename === 'badgerd_sdwirec')
     return { product }
+  },
+  head() {
+    return {
+      title: 'SDWireC | Badgerd Technologies',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USBC now it is SDWireC.',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Badgerd SDWireC',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USBC now it is SDWireC.',
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `${this.$config.baseURL}${this.$route.path}`,
+        },
+        {
+          hid: 'og:locale',
+          property: 'og:locale',
+          content: 'en_US',
+        },
+      ],
+    }
+  },
+  jsonld() {
+    return {
+      '@context': 'http://schema.org',
+      '@id': 'https://badgerd.nl/#sdwirec',
+      '@type': 'Product',
+      url: 'https://badgerd.nl/sdwirec',
+      name: 'Badgerd SDWireC',
+      mainEntityOfPage: 'https://badgerd.nl/sdwirec',
+      image: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
+      offers: [
+        {
+          '@type': 'Offer',
+          priceCurrency: 'EUR',
+          price: 85,
+          sku: 'badgerd_sdwirec',
+        },
+      ],
+    }
   },
 }
 </script>
