@@ -241,6 +241,7 @@ export default {
       name: 'Badgerd SDWireC',
       mainEntityOfPage: 'https://badgerd.nl/sdwirec',
       image: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
+      desciption: 'USBC Variant of standard SDWire product, now we are calling it as SDWireC',
       offers: [
         {
           '@type': 'Offer',
