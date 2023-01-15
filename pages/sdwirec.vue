@@ -191,6 +191,13 @@ export default {
   head() {
     return {
       title: 'SDWireC | Badgerd Technologies',
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `${this.$config.baseURL}${this.$route.path}`,
+        },
+      ],
       meta: [
         {
           hid: 'description',
@@ -233,24 +240,44 @@ export default {
     }
   },
   jsonld() {
-    return {
-      '@context': 'http://schema.org',
-      '@id': 'https://badgerd.nl/#sdwirec',
-      '@type': 'Product',
-      url: 'https://badgerd.nl/sdwirec',
-      name: 'Badgerd SDWireC',
-      mainEntityOfPage: 'https://badgerd.nl/sdwirec',
-      image: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
-      desciption: 'USBC Variant of standard SDWire product, now we are calling it as SDWireC',
-      offers: [
-        {
-          '@type': 'Offer',
-          priceCurrency: 'EUR',
-          price: 85,
-          sku: 'badgerd_sdwirec',
-        },
-      ],
-    }
+    return [
+      {
+        '@context': 'http://schema.org',
+        '@id': 'https://badgerd.nl/#sdwirec',
+        '@type': 'Product',
+        url: 'https://badgerd.nl/sdwirec',
+        name: 'Badgerd SDWireC',
+        mainEntityOfPage: 'https://badgerd.nl/sdwirec',
+        image: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
+        desciption: 'USBC Variant of standard SDWire product, now we are calling it as SDWireC',
+        offers: [
+          {
+            '@type': 'Offer',
+            priceCurrency: 'EUR',
+            price: 85,
+            sku: 'badgerd_sdwirec',
+          },
+        ],
+      },
+      {
+        '@context': 'https://schema.org/',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Store',
+            item: 'https://badgerd.nl/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'SDWireC',
+            item: 'https://badgerd.nl/sdwirec',
+          },
+        ],
+      },
+    ]
   },
 }
 </script>

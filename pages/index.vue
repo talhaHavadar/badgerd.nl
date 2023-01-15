@@ -214,13 +214,33 @@ export default {
     }
   },
   jsonld() {
-    return {
-      '@context': 'http://schema.org',
-      '@id': 'https://badgerd.nl/#webpage',
-      '@type': 'WebPage',
-      url: 'https://badgerd.nl/',
-      name: 'Badgerd Technologies',
-    }
+    return [
+      {
+        '@context': 'http://schema.org',
+        '@id': 'https://badgerd.nl/#webpage',
+        '@type': 'WebPage',
+        url: 'https://badgerd.nl/',
+        name: 'Badgerd Technologies',
+      },
+      {
+        '@context': 'https://schema.org/',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Store',
+            item: 'https://badgerd.nl/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'SDWireC',
+            item: 'https://badgerd.nl/sdwirec',
+          },
+        ],
+      },
+    ]
   },
 }
 </script>
