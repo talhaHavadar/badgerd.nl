@@ -171,7 +171,7 @@ export default {
   },
   head() {
     return {
-      title: 'Nest | Badgerd Technologies',
+      title: 'Sett | Badgerd Technologies',
       meta: [
         {
           hid: 'description',

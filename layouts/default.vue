@@ -29,7 +29,7 @@
       </div>
       <div class="flex flex-grow flex-col items-end">
         <div class="flex flex-grow items-end">
-          <a href="https://github.com/Badger-Embedded" target="_blank"
+          <a href="https://github.com/Badger-Embedded" rel="nofollow,external" target="_blank"
             ><svg
               class="button--github h-6 w-6 text-zinc-600 hover:text-zinc-800"
               xmlns="http://www.w3.org/2000/svg"
@@ -48,9 +48,11 @@
           ></a>
         </div>
         <div class="flex items-end">
-          <a href="mailto:badgerdshop@gmail.com" class="p-1 hover:text-zinc-800">Contact</a>
+          <a href="mailto:badgerdshop@gmail.com" rel="nofollow" class="p-1 hover:text-zinc-800">Contact</a>
           <NuxtLink to="/refund" class="p-1 hover:text-zinc-800">Refund</NuxtLink>
-          <NuxtLink to="/terms" class="p-1 hover:text-zinc-800">Terms of Service</NuxtLink>
+          <NuxtLink to="/terms" class="p-1 hover:text-zinc-800"
+            >Terms <span class="hidden sm:inline">of Service</span></NuxtLink
+          >
           <NuxtLink to="/privacy" class="p-1 hover:text-zinc-800">Privacy</NuxtLink>
           <NuxtLink to="/legal" class="p-1 hover:text-zinc-800">Legal Notice</NuxtLink>
         </div>
