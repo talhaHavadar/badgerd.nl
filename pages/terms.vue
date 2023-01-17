@@ -28,8 +28,6 @@
           website. It is your responsibility to check this page periodically for changes. Your continued use of or
           access to the website following the posting of any changes constitutes acceptance of those changes. <br />
           <br />
-          Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell
-          our products and services to you. <br />
           <br />
           <strong>SECTION 1 - ONLINE STORE TERMS</strong> <br />
           By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state
@@ -250,7 +248,34 @@
           changes. Your continued use of or access to our website or the Service following the posting of any changes to
           these Terms of Service constitutes acceptance of those changes. <br />
           <br />
-          <strong>SECTION 20 - CONTACT INFORMATION</strong> <br />
+          <strong>SECTION 20 - PRE-ORDER TERMS</strong> <br />
+          <ul class="list-disc">
+            <li>'Full payment' is required and should be made via available payments option on badgerd.nl</li>
+            <li>You will be charged the full price of the products at the time of placing the pre-order.</li>
+            <li>
+              Although we will make efforts to begin delivering products as soon as posible, you understand and agree
+              that there may be delays. An estimated time of delivery is only an estimate, is subject to change. We do
+              not warrant that it will be shipped by the estimated date. As result, in the event that a delay arises and
+              the estimated shipment is not met, we are not responsible for any damages that may occur due to the delay
+              no shall it be obligated, except as set forth in these Terms of Service, to provide any discounts, refunds
+              or credits due to any such delays. We will provide you updates with respect to such delivery schedule.
+            </li>
+            <li>
+              If for any reason you decide that you do not wish to continue to wait for your product, you may cancel
+              your reservation as long as following case applies. Buyer or Seller may cancel the pre-order at any time
+              for any or no reason prior to our notice to you that your product is ready for delivery. If you do so
+              prior to our notice of delivery, you will obtain a refund of the purchase price without interest. If we
+              cancel your pre-order, you will receive a full refund of the purchase price without interest too.
+            </li>
+            <li>
+              Under no circumstances will Badgerd Technologies B.V. be held liable for any incidental, special or
+              consequential damages arising out or related to this agreement. In the event that Badgerd Technologies
+              B.V. is held liable for any damages arising out or related to these Terms of Services, your sole and
+              exclusive remedy will be the full refund of your purchase price without interest.
+            </li>
+          </ul>
+          <br />
+          <strong>SECTION 21 - CONTACT INFORMATION</strong> <br />
           Questions about the Terms of Service should be sent to us at badgerdshop@gmail.com.
         </div>
       </div>

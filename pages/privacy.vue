@@ -5,9 +5,9 @@
         <div>
           <h2 class="my-5 text-center text-lg font-bold">Privacy Policy for Badgerd Technologies B.V.</h2>
           <p>
-            At Badgerd Shop, accessible from photography.badgerd.nl, one of our main priorities is the privacy of our
-            visitors. This Privacy Policy document contains types of information that is collected and recorded by
-            Badgerd Shop and how we use it.
+            At Badgerd Shop, accessible from badgerd.nl, one of our main priorities is the privacy of our visitors. This
+            Privacy Policy document contains types of information that is collected and recorded by Badgerd Shop and how
+            we use it.
           </p>
           <p>
             If you have additional questions or require more information about our Privacy Policy, do not hesitate to
