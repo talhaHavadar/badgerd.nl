@@ -88,6 +88,7 @@
                     fill="currentColor"
                   /></svg
               ></a>
+              <a href="#quick-start" class="text-zinc-700 hover:text-zinc-900">How-To</a>
               <a
                 href="https://docs.dasharo.com/transparent-validation/sd-wire/usage-validation/#environment-preparation"
                 target="_blank"
@@ -216,17 +217,17 @@
           Our first step is to install dependencies to build the software we need to control SDWire. So let's execute
           the following command in shell.
         </p>
-        <code class="block overflow-x-scroll whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
+        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
           >sudo apt install build-essential libftdi1-dev libpopt-dev cmake</code
         >
         <p>Now it is time to install the software to control the SDWireC.</p>
-        <code class="block overflow-x-scroll whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
+        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
           >git clone https://github.com/Badger-Embedded/badgerd-sdwirec.git && cd badgerd-sdwirec/sdwirec-sw</code
         >
 
         <p>Build and install the sd-mux-ctrl application by executing standard cmake build commands.</p>
         <!-- prettier-ignore -->
-        <code class="overflow-x-scroll block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">mkdir build && cd build
+        <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">mkdir build && cd build
 cmake ..
 make
 sudo make install</code>
@@ -246,9 +247,7 @@ sudo make install</code>
             <ul class="mt-2 list-disc space-y-2 pl-8">
               <li>
                 <p>In your computer's terminal run the following command:</p>
-                <code class="block overflow-x-scroll whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-                  >sudo dmesg -w</code
-                >
+                <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo dmesg -w</code>
               </li>
               <li>Connect your computer (or another host machine) with SDWireC using USB cable</li>
               <li>
@@ -257,24 +256,24 @@ sudo make install</code>
               </li>
               <li>
                 <p>In another terminal window, run the following command:</p>
-                <code class="block overflow-x-scroll whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
+                <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
                   >sudo sd-mux-ctrl --list</code
                 >
                 <p>If you see following output in terminal, this means that your SDWireC is not configured.</p>
                 <!-- prettier-ignore -->
-                <code class="overflow-x-scroll block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">Number of FTDI devices found: 0</code>
+                <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">Number of FTDI devices found: 0</code>
                 <p>Let's configure it otherwise you can continue on step 4</p>
                 <ul class="mt-2 list-[square] space-y-2 pl-12">
                   <li>
                     <p>Run the following command to configure SDWireC:</p>
                     <!-- prettier-ignore -->
-                    <code class="overflow-x-scroll block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial={SerialNumber} --vendor=0x{idVendor} --product=0x{idProduct} --device-type=sd-wire --set-serial=sdwirec_10</code>
+                    <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial={SerialNumber} --vendor=0x{idVendor} --product=0x{idProduct} --device-type=sd-wire --set-serial=sdwirec_10</code>
                     <p>Remember that all these values are coming from 'dmesg' output.</p>
                   </li>
                   <li>
                     <p>Now we should be able to see our SDWireC is recognized by 'sd-mux-ctrl'</p>
                     <!-- prettier-ignore -->
-                    <code class="overflow-x-scroll block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --list
+                    <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --list
 Number of FTDI devices found: 1
 Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
                   </li>
@@ -285,7 +284,7 @@ Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
           <li>
             <p>Connect SDCard to your computer (host|ts)</p>
             <!-- prettier-ignore -->
-            <code class="overflow-x-scroll block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --ts</code>
+            <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --ts</code>
           </li>
           <li>
             Flash the SDCard using
@@ -303,7 +302,7 @@ Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
           <li>
             <p>Connect SD card to Raspberry Pi (DUT) with sd-mux-ctrl</p>
             <!-- prettier-ignore -->
-            <code class="overflow-x-scroll block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --dut</code>
+            <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --dut</code>
           </li>
           <li>
             <p>Connect power supply of Raspberry Pi (DUT) and then voila!</p>
