@@ -318,6 +318,10 @@ Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
 
 <script>
 export default {
+  middleware({ res }) {
+    console.log(res)
+    res.setHeader('Cache-Control', 'no-cache')
+  },
   async asyncData({ $axios }) {
     const products = (await $axios.get(`/api/stripe/products`)).data
     const product = products.find((p) => p.codename === 'badgerd_sdwirec')
