@@ -12,7 +12,7 @@
           >STORE</NuxtLink
         >
         <NuxtLink
-          to="/sdwirec"
+          to="/sdwirec/"
           class="mx-4 flex items-center justify-center transition-all ease-in-out hover:font-medium hover:text-zinc-50"
           >SDWireC</NuxtLink
         >
@@ -49,12 +49,12 @@
         </div>
         <div class="flex items-end">
           <a href="mailto:badgerdshop@gmail.com" rel="nofollow" class="p-1 hover:text-zinc-800">Contact</a>
-          <NuxtLink to="/refund" class="p-1 hover:text-zinc-800">Refund</NuxtLink>
-          <NuxtLink to="/terms" class="p-1 hover:text-zinc-800"
+          <NuxtLink to="/refund/" class="p-1 hover:text-zinc-800">Refund</NuxtLink>
+          <NuxtLink to="/terms/" class="p-1 hover:text-zinc-800"
             >Terms <span class="hidden sm:inline">of Service</span></NuxtLink
           >
-          <NuxtLink to="/privacy" class="p-1 hover:text-zinc-800">Privacy</NuxtLink>
-          <NuxtLink to="/legal" class="p-1 hover:text-zinc-800">Legal Notice</NuxtLink>
+          <NuxtLink to="/privacy/" class="p-1 hover:text-zinc-800">Privacy</NuxtLink>
+          <NuxtLink to="/legal/" class="p-1 hover:text-zinc-800">Legal Notice</NuxtLink>
         </div>
       </div>
     </div>

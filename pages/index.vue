@@ -23,10 +23,9 @@
                     <div class="mb-6 flex items-center">
                       <h1 class="text-3xl font-bold">Badgerd SDWireC</h1>
                       <NuxtLink
-                        to="/sdwirec"
+                        to="/sdwirec/"
                         class="ml-4 text-2xl font-bold text-blue-500 transition-all ease-in-out after:content-[attr(after)] hover:text-[1.6rem] hover:text-blue-600"
-                        after=" >"
-                        >Buy</NuxtLink
+                        >Buy ></NuxtLink
                       >
                     </div>
                     <p class="mb-6 text-gray-500">
@@ -236,7 +235,7 @@ export default {
             '@type': 'ListItem',
             position: 2,
             name: 'SDWireC',
-            item: 'https://badgerd.nl/sdwirec',
+            item: 'https://badgerd.nl/sdwirec/',
           },
         ],
       },
