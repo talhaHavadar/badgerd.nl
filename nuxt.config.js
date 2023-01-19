@@ -108,6 +108,10 @@ export default {
     Sitemap: 'https://badgerd.nl/sitemap.xml',
   },
 
+  sitemap: {
+    trailingSlash: true,
+  },
+
   publicRuntimeConfig: {
     baseURL: process.env.BASE_URL || 'https://badgerd.nl',
   },

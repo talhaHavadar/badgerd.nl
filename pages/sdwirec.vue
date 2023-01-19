@@ -161,16 +161,12 @@
                 {{ product.reserved_stock }} items reserved, might be yours, try again in 30 minutes
               </div>
               <p v-if="product.current_stock > 0 || product.ignore_stock" class="text-xs font-light">
-                <span class="font-semibold">Living in EU?</span>
+                <span class="font-semibold">Looking for a bulk order?</span>
                 <br />
-                Then try this
-                <a
-                  href="https://buy.stripe.com/dR6013dsb0wr8BWbIR"
-                  rel="nofollow"
-                  class="text-blue-500 hover:text-blue-700"
-                  >link</a
+                <a href="mailto:badgerdshop+quote@gmail.com" rel="nofollow" class="text-blue-500 hover:text-blue-700"
+                  >Contact</a
                 >
-                for different shipping rates.
+                us to get a quote.
               </p>
               <hr class="mt-4" />
             </div>
@@ -185,7 +181,7 @@
                 the device. There is only one USB-C socket for connecting to host PC. Both USB mass storage and MUX
                 control are served through the same USB connection. The PCB board is designed in such way that it fits
                 into micro SD card slots. Thanks to this, there is no need for special cables with a micro SD adapter,
-                like in the muxPi product.
+                like in the muxPi product. It can even be used as SD card reader on steroids.
                 <br />
                 <br />
                 Based on Tizen SDWire:
@@ -381,16 +377,43 @@ export default {
         '@id': 'https://badgerd.nl/#sdwirec',
         '@type': 'Product',
         url: 'https://badgerd.nl/sdwirec/',
-        name: 'Badgerd SDWireC',
+        name: 'Badgerd SDWireC | SDWire',
         mainEntityOfPage: 'https://badgerd.nl/sdwirec/',
         image: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
-        desciption: 'USBC Variant of standard SDWire product, now we are calling it as SDWireC',
+        description: 'USB-C Variant of standard SDWire product, now we are calling it as SDWireC',
+        brand: {
+          logo: 'https://badgerd.nl/logo-nobg.png',
+          slogan: 'Creating software for hardware, hardware for humanity',
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: 5,
+          reviewCount: 1,
+        },
+        review: [
+          {
+            '@type': 'Review',
+            author: 'Talha',
+            datePublished: '2023-01-19',
+            reviewBody:
+              'It does what you expect from an SDWire device. And having it with USB-C is another plus for me.',
+            name: 'First User',
+            reviewRating: {
+              '@type': 'Rating',
+              bestRating: 5,
+              ratingValue: 5,
+              worstRating: 1,
+            },
+          },
+        ],
         offers: [
           {
             '@type': 'Offer',
             priceCurrency: 'EUR',
+            availability: 'https://schema.org/PreOrder',
             price: 85,
             sku: 'badgerd_sdwirec',
+            priceValidUntil: '2023-12-31',
           },
         ],
       },
