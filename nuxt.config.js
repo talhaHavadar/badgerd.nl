@@ -8,7 +8,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
 
       {
         hid: 'description',
@@ -87,6 +87,7 @@ export default {
   axios: {
     proxy: true,
   },
+
   proxy: {
     '/gif': {
       target: 'https://media.giphy.com',

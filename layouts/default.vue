@@ -1,23 +1,23 @@
 <template>
   <div class="bg-zinc-100">
-    <div class="flex h-12 justify-start bg-zinc-700 p-1 text-sm font-normal text-zinc-200 subpixel-antialiased">
-      <div class="w-56" />
+    <div class="flex items-center justify-start bg-zinc-700 p-1 text-sm font-normal text-zinc-200 subpixel-antialiased">
+      <div class="w-1/6" />
       <NuxtLink to="/" class="mx-4"
         ><Logo class="h-10 w-10 fill-zinc-200 transition-all hover:fill-zinc-50"
       /></NuxtLink>
-      <div class="flex flex-grow justify-center">
+      <div class="flex flex-grow flex-wrap justify-center">
         <NuxtLink
           to="/"
-          class="mx-4 flex items-center justify-center transition-all hover:font-medium hover:text-zinc-50"
+          class="mx-4 flex items-center justify-center p-1 transition-all hover:font-medium hover:text-zinc-50"
           >STORE</NuxtLink
         >
         <NuxtLink
           to="/sdwirec/"
-          class="mx-4 flex items-center justify-center transition-all ease-in-out hover:font-medium hover:text-zinc-50"
+          class="mx-4 flex items-center justify-center p-1 transition-all ease-in-out hover:font-medium hover:text-zinc-50"
           >SDWireC</NuxtLink
         >
       </div>
-      <div class="w-56" />
+      <div class="w-1/6" />
     </div>
     <Nuxt />
     <div
