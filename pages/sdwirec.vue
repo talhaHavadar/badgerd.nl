@@ -147,20 +147,18 @@
                     <select
                       class="form-select-sm form-select m-0 block appearance-none rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-8 py-2 text-sm font-normal text-gray-700 transition ease-in-out focus:border-blue-500 focus:bg-white focus:text-zinc-700 focus:outline-none"
                       aria-label=".form-select-sm"
-                      name="quantity"
+                      name="country_code"
                       :disabled="product.current_stock == 0 && !product.ignore_stock"
                       required
                     >
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="NL">Netherlands</option>
+                      <option
+                        v-for="country in countries"
+                        :key="country.code"
+                        :selected="country.code == countries[0].code"
+                        :value="country.code"
+                      >
+                        {{ country.name }}
+                      </option>
                     </select>
                   </div>
                   <button
@@ -337,7 +335,13 @@ export default {
   async asyncData({ $axios }) {
     const products = (await $axios.get(`/api/stripe/products`)).data
     const product = products.find((p) => p.codename === 'badgerd_sdwirec')
-    return { product }
+    const shippingRates = (await $axios.get(`/api/shippingrates`)).data
+    const countries = []
+    for (const countryCode in shippingRates) {
+      countries.push({ code: countryCode, name: shippingRates[countryCode].name })
+    }
+    countries.sort((a, b) => (a.name > b.name ? 1 : -1))
+    return { product, countries }
   },
   head() {
     return {
