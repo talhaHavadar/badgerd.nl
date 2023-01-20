@@ -151,12 +151,8 @@
                       :disabled="product.current_stock == 0 && !product.ignore_stock"
                       required
                     >
-                      <option
-                        v-for="country in countries"
-                        :key="country.code"
-                        :selected="country.code == countries[0].code"
-                        :value="country.code"
-                      >
+                      <option value="" disabled selected>Your Country</option>
+                      <option v-for="country in countries" :key="country.code" :value="country.code">
                         {{ country.name }}
                       </option>
                     </select>
