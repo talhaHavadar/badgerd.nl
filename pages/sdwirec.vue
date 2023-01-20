@@ -133,13 +133,13 @@
                       :disabled="product.current_stock == 0 && !product.ignore_stock"
                       required
                     >
-                      <template v-if="product.current_stock < 10 && product.current_stock > 0">
+                      <template v-if="product.current_stock < 20 && product.current_stock > 0">
                         <option v-for="n in product.current_stock" :key="n" :selected="n == 1" :value="n">
                           {{ n }}
                         </option>
                       </template>
-                      <template v-else-if="product.current_stock > 10 || product.ignore_stock">
-                        <option v-for="n in 10" :key="n" :selected="n == 1" :value="n">
+                      <template v-else-if="product.current_stock > 20 || product.ignore_stock">
+                        <option v-for="n in 20" :key="n" :selected="n == 1" :value="n">
                           {{ n }}
                         </option>
                       </template>
