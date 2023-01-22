@@ -24,6 +24,17 @@ export default {
     product.url = '#'
     return { product, orderId, celebrationGif }
   },
+  head() {
+    return {
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `${this.$config.baseURL}${this.$route.path}`,
+        },
+      ],
+    }
+  },
 
   async mounted() {
     const qCodename = this.$route.query.codename

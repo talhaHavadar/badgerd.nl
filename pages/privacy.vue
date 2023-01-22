@@ -153,5 +153,17 @@
 </template>
 
 <script>
-export default {}
+export default {
+  head() {
+    return {
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `${this.$config.baseURL}${this.$route.path}`,
+        },
+      ],
+    }
+  },
+}
 </script>
