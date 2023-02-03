@@ -53,6 +53,8 @@
                     alt="SDWireC Host(TS) Activated"
                     title="SDWireC Host(TS) Activated"
                     loading="eager"
+                    width="828"
+                    height="828"
                   />
                 </div>
                 <div class="carousel-item relative float-left w-full">
@@ -62,6 +64,8 @@
                     alt="SDWireC Device(DUT) Activated"
                     title="SDWireC Device(DUT) Activated"
                     loading="eager"
+                    width="828"
+                    height="828"
                   />
                 </div>
                 <div class="carousel-item relative float-left w-full">
@@ -71,6 +75,8 @@
                     alt="SDWireC Top Side"
                     title="SDWireC Top Side"
                     loading="eager"
+                    width="828"
+                    height="828"
                   />
                 </div>
                 <div class="carousel-item relative float-left w-full">
@@ -80,6 +86,8 @@
                     alt="SDWireC Plugged Into Raspberry Pi Top Side"
                     title="SDWireC Plugged Into Raspberry Pi Top Side"
                     loading="eager"
+                    width="828"
+                    height="828"
                   />
                 </div>
                 <div class="carousel-item relative float-left w-full">
@@ -89,6 +97,8 @@
                     alt="KiCAD 3D View"
                     title="KiCAD 3D View"
                     loading="eager"
+                    width="828"
+                    height="828"
                   />
                 </div>
               </div>
