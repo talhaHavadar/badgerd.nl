@@ -20,36 +20,77 @@
                   aria-current="true"
                   aria-label="Slide 1"
                 ></button>
-                <!-- <button
-                type="button"
-                data-bs-target="#carouselIndicators"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselIndicators"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-              ></button> -->
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="3"
+                  aria-label="Slide 4"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="4"
+                  aria-label="Slide 5"
+                ></button>
               </div>
               <div class="carousel-inner relative w-full overflow-hidden">
-                <div class="carousel-item active float-left w-full">
-                  <!-- active -->
+                <div class="carousel-item active relative float-left w-full">
                   <img
-                    :src="require('~/assets/sdwirec/badgerd-sdwirec-cad.png')"
-                    class="w-full"
-                    alt="KiCAD 3D View"
-                    title="KiCAD 3D View"
-                    loading="lazy"
+                    :src="require('~/assets/sdwirec/sdwirec-2.jpg')"
+                    class="block w-full"
+                    alt="SDWireC Host(TS) Activated"
+                    title="SDWireC Host(TS) Activated"
+                    loading="eager"
                   />
                 </div>
-                <!-- <div class="carousel-item float-left w-full">
-                <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="block w-full" alt="Camera" />
-              </div>
-              <div class="carousel-item float-left w-full">
-                <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="block w-full" alt="Exotic Fruits" />
-              </div> -->
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/sdwirec/sdwirec-3.jpg')"
+                    class="block w-full"
+                    alt="SDWireC Device(DUT) Activated"
+                    title="SDWireC Device(DUT) Activated"
+                    loading="eager"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/sdwirec/sdwirec-4.jpg')"
+                    class="block w-full"
+                    alt="SDWireC Top Side"
+                    title="SDWireC Top Side"
+                    loading="eager"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/sdwirec/sdwirec-5.jpg')"
+                    class="block w-full"
+                    alt="SDWireC Plugged Into Raspberry Pi Top Side"
+                    title="SDWireC Plugged Into Raspberry Pi Top Side"
+                    loading="eager"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/sdwirec/badgerd-sdwirec-cad.png')"
+                    class="block w-full"
+                    alt="KiCAD 3D View"
+                    title="KiCAD 3D View"
+                    loading="eager"
+                  />
+                </div>
               </div>
               <button
                 class="carousel-control-prev absolute top-0 bottom-0 left-0 flex items-center justify-center border-0 p-0 text-center hover:no-underline hover:outline-none focus:no-underline focus:outline-none"
@@ -399,7 +440,7 @@ export default {
         url: 'https://badgerd.nl/sdwirec/',
         name: 'Badgerd SDWireC | SDWire',
         mainEntityOfPage: 'https://badgerd.nl/sdwirec/',
-        image: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
+        image: 'https://www.badgerd.nl/sdwirec/sdwirec-5.jpg',
         description: 'USB-C Variant of standard SDWire product, now we are calling it as SDWireC',
         brand: {
           logo: 'https://badgerd.nl/logo-nobg.png',
