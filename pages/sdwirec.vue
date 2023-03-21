@@ -171,6 +171,12 @@
                   >
                     Out of Stock
                   </div>
+                  <div
+                    v-else-if="!product.ignore_stock && product.current_stock > 0"
+                    class="flex text-sm font-bold text-green-600"
+                  >
+                    In Stock
+                  </div>
                   <div v-else-if="product.ignore_stock" class="flex text-sm font-light text-orange-600">
                     Open for Pre-Order
                   </div>
@@ -279,7 +285,7 @@
           the following command in shell.
         </p>
         <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-          >sudo apt install build-essential libftdi1-dev libpopt-dev cmake</code
+          >sudo apt install build-essential libftdi1-dev libpopt-dev cmake pkg-config</code
         >
         <p>Now it is time to install the software to control the SDWireC.</p>
         <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
@@ -485,7 +491,7 @@ export default {
           {
             '@type': 'Offer',
             priceCurrency: 'EUR',
-            availability: 'https://schema.org/PreOrder',
+            availability: 'https://schema.org/InStock',
             price: 85,
             sku: 'badgerd_sdwirec',
             priceValidUntil: '2023-12-31',
