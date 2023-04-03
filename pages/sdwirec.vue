@@ -161,10 +161,13 @@
                     >
                       Last {{ product.current_stock }} items
                     </div>
+                    <div v-else-if="product.current_stock != 0" class="pl-2 text-xs font-normal text-green-600">
+                      Last {{ product.current_stock }} items
+                    </div>
                   </div>
 
                   <input type="hidden" name="codename" value="badgerd_sdwirec" />
-                  <div class="font-semibold">€85.00 + shipping and handling</div>
+                  <div class="font-semibold">€85.00 <span class="text-xs font-light">(incl. VAT)</span> + Shipping</div>
                   <div
                     v-if="product.current_stock == 0 && !product.ignore_stock"
                     class="flex text-sm font-light text-red-600"
@@ -232,7 +235,7 @@
                 {{ product.reserved_stock }} items reserved, might be yours, try again in 30 minutes
               </div>
               <p v-if="product.current_stock > 0 || product.ignore_stock" class="text-xs font-light">
-                <span class="font-semibold">Looking for a bulk order?</span>
+                <span class="font-semibold">Looking for a bulk order or B2B?</span>
                 <br />
                 <a href="mailto:badgerdshop+quote@gmail.com" rel="nofollow" class="text-blue-500 hover:text-blue-700"
                   >Contact</a
