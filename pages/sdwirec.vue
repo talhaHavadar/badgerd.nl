@@ -32,26 +32,25 @@
                   data-bs-slide-to="2"
                   aria-label="Slide 3"
                 ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselIndicators"
-                  data-bs-slide-to="3"
-                  aria-label="Slide 4"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselIndicators"
-                  data-bs-slide-to="4"
-                  aria-label="Slide 5"
-                ></button>
               </div>
               <div class="carousel-inner relative w-full overflow-hidden">
                 <div class="carousel-item active relative float-left w-full">
                   <img
+                    :src="require('~/assets/sdwirec/sdwirec-1.jpg')"
+                    class="block w-full"
+                    alt="SDWireC Top View"
+                    title="SDWireC Top View"
+                    loading="eager"
+                    width="828"
+                    height="828"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
                     :src="require('~/assets/sdwirec/sdwirec-2.jpg')"
                     class="block w-full"
-                    alt="SDWireC Host(TS) Activated"
-                    title="SDWireC Host(TS) Activated"
+                    alt="SDWireC Bottom View"
+                    title="SDWireC Bottom View"
                     loading="eager"
                     width="828"
                     height="828"
@@ -61,41 +60,8 @@
                   <img
                     :src="require('~/assets/sdwirec/sdwirec-3.jpg')"
                     class="block w-full"
-                    alt="SDWireC Device(DUT) Activated"
-                    title="SDWireC Device(DUT) Activated"
-                    loading="eager"
-                    width="828"
-                    height="828"
-                  />
-                </div>
-                <div class="carousel-item relative float-left w-full">
-                  <img
-                    :src="require('~/assets/sdwirec/sdwirec-4.jpg')"
-                    class="block w-full"
-                    alt="SDWireC Top Side"
-                    title="SDWireC Top Side"
-                    loading="eager"
-                    width="828"
-                    height="828"
-                  />
-                </div>
-                <div class="carousel-item relative float-left w-full">
-                  <img
-                    :src="require('~/assets/sdwirec/sdwirec-5.jpg')"
-                    class="block w-full"
-                    alt="SDWireC Plugged Into Raspberry Pi Top Side"
-                    title="SDWireC Plugged Into Raspberry Pi Top Side"
-                    loading="eager"
-                    width="828"
-                    height="828"
-                  />
-                </div>
-                <div class="carousel-item relative float-left w-full">
-                  <img
-                    :src="require('~/assets/sdwirec/badgerd-sdwirec-cad.png')"
-                    class="block w-full"
-                    alt="KiCAD 3D View"
-                    title="KiCAD 3D View"
+                    alt="SDWireC Being Used in Remote"
+                    title="SDWireC Being Used in Remote"
                     loading="eager"
                     width="828"
                     height="828"

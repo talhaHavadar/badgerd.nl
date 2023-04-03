@@ -127,7 +127,7 @@
                 </div>
                 <div class="md:mb-12 lg:mb-0">
                   <img
-                    :src="require('~/assets/sdwirec/badgerd-sdwirec-cad.png')"
+                    :src="require('~/assets/sdwirec/sdwirec-1.jpg')"
                     class="rotate-lg-6 w-full rounded-lg shadow-lg"
                     alt="SDWireC"
                     title="SDWireC"
