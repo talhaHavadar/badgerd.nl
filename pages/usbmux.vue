@@ -113,7 +113,7 @@
                     </div>
                   </div>
 
-                  <input type="hidden" name="codename" value="badgerd_sdwirec" />
+                  <input type="hidden" name="codename" value="badgerd_usbmux" />
                   <div class="font-semibold">
                     €180.00 <span class="text-xs font-light">(incl. VAT)</span> + Shipping
                   </div>
