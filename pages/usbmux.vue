@@ -1,7 +1,12 @@
 <template>
   <div>
+    <div class="relative h-20 w-full bg-blue-400 p-4 text-center font-medium text-slate-200">
+      10% of your purchase of USBMux will be donated to
+      <a href="https://oceanfdn.org/" rel="nofollow" target="_blank">The Ocean Foundation</a>
+      <span class="block text-sm font-light">Thank you for supporting efforts to save our oceans!</span>
+    </div>
     <div
-      class="items-top relative flex min-h-[calc(100vh-3rem)] flex-col justify-center bg-zinc-100 subpixel-antialiased sm:items-center sm:pt-0"
+      class="items-top relative flex min-h-[calc(100vh-10rem)] flex-col justify-center bg-zinc-100 subpixel-antialiased sm:items-center sm:pt-0"
     >
       <div class="mx-auto max-w-[1656px] sm:px-6 lg:px-8">
         <div class="flex flex-row flex-wrap items-center p-4 lg:flex-nowrap">
@@ -20,32 +25,26 @@
                   aria-current="true"
                   aria-label="Slide 1"
                 ></button>
-                <button
+                <!-- <button
                   type="button"
                   data-bs-target="#carouselIndicators"
                   data-bs-slide-to="1"
                   aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
+                ></button> -->
               </div>
               <div class="carousel-inner relative w-full overflow-hidden">
                 <div class="carousel-item active relative float-left w-full">
                   <img
-                    :src="require('~/assets/sdwirec/sdwirec-1.jpg')"
+                    :src="require('~/assets/usbmux/usbmux-cad.png')"
                     class="block w-full"
-                    alt="SDWireC Top View"
-                    title="SDWireC Top View"
+                    alt="USBMux Cad View"
+                    title="USBMux Cad View"
                     loading="eager"
                     width="828"
                     height="828"
                   />
                 </div>
-                <div class="carousel-item relative float-left w-full">
+                <!-- <div class="carousel-item relative float-left w-full">
                   <img
                     :src="require('~/assets/sdwirec/sdwirec-2.jpg')"
                     class="block w-full"
@@ -55,18 +54,7 @@
                     width="828"
                     height="828"
                   />
-                </div>
-                <div class="carousel-item relative float-left w-full">
-                  <img
-                    :src="require('~/assets/sdwirec/sdwirec-3.jpg')"
-                    class="block w-full"
-                    alt="SDWireC Being Used in Remote"
-                    title="SDWireC Being Used in Remote"
-                    loading="eager"
-                    width="828"
-                    height="828"
-                  />
-                </div>
+                </div> -->
               </div>
               <button
                 class="carousel-control-prev absolute top-0 bottom-0 left-0 flex items-center justify-center border-0 p-0 text-center hover:no-underline hover:outline-none focus:no-underline focus:outline-none"
@@ -106,13 +94,6 @@
                   /></svg
               ></a>
               <a href="#quick-start" class="text-zinc-700 hover:text-zinc-900">How-To</a>
-              <a
-                href="https://docs.dasharo.com/transparent-validation/sd-wire/usage-validation/#environment-preparation"
-                target="_blank"
-                rel="nofollow,external"
-                class="text-zinc-700 hover:text-zinc-900"
-                >Docs</a
-              >
             </div>
           </div>
           <div class="flex flex-col p-4">
@@ -120,7 +101,7 @@
               <div class="flex flex-wrap space-y-5 sm:flex-nowrap sm:space-y-2 sm:space-x-8">
                 <div class="flex flex-col">
                   <div class="flex items-center text-lg font-semibold">
-                    <p>SDWireC</p>
+                    <p>USBMux</p>
                     <div
                       v-if="product.current_stock < 10 && product.current_stock > 0"
                       class="pl-2 text-xs font-normal text-orange-600"
@@ -133,7 +114,9 @@
                   </div>
 
                   <input type="hidden" name="codename" value="badgerd_sdwirec" />
-                  <div class="font-semibold">€85.00 <span class="text-xs font-light">(incl. VAT)</span> + Shipping</div>
+                  <div class="font-semibold">
+                    €180.00 <span class="text-xs font-light">(incl. VAT)</span> + Shipping
+                  </div>
                   <div
                     v-if="product.current_stock == 0 && !product.ignore_stock"
                     class="flex text-sm font-light text-red-600"
@@ -190,7 +173,7 @@
                     :disabled="product.current_stock == 0 && !product.ignore_stock"
                     class="inline-block w-full min-w-[6rem] rounded border border-zinc-700 bg-zinc-100 px-6 py-2.5 text-xs font-semibold uppercase leading-tight text-zinc-700 shadow-md transition duration-150 ease-in-out hover:bg-zinc-200 hover:shadow-lg focus:bg-zinc-700 focus:text-zinc-200 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-zinc-800 active:shadow-lg disabled:border-zinc-200 disabled:text-zinc-400"
                   >
-                    Buy
+                    Pre Order
                   </button>
                 </div>
               </div>
@@ -201,9 +184,15 @@
                 {{ product.reserved_stock }} items reserved, might be yours, try again in 30 minutes
               </div>
               <p v-if="product.current_stock > 0 || product.ignore_stock" class="text-xs font-light">
-                <span class="font-semibold">Looking for a bulk order or B2B?</span>
+                <span v-if="product.ignore_stock" class="block font-semibold text-orange-600"
+                  >Use <span class="font-bold">PREORDER30</span> at checkout to get 30% discount.</span
+                >
+                <span class="font-semibold">Looking for a bulk order or B2B(VAT-free)?</span>
                 <br />
-                <a href="mailto:badgerdshop+quote@gmail.com" rel="nofollow" class="text-blue-500 hover:text-blue-700"
+                <a
+                  href="mailto:badgerdshop+quoteusbmux@gmail.com"
+                  rel="nofollow"
+                  class="text-blue-500 hover:text-blue-700"
                   >Contact</a
                 >
                 us to get a quote.
@@ -212,26 +201,29 @@
             </div>
             <div class="flex flex-col justify-around text-sm">
               <p class="">
-                The Badger<span class="font-bold text-red-700">'</span>d way of the infamous SDWire. It can be used to
-                automate testing sdcard interface or in 3D printing or to create a fully remote working place. In our
-                version of SDWire, we used USB-C interface to communicate with host.
+                USBMux is a device that helps you to control connection of three different usb ports. USB-mux has three
+                USB 2.0 ports, Host, DUT and Device.
                 <br />
                 <br />
-                SDWireC allows to flash SD card connected to the DUT (Device Under Test), without physical contact with
-                the device. There is only one USB-C socket for connecting to host PC. Both USB mass storage and MUX
-                control are served through the same USB connection. The PCB board is designed in such way that it fits
-                into micro SD card slots. Thanks to this, there is no need for special cables with a micro SD adapter,
-                like in the muxPi product. It can even be used as SD card reader on steroids.
+                The Host port is used to control the USBMux with our cli software tool.
                 <br />
                 <br />
-                Based on Tizen SDWire:
-                <a
-                  href="https://wiki.tizen.org/SDWire"
-                  target="_blank"
-                  rel="nofollow"
-                  class="text-blue-500 hover:text-blue-700"
-                  >Wiki</a
-                >
+                The Device port is used to connect USB devices like USB flash storage devices, mouses etc.
+                <br />
+                <br />
+                The DUT port is used to connect the device under test. It allows device itself to act as USB host or USB
+                device. You can also control USB ID pin using our usb-mux-ctrl cli tool.
+                <br />
+                <br />
+                The USBMux uses the analog switches and power transistors to create connections between all these three
+                ports. It allows you to connect
+                <span class="font-semibold">Host to Device</span>, <span class="font-semibold">Device to DUT</span> and
+                <span class="font-semibold">Host to DUT</span> using cli tool.
+                <br />
+                <br />
+                You can connect your host to the device port to write data to a connected flash storage before
+                connecting DUT to Device port. Or you can connect your DUT to the host port to test DUT device in its
+                device functionality.
                 <br />
                 <br />
                 Go to <a href="#quick-start" class="text-blue-500 hover:text-blue-700">Quick Start</a> guide to start
@@ -245,108 +237,10 @@
     <hr class="lg:mt-16" />
     <div class="my-4 flex justify-center">
       <div class="max-w-7xl space-y-4 px-6 sm:px-16 lg:px-32">
-        <h1 id="quick-start" class="my-8 px-4 text-center text-lg font-bold lg:my-12">
-          How to use Badgerd's SDWire with USB-C?
-        </h1>
-
-        <p class="">
-          Our first step is to install dependencies to build the software we need to control SDWire. So let's execute
-          the following command in shell.
-        </p>
-        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-          >sudo apt install build-essential libftdi1-dev libpopt-dev cmake pkg-config</code
-        >
-        <p>Now it is time to install the software to control the SDWireC.</p>
-        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-          >git clone https://github.com/Badger-Embedded/badgerd-sdwirec.git && cd badgerd-sdwirec/sdwirec-sw</code
-        >
-
-        <p>Build and install the sd-mux-ctrl application by executing standard cmake build commands.</p>
-        <!-- prettier-ignore -->
-        <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">mkdir build && cd build
-cmake ..
-make
-sudo make install</code>
-        <p>Commands above will install `sd-mux-ctrl` into /usr/local/bin</p>
-
-        <p>
-          Since we have the tools we need, now we can continue on actually using the SDWireC. To do that we need a
-          Raspberry Pi like device that has an SD Card slot so that we can place our SDWireC into it. Plus, we also need
-          an USB cable to connect SDWireC to our computer. (In this case I am using my
-          <span class="text-orange-600">Ubuntu</span> host)
-        </p>
-        <ol class="list-decimal space-y-2 pl-4">
-          <li>Make sure that Raspberry Pi is not powered</li>
-          <li>Place SDWireC into Raspberry Pi's SD Card slot</li>
-          <li>
-            Let's check if our SDWireC is already configured or not
-            <ul class="mt-2 list-disc space-y-2 pl-8">
-              <li>
-                <p>In your computer's terminal run the following command:</p>
-                <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo dmesg -w</code>
-              </li>
-              <li>Connect your computer (or another host machine) with SDWireC using USB cable</li>
-              <li>
-                Then you should be able to see 'idVendor', 'idProduct', 'SerialNumber'(alphanumeric) of the SDWireC. We
-                are going to use these values to configure if our SDWireC is not configured yet. Let's check that!
-              </li>
-              <li>
-                <p>In another terminal window, run the following command:</p>
-                <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-                  >sudo sd-mux-ctrl --list</code
-                >
-                <p>If you see following output in terminal, this means that your SDWireC is not configured.</p>
-                <!-- prettier-ignore -->
-                <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">Number of FTDI devices found: 0</code>
-                <p>Let's configure it otherwise you can continue on step 4</p>
-                <ul class="mt-2 list-[square] space-y-2 pl-12">
-                  <li>
-                    <p>Run the following command to configure SDWireC:</p>
-                    <!-- prettier-ignore -->
-                    <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial={SerialNumber} --vendor=0x{idVendor} --product=0x{idProduct} --device-type=sd-wire --set-serial=sdwirec_10</code>
-                    <p>Remember that all these values are coming from 'dmesg' output.</p>
-                  </li>
-                  <li>
-                    <p>Now we should be able to see our SDWireC is recognized by 'sd-mux-ctrl'</p>
-                    <!-- prettier-ignore -->
-                    <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --list
-Number of FTDI devices found: 1
-Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <p>Connect SDCard to your computer (host|ts)</p>
-            <!-- prettier-ignore -->
-            <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --ts</code>
-          </li>
-          <li>
-            Flash the SDCard using
-            <a
-              href="https://www.raspberrypi.com/software/"
-              class="text-blue-500 hover:text-blue-700"
-              rel="nofollow,external"
-              >RPi Imager</a
-            >
-            or
-            <a href="https://www.balena.io/etcher" class="text-blue-500 hover:text-blue-700" rel="nofollow,external"
-              >BalenaEtcher</a
-            >
-          </li>
-          <li>
-            <p>Connect SD card to Raspberry Pi (DUT) with sd-mux-ctrl</p>
-            <!-- prettier-ignore -->
-            <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --dut</code>
-          </li>
-          <li>
-            <p>Connect power supply of Raspberry Pi (DUT) and then voila!</p>
-          </li>
-        </ol>
-
+        <h1 id="quick-start" class="my-8 px-4 text-center text-lg font-bold lg:my-12">How to use Badgerd's USBMux?</h1>
+        <p>This guide still a work in progress so please keep checking this page to see updates!</p>
         <br />
-        <p>Hope this quick start guide helps you to give our SDWireC a kickstart. See you in another challenge!</p>
+        <p>Hope this quick start guide helps you to give our USBMux a kickstart. See you in another challenge!</p>
       </div>
     </div>
   </div>
@@ -356,7 +250,7 @@ Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
 export default {
   async asyncData({ $axios }) {
     const products = (await $axios.get(`/api/stripe/products`)).data
-    const product = products.find((p) => p.codename === 'badgerd_sdwirec')
+    const product = products.find((p) => p.codename === 'badgerd_usbmux')
     const shippingRates = (await $axios.get(`/api/shippingrates`)).data
     const countries = []
     for (const countryCode in shippingRates) {
@@ -367,7 +261,7 @@ export default {
   },
   head() {
     return {
-      title: 'Buy SDWire With USB-C | Quickstart With Badgerd SDWireC',
+      title: 'Buy Badgerd USBMux | Quickstart With USBMux',
       link: [
         {
           hid: 'canonical',
@@ -380,18 +274,18 @@ export default {
           hid: 'description',
           name: 'description',
           content:
-            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USB-C now it is SDWireC.',
+            'USBMux is a tool that helps you two switch connections between 3 USB ports. You can control the connection of the ports from a computer.',
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: 'Badgerd SDWireC',
+          content: 'Badgerd USBMux',
         },
         {
           hid: 'og:description',
           property: 'og:description',
           content:
-            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USB-C now it is SDWireC.',
+            'USBMux is a tool that helps you two switch connections between 3 USB ports. You can control the connection of the ports from a computer.',
         },
         {
           hid: 'og:type',
@@ -401,7 +295,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
+          content: 'https://www.badgerd.nl/usbmux/badgerd-usbmux-og.png',
         },
         {
           hid: 'og:url',
@@ -420,13 +314,13 @@ export default {
     return [
       {
         '@context': 'http://schema.org',
-        '@id': 'https://badgerd.nl/#sdwirec',
+        '@id': 'https://badgerd.nl/#usbmux',
         '@type': 'Product',
-        url: 'https://badgerd.nl/sdwirec/',
-        name: 'Badgerd SDWireC | SDWire',
-        mainEntityOfPage: 'https://badgerd.nl/sdwirec/',
-        image: 'https://www.badgerd.nl/sdwirec/sdwirec-5.jpg',
-        description: 'USB-C Variant of standard SDWire product, now we are calling it as SDWireC',
+        url: 'https://badgerd.nl/usbmux/',
+        name: 'Badgerd USBMux | USBMux',
+        mainEntityOfPage: 'https://badgerd.nl/usbmux/',
+        image: 'https://www.badgerd.nl/usbmux/usbmux-1.jpg',
+        description: 'USBMux is a USB switch that you can control the connection of 3 different USB Ports',
         brand: {
           logo: 'https://badgerd.nl/logo-nobg.png',
           name: 'Badgerd',
@@ -444,9 +338,8 @@ export default {
               '@type': 'Person',
               name: 'Talha',
             },
-            datePublished: '2023-01-19',
-            reviewBody:
-              'It does what you expect from an SDWire device. And having it with USB-C is another plus for me.',
+            datePublished: '2023-05-19',
+            reviewBody: 'It does what you expect from a USBMux/Switch.',
             name: 'First User',
             reviewRating: {
               '@type': 'Rating',
@@ -461,8 +354,8 @@ export default {
             '@type': 'Offer',
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
-            price: 85,
-            sku: 'badgerd_sdwirec',
+            price: 180,
+            sku: 'badgerd_usbmux',
             priceValidUntil: '2023-12-31',
           },
         ],
@@ -482,6 +375,12 @@ export default {
             position: 2,
             name: 'SDWireC',
             item: 'https://badgerd.nl/sdwirec/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'USBMux',
+            item: 'https://badgerd.nl/usbmux/',
           },
         ],
       },
