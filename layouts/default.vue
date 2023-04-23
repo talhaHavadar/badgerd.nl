@@ -16,6 +16,11 @@
           class="mx-4 flex items-center justify-center p-1 transition-all ease-in-out hover:font-medium hover:text-zinc-50"
           >SDWireC</NuxtLink
         >
+        <NuxtLink
+          to="/usbmux/"
+          class="mx-4 flex items-center justify-center p-1 transition-all ease-in-out hover:font-medium hover:text-zinc-50"
+          >USBMux</NuxtLink
+        >
       </div>
       <div class="w-1/6" />
     </div>
