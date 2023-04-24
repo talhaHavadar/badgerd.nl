@@ -274,7 +274,7 @@ export default {
           hid: 'description',
           name: 'description',
           content:
-            'USBMux is a tool that helps you two switch connections between 3 USB ports. You can control the connection of the ports from a computer.',
+            'USBMux is a tool that helps you to switch connections between 3 USB ports. You can control the connection of the ports from a computer.',
         },
         {
           hid: 'og:title',
@@ -285,7 +285,7 @@ export default {
           hid: 'og:description',
           property: 'og:description',
           content:
-            'USBMux is a tool that helps you two switch connections between 3 USB ports. You can control the connection of the ports from a computer.',
+            'USBMux is a tool that helps you to switch connections between 3 USB ports. You can control the connection of the ports from a computer.',
         },
         {
           hid: 'og:type',
