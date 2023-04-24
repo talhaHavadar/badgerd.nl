@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="relative h-20 w-full bg-blue-400 p-4 text-center font-medium text-slate-200">
+    <div class="relative w-full bg-blue-400 p-4 text-center font-medium text-slate-200">
       10% of your purchase of USBMux will be donated to
       <a href="https://oceanfdn.org/" rel="nofollow" target="_blank">The Ocean Foundation</a>
       <span class="block text-sm font-light">Thank you for supporting efforts to save our oceans!</span>
