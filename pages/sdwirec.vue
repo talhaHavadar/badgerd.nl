@@ -130,6 +130,9 @@
                     <div v-else-if="product.current_stock > 50" class="pl-2 text-xs font-normal text-green-600">
                       50+ items
                     </div>
+                    <div v-else class="pl-2 text-xs font-normal text-green-600">
+                      Last {{ product.current_stock }} items
+                    </div>
                   </div>
 
                   <input type="hidden" name="codename" value="badgerd_sdwirec" />
