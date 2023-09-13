@@ -127,8 +127,8 @@
                     >
                       Last {{ product.current_stock }} items
                     </div>
-                    <div v-else-if="product.current_stock != 0" class="pl-2 text-xs font-normal text-green-600">
-                      Last {{ product.current_stock }} items
+                    <div v-else-if="product.current_stock > 50" class="pl-2 text-xs font-normal text-green-600">
+                      50+ items
                     </div>
                   </div>
 
