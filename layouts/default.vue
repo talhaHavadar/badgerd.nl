@@ -53,7 +53,7 @@
           ></a>
         </div>
         <div class="flex items-end">
-          <a href="mailto:badgerdshop@gmail.com" rel="nofollow" class="p-1 hover:text-zinc-800">Contact</a>
+          <a href="mailto:info@badgerd.nl" rel="nofollow" class="p-1 hover:text-zinc-800">Contact</a>
           <NuxtLink to="/refund/" class="p-1 hover:text-zinc-800">Refund</NuxtLink>
           <NuxtLink to="/terms/" class="p-1 hover:text-zinc-800"
             >Terms <span class="hidden sm:inline">of Service</span></NuxtLink

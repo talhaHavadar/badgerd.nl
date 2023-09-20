@@ -206,7 +206,7 @@
               <p v-if="product.current_stock > 0 || product.ignore_stock" class="text-xs font-light">
                 <span class="font-semibold">Looking for a bulk order or B2B?</span>
                 <br />
-                <a href="mailto:badgerdshop+quote@gmail.com" rel="nofollow" class="text-blue-500 hover:text-blue-700"
+                <a href="mailto:info+quote@badgerd.nl" rel="nofollow" class="text-blue-500 hover:text-blue-700"
                   >Contact</a
                 >
                 us to get a quote.

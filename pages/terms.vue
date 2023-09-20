@@ -276,7 +276,7 @@
           </ul>
           <br />
           <strong>SECTION 21 - CONTACT INFORMATION</strong> <br />
-          Questions about the Terms of Service should be sent to us at badgerdshop@gmail.com.
+          Questions about the Terms of Service should be sent to us at info@badgerd.nl.
         </div>
       </div>
     </div>
