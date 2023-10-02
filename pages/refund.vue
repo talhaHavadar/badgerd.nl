@@ -9,20 +9,20 @@
             return.<br /><br />To be eligible for a return, your item must be in the same condition that you received
             it, unworn or unused, with tags, and in its original packaging. You’ll also need the receipt or proof of
             purchase. <br /><br />To start a return, you can contact us at<a
-              href="mailto:badgerdshop@gmail.com"
+              href="mailto:info@badgerd.nl"
               target="_blank"
               rel="noopener noreferrer"
               aria-describedby="forwarding-new-window-message"
-              >badgerdshop@gmail.com</a
+              >info@badgerd.nl</a
             >. If your return is accepted, we’ll give you an address to send the item back to us. Please be aware that
             we are not responsible for shipping costs of returned item.<br /><br />You can always contact us for any
             return question at<span>&nbsp;</span
             ><a
-              href="mailto:badgerdshop@gmail.com"
+              href="mailto:info@badgerd.nl"
               target="_blank"
               rel="noopener noreferrer"
               aria-describedby="forwarding-new-window-message"
-              >badgerdshop@gmail.com</a
+              >info@badgerd.nl</a
             ><span>.</span>
           </p>
           <br />
