@@ -489,6 +489,12 @@ export default {
             name: 'SDWireC',
             item: 'https://badgerd.nl/sdwirec/',
           },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'USBMux',
+            item: 'https://badgerd.nl/usbmux/',
+          },
         ],
       },
     ]
