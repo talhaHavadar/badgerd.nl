@@ -76,7 +76,7 @@
               </button>
             </div>
             <div class="flex flex-row space-x-4 pt-4 font-light">
-              <a href="https://github.com/Badger-Embedded/badgerd-sdwirec" rel="nofollow,external" target="_blank"
+              <a href="https://github.com/Badger-Embedded/muxer" rel="nofollow,external" target="_blank"
                 ><svg
                   class="button--github h-6 w-6 text-zinc-600 hover:text-zinc-800"
                   xmlns="http://www.w3.org/2000/svg"
@@ -243,12 +243,12 @@
         <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
           >sudo apt install build-essential libftdi1-dev libpopt-dev cmake pkg-config</code
         >
-        <p>Now it is time to install the software to control the SDWireC.</p>
+        <p>Now it is time to install the software to control the USBMux.</p>
         <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
           >git clone https://github.com/Badger-Embedded/muxer.git badgerd-muxer && cd badgerd-muxer</code
         >
 
-        <p>Build and install the sd-mux-ctrl application by executing standard cmake build commands.</p>
+        <p>Build and install the badgerd-muxer application by executing standard cmake build commands.</p>
         <!-- prettier-ignore -->
         <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">mkdir build && cd build
 cmake ..
@@ -289,7 +289,7 @@ sudo make install</code>
                 <p>Let's configure it otherwise you can continue on step 4</p>
                 <ul class="mt-2 list-[square] space-y-2 pl-12">
                   <li>
-                    <p>Run the following command to configure SDWireC:</p>
+                    <p>Run the following command to configure USBMux:</p>
                     <!-- prettier-ignore -->
                     <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">badgerd-muxer --device-serial={SerialNumber} --vendor=0x{idVendor} --product=0x{idProduct} --set-serial=bdgrd_usbmux_101</code>
                     <p>Remember that all these values are coming from 'dmesg' output.</p>
