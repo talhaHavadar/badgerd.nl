@@ -240,9 +240,20 @@
                 Go to <a href="#quick-start" class="text-blue-500 hover:text-blue-700">Quick Start</a> guide to start
                 testing it immediately!
                 <br />
-                Please consider that with the multiplexer in use it is best to use slower sd-cards due to the component
-                in between the sd card and the DUT.
+                All the SDWireC products that will be shipped is tested on micro SD card slot of Raspberry Pi 3 Model B
+                Version 1.2, using Gnome Disk Benchmark tool.
+                <br />
+                <br />
+                SDWireC is tested and verified on following SD cards in house:
+                <br />
+                <br />
               </p>
+              <ul class="list-disc pl-10">
+                <li>SanDisk Ultra A1 Micro SDHC U1 Class 10</li>
+                <li>Samsung PRO Plus A2 Micro SDXC U3 Class V30</li>
+                <li>SanDisk Extreme A2 Micro SDXC U3 Class V30</li>
+                <li>Samsung Evo A1 Micro SDHC</li>
+              </ul>
             </div>
           </div>
         </div>
