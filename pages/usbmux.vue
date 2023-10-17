@@ -25,17 +25,96 @@
                   aria-current="true"
                   aria-label="Slide 1"
                 ></button>
-                <!-- <button
+                <button
                   type="button"
                   data-bs-target="#carouselIndicators"
                   data-bs-slide-to="1"
                   aria-label="Slide 2"
-                ></button> -->
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="3"
+                  aria-label="Slide 4"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="4"
+                  aria-label="Slide 5"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="5"
+                  aria-label="Slide 6"
+                ></button>
               </div>
               <div class="carousel-inner relative w-full overflow-hidden">
                 <div class="carousel-item active relative float-left w-full">
                   <img
-                    :src="require('~/assets/usbmux/usbmux-cad.png')"
+                    :src="require('~/assets/usbmux/usbmux_2.jpg')"
+                    class="block w-full"
+                    alt="USBMux Cad View"
+                    title="USBMux Cad View"
+                    loading="eager"
+                    width="828"
+                    height="828"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/usbmux/usbmux_1.jpg')"
+                    class="block w-full"
+                    alt="USBMux Cad View"
+                    title="USBMux Cad View"
+                    loading="eager"
+                    width="828"
+                    height="828"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/usbmux/usbmux_3.jpg')"
+                    class="block w-full"
+                    alt="USBMux Cad View"
+                    title="USBMux Cad View"
+                    loading="eager"
+                    width="828"
+                    height="828"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/usbmux/usbmux_4.jpg')"
+                    class="block w-full"
+                    alt="USBMux Cad View"
+                    title="USBMux Cad View"
+                    loading="eager"
+                    width="828"
+                    height="828"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/usbmux/usbmux_5.jpg')"
+                    class="block w-full"
+                    alt="USBMux Cad View"
+                    title="USBMux Cad View"
+                    loading="eager"
+                    width="828"
+                    height="828"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/usbmux/usbmux_6.jpg')"
                     class="block w-full"
                     alt="USBMux Cad View"
                     title="USBMux Cad View"
