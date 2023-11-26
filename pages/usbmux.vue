@@ -316,9 +316,22 @@
         <h1 id="quick-start" class="my-8 px-4 text-center text-lg font-bold lg:my-12">How to use Badgerd's USBMux?</h1>
 
         <p class="">
-          Our first step is to install dependencies to build the software we need to control USBMux. So let's execute
-          the following command in shell.
+          Let's install the command line application that will help us control the Badgerd USBMux device. We have
+          already created a PPA to make the installation of the application easy for you. So let's execute the following
+          commands to install the application. If you want to build the application from the source please follow the
+          instructions
+          <a href="#build-from-source" class="text-blue-500 hover:text-blue-700">here</a>.
         </p>
+        <!-- prettier-ignore -->
+        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo add-apt-repository ppa:tchavadar/badgerd
+sudo apt update
+sudo apt install badgerd-muxer</code>
+        <p>
+          Once the installation is completed successfully. Now you can see the demonstrations steps to see what you can
+          do with the Badgerd USBMux.
+          <a href="#demonstration" class="text-blue-500 hover:text-blue-700">Jump the demonstration steps here.</a>
+        </p>
+        <p id="build-from-source" class="">Building the badgerd-muxer from source.</p>
         <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
           >sudo apt install build-essential libftdi1-dev libpopt-dev cmake pkg-config</code
         >
@@ -335,7 +348,7 @@ make
 sudo make install</code>
         <p>Commands above will install `badgerd-muxer` into /usr/local/bin</p>
 
-        <p>
+        <p id="demonstration">
           Since we have the tools we need, now we can continue on actually using the USBMux. For the purpose of
           demonstration, we will use the USBMux with two different USB storage connected to DUT and DEVICE ports. We
           also need a USB Type B cable to connect USBMux to our computer. (In this case I am using my
