@@ -123,17 +123,6 @@
                     height="828"
                   />
                 </div>
-                <!-- <div class="carousel-item relative float-left w-full">
-                  <img
-                    :src="require('~/assets/sdwirec/sdwirec-2.jpg')"
-                    class="block w-full"
-                    alt="SDWireC Bottom View"
-                    title="SDWireC Bottom View"
-                    loading="eager"
-                    width="828"
-                    height="828"
-                  />
-                </div> -->
               </div>
               <button
                 class="carousel-control-prev absolute top-0 bottom-0 left-0 flex items-center justify-center border-0 p-0 text-center hover:no-underline hover:outline-none focus:no-underline focus:outline-none"

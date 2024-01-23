@@ -246,7 +246,7 @@
     </div>
     <hr class="lg:mt-16" />
     <div class="my-4 flex justify-center">
-      <div class="max-w-7xl space-y-4 px-6 sm:px-16 lg:px-32">
+      <div class="max-w-7xl px-6 sm:px-16 lg:px-32">
         <h1 id="pinout" class="my-8 px-4 text-center text-lg font-bold lg:my-12">Pinout of Badgerd nRFNANO</h1>
         <img
           :src="require('~/assets/nrfnano/diagram.svg')"
@@ -259,17 +259,26 @@
         />
         <hr class="lg:pb-16" />
 
-        <h1 id="quick-start" class="my-8 px-4 text-center text-lg font-bold lg:my-12">Frequently Asked Questions</h1>
+        <h1 id="faq" class="my-8 px-4 text-center text-lg font-bold lg:my-12">Frequently Asked Questions</h1>
 
-        <p class="font-semibold">Where can I find the example application that the board came with?</p>
-
-        <p class="font-semibold">How can I put nRFNANO into bootloader mode?</p>
+        <p class="mt-4 font-semibold">Where can I find the example application that the board came with?</p>
+        <p>
+          We are publishing some of the materials we use during development of nRFNANO in
+          <a
+            href="https://github.com/Badger-Embedded/badgerd-nrfnano"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700"
+            >this</a
+          >
+          github repo. You can find the example applications in the repository.
+        </p>
+        <p class="mt-4 font-semibold">How can I put nRFNANO into bootloader mode?</p>
         <p>
           To activate UF2 bootloader simply double tap nRESET pin. You can use a pair of tweezers to connect nRESET and
           GND pins of the board twice, this will activate bootloader mode so that you can reflash the UF2 firmware you
           have.
         </p>
-        <p class="font-semibold">Where can I find the original UF2 firmware for nRFNANO?</p>
+        <p class="mt-4 font-semibold">Where can I find the original UF2 firmware for nRFNANO?</p>
         <p>
           nRFNANO has compatible hardware design and pinout with nice!nano so the firmwares compatible with nice!nano
           should work with nRFNANO as well. But if you want to download the firmware we ship, you can get it from
@@ -290,7 +299,7 @@
           >
           link.
         </p>
-        <p class="font-semibold">Is there a specific connector for debug pins?</p>
+        <p class="mt-4 font-semibold">Is there a specific connector for debug pins?</p>
         <p>
           Yes, footprint of the debug pins are compatible with Tag-Connect cables, we used
           <a
