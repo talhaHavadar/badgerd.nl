@@ -130,7 +130,9 @@
                   </div>
 
                   <input type="hidden" name="codename" value="badgerd_sdwirec" />
-                  <div class="font-semibold">€85.00 <span class="text-xs font-light">(incl. VAT)</span> + Shipping</div>
+                  <div class="font-semibold">
+                    €19.00 <span class="text-xs font-light">(incl. VAT*)</span> + Shipping
+                  </div>
                   <div
                     v-if="product.current_stock == 0 && !product.ignore_stock"
                     class="flex text-sm font-light text-red-600"
