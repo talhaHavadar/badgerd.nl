@@ -334,8 +334,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content:
-            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USB-C now it is SDWireC.',
+          content: `The Badgerd nRFNANO is an Arduino ProMicro form factor nrf52840 development board. nRFNANO comes with fully compatible pinout with nice!nano. In addition to that you will have an exposed pad to add extra safety for your charging circuit which allows you to connect a temperature sensor.`,
         },
         {
           hid: 'og:title',
@@ -345,8 +344,7 @@ export default {
         {
           hid: 'og:description',
           property: 'og:description',
-          content:
-            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USB-C now it is SDWireC.',
+          content: `The Badgerd nRFNANO is an Arduino ProMicro form factor nrf52840 development board. nRFNANO comes with fully compatible pinout with nice!nano. In addition to that you will have an exposed pad to add extra safety for your charging circuit which allows you to connect a temperature sensor.`,
         },
         {
           hid: 'og:type',
@@ -356,7 +354,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
+          content: 'https://www.badgerd.nl/nrfnano/nrfnano-0.jpg',
         },
         {
           hid: 'og:url',
@@ -379,9 +377,9 @@ export default {
         '@type': 'Product',
         url: 'https://badgerd.nl/sdwirec/',
         name: 'Badgerd SDWireC | SDWire',
-        mainEntityOfPage: 'https://badgerd.nl/sdwirec/',
-        image: 'https://www.badgerd.nl/sdwirec/sdwirec-5.jpg',
-        description: 'USB-C Variant of standard SDWire product, now we are calling it as SDWireC',
+        mainEntityOfPage: 'https://badgerd.nl/nrfnano/',
+        image: 'https://www.badgerd.nl/nrfnano/nrfnano-0.jpg',
+        description: 'The Badgerd nRFNANO is an Arduino ProMicro form factor nrf52840 development board.',
         brand: {
           logo: 'https://badgerd.nl/logo-nobg.png',
           name: 'Badgerd',
@@ -399,9 +397,9 @@ export default {
               '@type': 'Person',
               name: 'Talha',
             },
-            datePublished: '2023-01-19',
+            datePublished: '2024-01-19',
             reviewBody:
-              'It does what you expect from an SDWire device. And having it with USB-C is another plus for me.',
+              'nRFNANO is super easy to learn embedded development for iot by providing circuitpython as a default firmware',
             name: 'First User',
             reviewRating: {
               '@type': 'Rating',
@@ -416,9 +414,9 @@ export default {
             '@type': 'Offer',
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
-            price: 85,
-            sku: 'badgerd_sdwirec',
-            priceValidUntil: '2023-12-31',
+            price: 19,
+            sku: 'badgerd_nrfnano',
+            priceValidUntil: '2024-12-31',
           },
         ],
       },
@@ -443,6 +441,12 @@ export default {
             position: 3,
             name: 'USBMux',
             item: 'https://badgerd.nl/usbmux/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'nRFNANO',
+            item: 'https://badgerd.nl/nrfnano/',
           },
         ],
       },

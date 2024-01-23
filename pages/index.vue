@@ -243,6 +243,12 @@ export default {
             name: 'USBMux',
             item: 'https://badgerd.nl/usbmux/',
           },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'nRFNANO',
+            item: 'https://badgerd.nl/nrfnano/',
+          },
         ],
       },
     ]
