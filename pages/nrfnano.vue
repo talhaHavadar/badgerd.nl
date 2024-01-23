@@ -261,101 +261,47 @@
 
         <h1 id="quick-start" class="my-8 px-4 text-center text-lg font-bold lg:my-12">Frequently Asked Questions</h1>
 
-        <p class="font-semibold">How Can I Put nRFNANO Into Bootloader Mode?</p>
-        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-          >sudo apt install build-essential libftdi1-dev libpopt-dev cmake pkg-config</code
-        >
-        <p>Now it is time to install the software to control the SDWireC.</p>
-        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-          >git clone https://github.com/Badger-Embedded/badgerd-sdwirec.git && cd badgerd-sdwirec/sdwirec-sw</code
-        >
+        <p class="font-semibold">Where can I find the example application that the board came with?</p>
 
-        <p>Build and install the sd-mux-ctrl application by executing standard cmake build commands.</p>
-        <!-- prettier-ignore -->
-        <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">mkdir build && cd build
-cmake ..
-make
-sudo make install</code>
-        <p>Commands above will install `sd-mux-ctrl` into /usr/local/bin</p>
-
+        <p class="font-semibold">How can I put nRFNANO into bootloader mode?</p>
         <p>
-          Since we have the tools we need, now we can continue on actually using the SDWireC. To do that we need a
-          Raspberry Pi like device that has an SD Card slot so that we can place our SDWireC into it. Plus, we also need
-          an USB cable to connect SDWireC to our computer. (In this case I am using my
-          <span class="text-orange-600">Ubuntu</span> host)
+          To activate UF2 bootloader simply double tap nRESET pin. You can use a pair of tweezers to connect nRESET and
+          GND pins of the board twice, this will activate bootloader mode so that you can reflash the UF2 firmware you
+          have.
         </p>
-        <ol class="list-decimal space-y-2 pl-4">
-          <li>Make sure that Raspberry Pi is not powered</li>
-          <li>Place SDWireC into Raspberry Pi's SD Card slot</li>
-          <li>
-            Let's check if our SDWireC is already configured or not
-            <ul class="mt-2 list-disc space-y-2 pl-8">
-              <li>
-                <p>In your computer's terminal run the following command:</p>
-                <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo dmesg -w</code>
-              </li>
-              <li>Connect your computer (or another host machine) with SDWireC using USB cable</li>
-              <li>
-                Then you should be able to see 'idVendor', 'idProduct', 'SerialNumber'(alphanumeric) of the SDWireC. We
-                are going to use these values to configure if our SDWireC is not configured yet. Let's check that!
-              </li>
-              <li>
-                <p>In another terminal window, run the following command:</p>
-                <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-                  >sudo sd-mux-ctrl --list</code
-                >
-                <p>If you see following output in terminal, this means that your SDWireC is not configured.</p>
-                <!-- prettier-ignore -->
-                <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">Number of FTDI devices found: 0</code>
-                <p>Let's configure it otherwise you can continue on step 4</p>
-                <ul class="mt-2 list-[square] space-y-2 pl-12">
-                  <li>
-                    <p>Run the following command to configure SDWireC:</p>
-                    <!-- prettier-ignore -->
-                    <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial={SerialNumber} --vendor=0x{idVendor} --product=0x{idProduct} --device-type=sd-wire --set-serial=sdwirec_10</code>
-                    <p>Remember that all these values are coming from 'dmesg' output.</p>
-                  </li>
-                  <li>
-                    <p>Now we should be able to see our SDWireC is recognized by 'sd-mux-ctrl'</p>
-                    <!-- prettier-ignore -->
-                    <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --list
-Number of FTDI devices found: 1
-Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <p>Connect SDCard to your computer (host|ts)</p>
-            <!-- prettier-ignore -->
-            <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --ts</code>
-          </li>
-          <li>
-            Flash the SDCard using
-            <a
-              href="https://www.raspberrypi.com/software/"
-              class="text-blue-500 hover:text-blue-700"
-              rel="nofollow,external"
-              >RPi Imager</a
-            >
-            or
-            <a href="https://www.balena.io/etcher" class="text-blue-500 hover:text-blue-700" rel="nofollow,external"
-              >BalenaEtcher</a
-            >
-          </li>
-          <li>
-            <p>Connect SD card to Raspberry Pi (DUT) with sd-mux-ctrl</p>
-            <!-- prettier-ignore -->
-            <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --dut</code>
-          </li>
-          <li>
-            <p>Connect power supply of Raspberry Pi (DUT) and then voila!</p>
-          </li>
-        </ol>
-
-        <br />
-        <p>Hope this quick start guide helps you to give our SDWireC a kickstart. See you in another challenge!</p>
+        <p class="font-semibold">Where can I find the original UF2 firmware for nRFNANO?</p>
+        <p>
+          nRFNANO has compatible hardware design and pinout with nice!nano so the firmwares compatible with nice!nano
+          should work with nRFNANO as well. But if you want to download the firmware we ship, you can get it from
+          <a
+            href="https://badgerd.nl/nrfnano/nrfnano_bootloader-0.7.0_s140_6.1.1.hex"
+            rel="nofollow"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700"
+            >here</a
+          >. <br />
+          To download the circuitpython UF2 file we ship please use
+          <a
+            href="https://badgerd.nl/nrfnano/adafruit-circuitpython-nice_nano-en_US-8.2.9.uf2"
+            rel="nofollow"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700"
+            >this</a
+          >
+          link.
+        </p>
+        <p class="font-semibold">Is there a specific connector for debug pins?</p>
+        <p>
+          Yes, footprint of the debug pins are compatible with Tag-Connect cables, we used
+          <a
+            href="https://www.tag-connect.com/product/tc2030-ctx-nl-6-pin-no-legs-cable-with-10-pin-micro-connector-for-cortex-processors"
+            rel="nofollow"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700"
+            >TC2030-CTX-NL</a
+          >
+          footprint to prevent cable mess and speed-up the debugging/testing of the boards.
+        </p>
       </div>
     </div>
   </div>
