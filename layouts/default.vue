@@ -14,6 +14,11 @@
           >STORE</NuxtLink
         >
         <NuxtLink
+          to="/nrfnano/"
+          class="mx-4 flex items-center justify-center p-2 transition-all ease-in-out hover:font-medium hover:text-zinc-50"
+          >nRFNANO</NuxtLink
+        >
+        <NuxtLink
           to="/sdwirec/"
           class="mx-4 flex items-center justify-center p-2 transition-all ease-in-out hover:font-medium hover:text-zinc-50"
           >SDWireC</NuxtLink
@@ -85,6 +90,10 @@
       class="flex min-h-[20vh] w-full flex-row flex-wrap justify-between border border-t-gray-300 bg-gray-100 p-8 text-zinc-600 subpixel-antialiased"
     >
       <div class="flex flex-col items-start justify-end font-thin subpixel-antialiased">
+        <p class="font-light">
+          * Shipments outside the EU may require customers to pay additional costs for Tax&Duties depending on the laws
+          of destination country.
+        </p>
         <p>KvK# 87317427</p>
         <p>Copyright © 2023 Badgerd Technologies B.V. All rights reserved.</p>
       </div>

@@ -123,17 +123,6 @@
                     height="828"
                   />
                 </div>
-                <!-- <div class="carousel-item relative float-left w-full">
-                  <img
-                    :src="require('~/assets/sdwirec/sdwirec-2.jpg')"
-                    class="block w-full"
-                    alt="SDWireC Bottom View"
-                    title="SDWireC Bottom View"
-                    loading="eager"
-                    width="828"
-                    height="828"
-                  />
-                </div> -->
               </div>
               <button
                 class="carousel-control-prev absolute top-0 bottom-0 left-0 flex items-center justify-center border-0 p-0 text-center hover:no-underline hover:outline-none focus:no-underline focus:outline-none"
@@ -575,7 +564,7 @@ export default {
             availability: 'https://schema.org/InStock',
             price: 180,
             sku: 'badgerd_usbmux',
-            priceValidUntil: '2023-12-31',
+            priceValidUntil: '2024-12-31',
           },
         ],
       },
@@ -600,6 +589,12 @@ export default {
             position: 3,
             name: 'USBMux',
             item: 'https://badgerd.nl/usbmux/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'nRFNANO',
+            item: 'https://badgerd.nl/nrfnano/',
           },
         ],
       },
