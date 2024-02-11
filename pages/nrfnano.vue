@@ -26,20 +26,14 @@
                   data-bs-slide-to="1"
                   aria-label="Slide 2"
                 ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
               </div>
               <div class="carousel-inner relative w-full overflow-hidden">
                 <div class="carousel-item active relative float-left w-full">
                   <img
-                    :src="require('~/assets/sdwirec/sdwirec-1.jpg')"
+                    :src="require('~/assets/nrfnano/nrfnano_0.jpg')"
                     class="block w-full"
-                    alt="SDWireC Top View"
-                    title="SDWireC Top View"
+                    alt="nRFNANO Top View"
+                    title="nRFNANO Top View"
                     loading="eager"
                     width="828"
                     height="828"
@@ -47,21 +41,10 @@
                 </div>
                 <div class="carousel-item relative float-left w-full">
                   <img
-                    :src="require('~/assets/sdwirec/sdwirec-2.jpg')"
+                    :src="require('~/assets/nrfnano/nrfnano_1.jpg')"
                     class="block w-full"
-                    alt="SDWireC Bottom View"
-                    title="SDWireC Bottom View"
-                    loading="eager"
-                    width="828"
-                    height="828"
-                  />
-                </div>
-                <div class="carousel-item relative float-left w-full">
-                  <img
-                    :src="require('~/assets/sdwirec/sdwirec-3.jpg')"
-                    class="block w-full"
-                    alt="SDWireC Being Used in Remote"
-                    title="SDWireC Being Used in Remote"
+                    alt="nRFNANO Top View Plugged In"
+                    title="nRFNANO Top View Plugged In"
                     loading="eager"
                     width="828"
                     height="828"
@@ -129,7 +112,7 @@
                     </div>
                   </div>
 
-                  <input type="hidden" name="codename" value="badgerd_sdwirec" />
+                  <input type="hidden" name="codename" value="badgerd_nrfnano" />
                   <div class="font-semibold">
                     €19.00 <span class="text-xs font-light">(incl. VAT*)</span> + Shipping
                   </div>
@@ -246,16 +229,16 @@
     </div>
     <hr class="lg:mt-16" />
     <div class="my-4 flex justify-center">
-      <div class="max-w-7xl px-6 sm:px-16 lg:px-32">
+      <div class="max-w-full px-6 sm:px-16 lg:px-32">
         <h1 id="pinout" class="my-8 px-4 text-center text-lg font-bold lg:my-12">Pinout of Badgerd nRFNANO</h1>
         <img
           :src="require('~/assets/nrfnano/diagram.svg')"
           class="block w-full"
-          alt="SDWireC Top View"
-          title="SDWireC Top View"
+          alt="nRFNANO Pinout Diagram"
+          title="nRFNANO Pinout Diagram"
           loading="eager"
-          width="828"
-          height="828"
+          width="1024"
+          height="1024"
         />
         <hr class="lg:pb-16" />
 
@@ -382,12 +365,12 @@ export default {
     return [
       {
         '@context': 'http://schema.org',
-        '@id': 'https://badgerd.nl/#sdwirec',
+        '@id': 'https://badgerd.nl/#nrfnano',
         '@type': 'Product',
-        url: 'https://badgerd.nl/sdwirec/',
-        name: 'Badgerd SDWireC | SDWire',
+        url: 'https://badgerd.nl/nrfnano/',
+        name: 'Badgerd nRFNANO | nRFNANO',
         mainEntityOfPage: 'https://badgerd.nl/nrfnano/',
-        image: 'https://www.badgerd.nl/nrfnano/nrfnano-0.jpg',
+        image: 'https://www.badgerd.nl/nrfnano/nrfnano_0.jpg',
         description: 'The Badgerd nRFNANO is an Arduino ProMicro form factor nrf52840 development board.',
         brand: {
           logo: 'https://badgerd.nl/logo-nobg.png',
