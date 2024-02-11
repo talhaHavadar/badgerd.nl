@@ -26,20 +26,14 @@
                   data-bs-slide-to="1"
                   aria-label="Slide 2"
                 ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
               </div>
               <div class="carousel-inner relative w-full overflow-hidden">
                 <div class="carousel-item active relative float-left w-full">
                   <img
-                    :src="require('~/assets/sdwirec/sdwirec-1.jpg')"
+                    :src="require('~/assets/nrfnano/nrfnano_0.jpg')"
                     class="block w-full"
-                    alt="SDWireC Top View"
-                    title="SDWireC Top View"
+                    alt="nRFNANO Top View"
+                    title="nRFNANO Top View"
                     loading="eager"
                     width="828"
                     height="828"
@@ -47,21 +41,10 @@
                 </div>
                 <div class="carousel-item relative float-left w-full">
                   <img
-                    :src="require('~/assets/sdwirec/sdwirec-2.jpg')"
+                    :src="require('~/assets/nrfnano/nrfnano_1.jpg')"
                     class="block w-full"
-                    alt="SDWireC Bottom View"
-                    title="SDWireC Bottom View"
-                    loading="eager"
-                    width="828"
-                    height="828"
-                  />
-                </div>
-                <div class="carousel-item relative float-left w-full">
-                  <img
-                    :src="require('~/assets/sdwirec/sdwirec-3.jpg')"
-                    class="block w-full"
-                    alt="SDWireC Being Used in Remote"
-                    title="SDWireC Being Used in Remote"
+                    alt="nRFNANO Top View Plugged In"
+                    title="nRFNANO Top View Plugged In"
                     loading="eager"
                     width="828"
                     height="828"
@@ -88,7 +71,7 @@
               </button>
             </div>
             <div class="flex flex-row space-x-4 pt-4 font-light">
-              <a href="https://github.com/Badger-Embedded/badgerd-sdwirec" rel="nofollow,external" target="_blank"
+              <a href="https://github.com/Badger-Embedded/badgerd-nrfnano" rel="nofollow,external" target="_blank"
                 ><svg
                   class="button--github h-6 w-6 text-zinc-600 hover:text-zinc-800"
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,14 +88,8 @@
                     fill="currentColor"
                   /></svg
               ></a>
-              <a href="#quick-start" class="text-zinc-700 hover:text-zinc-900">How-To</a>
-              <a
-                href="https://docs.dasharo.com/transparent-validation/sd-wire/usage-validation/#environment-preparation"
-                target="_blank"
-                rel="nofollow,external"
-                class="text-zinc-700 hover:text-zinc-900"
-                >Docs</a
-              >
+              <a href="#faq" class="text-zinc-700 hover:text-zinc-900">FAQ</a>
+              <a href="#pinout" class="text-zinc-700 hover:text-zinc-900">Pinout</a>
             </div>
           </div>
           <div class="flex flex-col p-4">
@@ -120,7 +97,7 @@
               <div class="flex flex-wrap space-y-5 sm:flex-nowrap sm:space-y-2 sm:space-x-8">
                 <div class="flex flex-col">
                   <div class="flex items-center text-lg font-semibold">
-                    <p>SDWireC</p>
+                    <p>nRFNANO</p>
                     <div
                       v-if="product.current_stock < 10 && product.current_stock > 0"
                       class="pl-2 text-xs font-normal text-orange-600"
@@ -135,8 +112,10 @@
                     </div>
                   </div>
 
-                  <input type="hidden" name="codename" value="badgerd_sdwirec" />
-                  <div class="font-semibold">€85.00 <span class="text-xs font-light">(incl. VAT)</span> + Shipping</div>
+                  <input type="hidden" name="codename" value="badgerd_nrfnano" />
+                  <div class="font-semibold">
+                    €19.00 <span class="text-xs font-light">(incl. VAT*)</span> + Shipping
+                  </div>
                   <div
                     v-if="product.current_stock == 0 && !product.ignore_stock"
                     class="flex text-sm font-light text-red-600"
@@ -215,45 +194,34 @@
             </div>
             <div class="flex flex-col justify-around text-sm">
               <p class="">
-                The Badger<span class="font-bold text-red-700">'</span>d way of the infamous SDWire. It can be used to
-                automate testing sdcard interface or in 3D printing or to create a fully remote working place. In our
-                version of SDWire, we used USB-C interface to communicate with host.
+                The Badger<span class="font-bold text-red-700">'</span>d nRFNANO is an Arduino ProMicro form factor
+                nrf52840 development board.
                 <br />
                 <br />
-                SDWireC allows to flash SD card connected to the DUT (Device Under Test), without physical contact with
-                the device. There is only one USB-C socket for connecting to host PC. Both USB mass storage and MUX
-                control are served through the same USB connection. The PCB board is designed in such way that it fits
-                into micro SD card slots. Thanks to this, there is no need for special cables with a micro SD adapter,
-                like in the muxPi product. It can even be used as SD card reader on steroids.
+                nRFNANO comes with fully compatible pinout with nice!nano. In addition to that you will have an exposed
+                pad to add extra safety for your charging circuit which allows you to connect a temperature sensor.
                 <br />
                 <br />
-                Based on Tizen SDWire:
-                <a
-                  href="https://wiki.tizen.org/SDWire"
-                  target="_blank"
-                  rel="nofollow"
-                  class="text-blue-500 hover:text-blue-700"
-                  >Wiki</a
-                >
+                It comes with UF2 drag and drop bootloader which makes life way much easier for developers. With extra
+                isolated PCB antenna, it will provide relatively powerful signal which allows more stable connections
+                when there are obstacles in between.
                 <br />
                 <br />
-                Go to <a href="#quick-start" class="text-blue-500 hover:text-blue-700">Quick Start</a> guide to start
-                testing it immediately!
+                <span class="font-medium">Tech Specs: </span> <br />
+                <span class="block pl-4">
+                  Microcontroller: nRF52840 <br />
+                  Flash: 1MB <br />
+                  RAM: 256KB <br />
+                  GPIO Count: 19<br />
+                  Battery Charger: 4.2V Lithium @ 100/500mA rate <br />
+                  Voltage 3.3V
+                </span>
                 <br />
-                All the SDWireC products that will be shipped is tested on micro SD card slot of Raspberry Pi 3 Model B
-                Version 1.2, using Gnome Disk Benchmark tool.
                 <br />
-                <br />
-                SDWireC is tested and verified on following SD cards in house:
-                <br />
+                Check the <a href="#pinout" class="text-blue-500 hover:text-blue-700">Pinout</a> or go to
+                <a href="#faq" class="text-blue-500 hover:text-blue-700">FAQ</a> to start using it immediately!
                 <br />
               </p>
-              <ul class="list-disc pl-10">
-                <li>SanDisk Ultra A1 Micro SDHC U1 Class 10</li>
-                <li>Samsung PRO Plus A2 Micro SDXC U3 Class V30</li>
-                <li>SanDisk Extreme A2 Micro SDXC U3 Class V30</li>
-                <li>Samsung Evo A1 Micro SDHC</li>
-              </ul>
             </div>
           </div>
         </div>
@@ -261,109 +229,71 @@
     </div>
     <hr class="lg:mt-16" />
     <div class="my-4 flex justify-center">
-      <div class="max-w-7xl space-y-4 px-6 sm:px-16 lg:px-32">
-        <h1 id="quick-start" class="my-8 px-4 text-center text-lg font-bold lg:my-12">
-          How to use Badgerd's SDWire with USB-C?
-        </h1>
+      <div class="max-w-full px-6 sm:px-16 lg:px-32">
+        <h1 id="pinout" class="my-8 px-4 text-center text-lg font-bold lg:my-12">Pinout of Badgerd nRFNANO</h1>
+        <img
+          :src="require('~/assets/nrfnano/diagram.svg')"
+          class="block w-full"
+          alt="nRFNANO Pinout Diagram"
+          title="nRFNANO Pinout Diagram"
+          loading="eager"
+          width="1024"
+          height="1024"
+        />
+        <hr class="lg:pb-16" />
 
-        <p class="">
-          Our first step is to install dependencies to build the software we need to control SDWire. So let's execute
-          the following command in shell.
-        </p>
-        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-          >sudo apt install build-essential libftdi1-dev libpopt-dev cmake pkg-config</code
-        >
-        <p>Now it is time to install the software to control the SDWireC.</p>
-        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-          >git clone https://github.com/Badger-Embedded/badgerd-sdwirec.git && cd badgerd-sdwirec/sdwirec-sw</code
-        >
+        <h1 id="faq" class="my-8 px-4 text-center text-lg font-bold lg:my-12">Frequently Asked Questions</h1>
 
-        <p>Build and install the sd-mux-ctrl application by executing standard cmake build commands.</p>
-        <!-- prettier-ignore -->
-        <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">mkdir build && cd build
-cmake ..
-make
-sudo make install</code>
-        <p>Commands above will install `sd-mux-ctrl` into /usr/local/bin</p>
-
+        <p class="mt-4 font-semibold">Where can I find the example application that the board came with?</p>
         <p>
-          Since we have the tools we need, now we can continue on actually using the SDWireC. To do that we need a
-          Raspberry Pi like device that has an SD Card slot so that we can place our SDWireC into it. Plus, we also need
-          an USB cable to connect SDWireC to our computer. (In this case I am using my
-          <span class="text-orange-600">Ubuntu</span> host)
+          We are publishing some of the materials we use during development of nRFNANO in
+          <a
+            href="https://github.com/Badger-Embedded/badgerd-nrfnano"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700"
+            >this</a
+          >
+          github repo. You can find the example applications in the repository.
         </p>
-        <ol class="list-decimal space-y-2 pl-4">
-          <li>Make sure that Raspberry Pi is not powered</li>
-          <li>Place SDWireC into Raspberry Pi's SD Card slot</li>
-          <li>
-            Let's check if our SDWireC is already configured or not
-            <ul class="mt-2 list-disc space-y-2 pl-8">
-              <li>
-                <p>In your computer's terminal run the following command:</p>
-                <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo dmesg -w</code>
-              </li>
-              <li>Connect your computer (or another host machine) with SDWireC using USB cable</li>
-              <li>
-                Then you should be able to see 'idVendor', 'idProduct', 'SerialNumber'(alphanumeric) of the SDWireC. We
-                are going to use these values to configure if our SDWireC is not configured yet. Let's check that!
-              </li>
-              <li>
-                <p>In another terminal window, run the following command:</p>
-                <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4"
-                  >sudo sd-mux-ctrl --list</code
-                >
-                <p>If you see following output in terminal, this means that your SDWireC is not configured.</p>
-                <!-- prettier-ignore -->
-                <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">Number of FTDI devices found: 0</code>
-                <p>Let's configure it otherwise you can continue on step 4</p>
-                <ul class="mt-2 list-[square] space-y-2 pl-12">
-                  <li>
-                    <p>Run the following command to configure SDWireC:</p>
-                    <!-- prettier-ignore -->
-                    <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial={SerialNumber} --vendor=0x{idVendor} --product=0x{idProduct} --device-type=sd-wire --set-serial=sdwirec_10</code>
-                    <p>Remember that all these values are coming from 'dmesg' output.</p>
-                  </li>
-                  <li>
-                    <p>Now we should be able to see our SDWireC is recognized by 'sd-mux-ctrl'</p>
-                    <!-- prettier-ignore -->
-                    <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --list
-Number of FTDI devices found: 1
-Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <p>Connect SDCard to your computer (host|ts)</p>
-            <!-- prettier-ignore -->
-            <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --ts</code>
-          </li>
-          <li>
-            Flash the SDCard using
-            <a
-              href="https://www.raspberrypi.com/software/"
-              class="text-blue-500 hover:text-blue-700"
-              rel="nofollow,external"
-              >RPi Imager</a
-            >
-            or
-            <a href="https://www.balena.io/etcher" class="text-blue-500 hover:text-blue-700" rel="nofollow,external"
-              >BalenaEtcher</a
-            >
-          </li>
-          <li>
-            <p>Connect SD card to Raspberry Pi (DUT) with sd-mux-ctrl</p>
-            <!-- prettier-ignore -->
-            <code class=" block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">sudo sd-mux-ctrl --device-serial=sdwirec_10 --dut</code>
-          </li>
-          <li>
-            <p>Connect power supply of Raspberry Pi (DUT) and then voila!</p>
-          </li>
-        </ol>
-
-        <br />
-        <p>Hope this quick start guide helps you to give our SDWireC a kickstart. See you in another challenge!</p>
+        <p class="mt-4 font-semibold">How can I put nRFNANO into bootloader mode?</p>
+        <p>
+          To activate UF2 bootloader simply double tap nRESET pin. You can use a pair of tweezers to connect nRESET and
+          GND pins of the board twice, this will activate bootloader mode so that you can reflash the UF2 firmware you
+          have.
+        </p>
+        <p class="mt-4 font-semibold">Where can I find the original UF2 firmware for nRFNANO?</p>
+        <p>
+          nRFNANO has compatible hardware design and pinout with nice!nano so the firmwares compatible with nice!nano
+          should work with nRFNANO as well. But if you want to download the firmware we ship, you can get it from
+          <a
+            href="https://badgerd.nl/nrfnano/nrfnano_bootloader-0.7.0_s140_6.1.1.hex"
+            rel="nofollow"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700"
+            >here</a
+          >. <br />
+          To download the circuitpython UF2 file we ship please use
+          <a
+            href="https://badgerd.nl/nrfnano/adafruit-circuitpython-nice_nano-en_US-8.2.9.uf2"
+            rel="nofollow"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700"
+            >this</a
+          >
+          link.
+        </p>
+        <p class="mt-4 font-semibold">Is there a specific connector for debug pins?</p>
+        <p>
+          Yes, footprint of the debug pins are compatible with Tag-Connect cables, we used
+          <a
+            href="https://www.tag-connect.com/product/tc2030-ctx-nl-6-pin-no-legs-cable-with-10-pin-micro-connector-for-cortex-processors"
+            rel="nofollow"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700"
+            >TC2030-CTX-NL</a
+          >
+          footprint to prevent cable mess and speed-up the debugging/testing of the boards.
+        </p>
       </div>
     </div>
   </div>
@@ -373,7 +303,7 @@ Dev: 0, Manufacturer: SRPOL, Serial: sdwirec_10, Description: sd-wire</code>
 export default {
   async asyncData({ $axios }) {
     const products = (await $axios.get(`/api/stripe/products`)).data
-    const product = products.find((p) => p.codename === 'badgerd_sdwirec')
+    const product = products.find((p) => p.codename === 'badgerd_nrfnano')
     const shippingRates = (await $axios.get(`/api/shippingrates`)).data
     const countries = []
     for (const countryCode in shippingRates) {
@@ -384,7 +314,7 @@ export default {
   },
   head() {
     return {
-      title: 'Buy SDWire With USB-C | Quickstart With Badgerd SDWireC',
+      title: 'Buy nRFNANO IoT Development Board | Quickstart With Badgerd nRFNANO (nrf52840)',
       link: [
         {
           hid: 'canonical',
@@ -396,19 +326,17 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content:
-            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USB-C now it is SDWireC.',
+          content: `The Badgerd nRFNANO is an Arduino ProMicro form factor nrf52840 development board. nRFNANO comes with fully compatible pinout with nice!nano. In addition to that you will have an exposed pad to add extra safety for your charging circuit which allows you to connect a temperature sensor.`,
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: 'Badgerd SDWireC',
+          content: 'Badgerd nRFNANO',
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content:
-            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USB-C now it is SDWireC.',
+          content: `The Badgerd nRFNANO is an Arduino ProMicro form factor nrf52840 development board. nRFNANO comes with fully compatible pinout with nice!nano. In addition to that you will have an exposed pad to add extra safety for your charging circuit which allows you to connect a temperature sensor.`,
         },
         {
           hid: 'og:type',
@@ -418,7 +346,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://www.badgerd.nl/sdwirec/badgerd-sdwirec-cad.png',
+          content: 'https://www.badgerd.nl/nrfnano/nrfnano-0.jpg',
         },
         {
           hid: 'og:url',
@@ -437,13 +365,13 @@ export default {
     return [
       {
         '@context': 'http://schema.org',
-        '@id': 'https://badgerd.nl/#sdwirec',
+        '@id': 'https://badgerd.nl/#nrfnano',
         '@type': 'Product',
-        url: 'https://badgerd.nl/sdwirec/',
-        name: 'Badgerd SDWireC | SDWire',
-        mainEntityOfPage: 'https://badgerd.nl/sdwirec/',
-        image: 'https://www.badgerd.nl/sdwirec/sdwirec-5.jpg',
-        description: 'USB-C Variant of standard SDWire product, now we are calling it as SDWireC',
+        url: 'https://badgerd.nl/nrfnano/',
+        name: 'Badgerd nRFNANO | nRFNANO',
+        mainEntityOfPage: 'https://badgerd.nl/nrfnano/',
+        image: 'https://www.badgerd.nl/nrfnano/nrfnano_0.jpg',
+        description: 'The Badgerd nRFNANO is an Arduino ProMicro form factor nrf52840 development board.',
         brand: {
           logo: 'https://badgerd.nl/logo-nobg.png',
           name: 'Badgerd',
@@ -461,9 +389,9 @@ export default {
               '@type': 'Person',
               name: 'Talha',
             },
-            datePublished: '2023-01-19',
+            datePublished: '2024-01-19',
             reviewBody:
-              'It does what you expect from an SDWire device. And having it with USB-C is another plus for me.',
+              'nRFNANO is super easy to learn embedded development for iot by providing circuitpython as a default firmware',
             name: 'First User',
             reviewRating: {
               '@type': 'Rating',
@@ -478,9 +406,9 @@ export default {
             '@type': 'Offer',
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
-            price: 85,
-            sku: 'badgerd_sdwirec',
-            priceValidUntil: '2024-06-31',
+            price: 19,
+            sku: 'badgerd_nrfnano',
+            priceValidUntil: '2024-12-31',
           },
         ],
       },
