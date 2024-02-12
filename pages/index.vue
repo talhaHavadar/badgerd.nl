@@ -14,7 +14,133 @@
 
           <div class="py-12 md:px-12">
             <div class="container mx-auto xl:px-32">
-              <div class="grid items-center lg:grid-cols-2">
+              <div class="grid min-h-[calc(100vh-3rem)] items-center lg:grid-cols-2">
+                <div class="mb-12 md:mt-12 lg:mt-0 lg:mb-0">
+                  <div
+                    class="relative block rounded-lg px-6 pt-12 pb-6 shadow-lg md:px-12 lg:-mr-14"
+                    style="background: hsla(0, 0%, 100%, 0.55); backdrop-filter: blur(30px); z-index: 1"
+                  >
+                    <div class="mb-6 flex items-center">
+                      <h1 class="text-3xl font-bold">Badgerd nRFNANO</h1>
+                      <NuxtLink
+                        to="/nrfnano/"
+                        class="ml-4 text-2xl font-bold text-blue-500 transition-all ease-in-out after:content-[attr(after)] hover:text-[1.6rem] hover:text-blue-600"
+                        >Buy ></NuxtLink
+                      >
+                    </div>
+                    <p class="mb-6 text-gray-500">
+                      The Badger'd nRFNANO, is a tiny BLE/IoT development board that enables users to work with nRF52840
+                      ic, superfast with the help of UF2 bootloader.
+                    </p>
+
+                    <div class="grid gap-x-6 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
+                      <div class="mb-6">
+                        <p class="flex items-center">
+                          <svg
+                            class="mr-2 h-4 w-4 text-gray-900"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            ></path></svg
+                          >nice!nano compatible
+                        </p>
+                      </div>
+
+                      <div class="mb-6">
+                        <p class="flex items-center">
+                          <svg
+                            class="mr-2 h-4 w-4 text-gray-900"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            ></path></svg
+                          >ProMicro Form Factor
+                        </p>
+                      </div>
+
+                      <div class="mb-6">
+                        <p class="flex items-center">
+                          <svg
+                            class="mr-2 h-4 w-4 text-gray-900"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            ></path></svg
+                          >UF2 Bootloader
+                        </p>
+                      </div>
+                      <div class="mb-6">
+                        <p class="flex items-center">
+                          <svg
+                            class="mr-2 h-4 w-4 text-gray-900"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            ></path></svg
+                          >Built-in Charger
+                        </p>
+                      </div>
+
+                      <div class="mb-6">
+                        <p class="flex items-center">
+                          <svg
+                            class="mr-2 h-4 w-4 text-gray-900"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            ></path></svg
+                          >1MB Flash
+                        </p>
+                      </div>
+
+                      <div class="mb-6">
+                        <p class="flex items-center">
+                          <svg
+                            class="mr-2 h-4 w-4 text-gray-900"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            ></path></svg
+                          >TC Debugging
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="md:mb-12 lg:mb-0">
+                  <img
+                    :src="require('~/assets/nrfnano/nrfnano_0.jpg')"
+                    class="rotate-lg-6 w-full rounded-lg shadow-lg"
+                    alt="nRFNANO"
+                    title="nRFNANO"
+                    loading="eager"
+                  />
+                  <!-- <img
+                src="https://mdbootstrap.com/img/new/ecommerce/vertical/121.jpg"
+                class="rotate-lg-6 w-full rounded-lg shadow-lg"
+                alt=""
+              /> -->
+                </div>
+              </div>
+              <div class="mt-12 grid items-center lg:grid-cols-2">
                 <div class="mb-12 md:mt-12 lg:mt-0 lg:mb-0">
                   <div
                     class="relative block rounded-lg px-6 pt-12 pb-6 shadow-lg md:px-12 lg:-mr-14"
