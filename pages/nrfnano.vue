@@ -26,6 +26,12 @@
                   data-bs-slide-to="1"
                   aria-label="Slide 2"
                 ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselIndicators"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
               </div>
               <div class="carousel-inner relative w-full overflow-hidden">
                 <div class="carousel-item active relative float-left w-full">
@@ -45,6 +51,17 @@
                     class="block w-full"
                     alt="nRFNANO Top View Plugged In"
                     title="nRFNANO Top View Plugged In"
+                    loading="eager"
+                    width="828"
+                    height="828"
+                  />
+                </div>
+                <div class="carousel-item relative float-left w-full">
+                  <img
+                    :src="require('~/assets/nrfnano/diagram.png')"
+                    class="block w-full"
+                    alt="nRFNANO Pinout Diagram"
+                    title="nRFNANO Pinout Diagram"
                     loading="eager"
                     width="828"
                     height="828"
