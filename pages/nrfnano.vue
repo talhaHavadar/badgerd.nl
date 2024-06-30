@@ -322,9 +322,14 @@ export default {
     const products = (await $axios.get(`/api/stripe/products`)).data
     const product = products.find((p) => p.codename === 'badgerd_nrfnano')
     const shippingRates = (await $axios.get(`/api/shippingrates`)).data
-    const countries = []
-    for (const countryCode in shippingRates) {
-      countries.push({ code: countryCode, name: shippingRates[countryCode].name })
+    let countries = []
+
+    if (Object.prototype.hasOwnProperty.call(shippingRates, 'countries')) {
+      countries = shippingRates.countries
+    } else {
+      for (const countryCode in shippingRates) {
+        countries.push({ code: countryCode, name: shippingRates[countryCode].name })
+      }
     }
     countries.sort((a, b) => (a.name > b.name ? 1 : -1))
     return { product, countries }
