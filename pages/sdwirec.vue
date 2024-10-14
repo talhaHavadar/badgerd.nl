@@ -266,6 +266,22 @@
           How to use Badgerd's SDWire with USB-C?
         </h1>
 
+        <hr class="lg:mt-16" />
+        <h4 class="my-8 px-4 text-center text-lg lg:my-12">Python CLI App with Disclaimer</h4>
+        <p class="">
+          For the ones who wants to try the board easily (even in windows) and not concerned about the stability of the
+          cli application, we have a python application which you can install using pip as shown below.
+        </p>
+        <!-- prettier-ignore -->
+        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">pipx install sdwirec
+# use --help to see how to use the application
+sdwirec --help</code>
+        <p class="">
+          Please keep in mind that the python cli application interface is prone to be change frequently so if you want
+          a stable cli interface use the application explained below.
+        </p>
+        <hr class="lg:mt-16" />
+        <h4 class="my-8 px-4 text-center text-lg lg:my-12">Stable CLI Application</h4>
         <p class="">
           Our first step is to install dependencies to build the software we need to control SDWire. So let's execute
           the following command in shell.
