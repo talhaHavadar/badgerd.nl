@@ -273,7 +273,7 @@
           cli application, we have a python application which you can install using pip as shown below.
         </p>
         <!-- prettier-ignore -->
-        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">pipx install sdwirec
+        <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">pip install sdwirec
 # use --help to see how to use the application
 sdwirec --help</code>
         <p class="">
