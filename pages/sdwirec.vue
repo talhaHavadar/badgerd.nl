@@ -267,22 +267,36 @@
         </h1>
 
         <hr class="lg:mt-16" />
-        <h4 class="my-8 px-4 text-center text-lg lg:my-12">Python CLI App with Disclaimer</h4>
+        <h4 class="my-8 px-4 text-center text-lg lg:my-12">Python CLI App</h4>
         <p class="">
-          For the ones who wants to try the board easily (even in windows) and not concerned about the stability of the
-          cli application, we have a python application which you can install using pip as shown below.
+          For the ones who wants to try the board easily (even in windows), we have a python application which you can
+          install using pip as shown below. If you are in a system where you can use apt (Ubuntu/Debian/Raspbian etc.)
+          then we would recommend you to use apt to install the sdwire as shown below. Source code of the CLI
+          application can be found
+          <a
+            href="https://github.com/badger-Embedded/sdwire-cli/"
+            class="text-blue-500 hover:text-blue-700"
+            rel="nofollow,external"
+            >here</a
+          >.
         </p>
+
         <!-- prettier-ignore -->
         <code class="block whitespace-pre-wrap border border-zinc-200 bg-[#fafafa] p-4">pip install sdwire
 # use --help to see how to use the application
 sdwire --help
-sdwire switch --help</code>
+sdwire switch --help
+
+# For Ubuntu/Debian/Raspbian users please use apt instead of pip
+sudo add-apt-repository ppa:tchavadar/badgerd # for stable builds
+sudo add-apt-repository ppa:tchavadar/badgerd-unstable # for daily builds
+sudo apt install python3-sdwire</code>
         <p class="">
-          Please keep in mind that the python cli application interface is prone to be change frequently so if you want
-          a stable cli interface use the application explained below.
+          Please keep in mind that new CLI doesnt have all the functionalities of old CLI application yet if you need
+          those functionalities, please the guide below to unstall old CLI application.
         </p>
         <hr class="lg:mt-16" />
-        <h4 class="my-8 px-4 text-center text-lg lg:my-12">Stable CLI Application</h4>
+        <h4 class="my-8 px-4 text-center text-lg lg:my-12">Oldschool CLI Application</h4>
         <p class="">
           Our first step is to install dependencies to build the software we need to control SDWire. So let's execute
           the following command in shell.
