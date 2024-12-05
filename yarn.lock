@@ -7562,9 +7562,9 @@ num2fraction@^1.2.2:
   integrity sha512-Y1wZESM7VUThYY+4W+X4ySH2maqcA+p7UR+w8VWNWVAd6lwuXXWz/w/Cz43J/dI2I+PS6wD5N+bJUF+gjWvIqg==
 
 nuxt-jsonld@v1:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/nuxt-jsonld/-/nuxt-jsonld-1.5.3.tgz#53e9f468f145b47a139eb84a30911cff713846f7"
-  integrity sha512-FC+mEfjyMdOR1lfjSQvmhtcDUOQiUha/+Y+2MaWGd8A8OQVZJaJ+d8ZyHU+p/XdLFFTjwQG0byKqa+jVvwVMTA==
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/nuxt-jsonld/-/nuxt-jsonld-1.5.5.tgz#2fcffae1a6e4fef611e3a39bd48c1e512f7bb1de"
+  integrity sha512-wN63nfErBgATZQ8H2FMV8kua1cnS6VLVpVCom+GQGQP++psvPAqJLQrxnmdS8NKVzm/fHZnv26REadlyatiB+Q==
   dependencies:
     schema-dts "^1.0.0"
 
