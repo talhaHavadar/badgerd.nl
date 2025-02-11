@@ -14,6 +14,11 @@
           >STORE</NuxtLink
         >
         <NuxtLink
+          to="/sdwire3/"
+          class="mx-4 flex items-center justify-center p-2 transition-all ease-in-out hover:font-medium hover:text-zinc-50"
+          >SDWire3</NuxtLink
+        >
+        <NuxtLink
           to="/nrfnano/"
           class="mx-4 flex items-center justify-center p-2 transition-all ease-in-out hover:font-medium hover:text-zinc-50"
           >nRFNANO</NuxtLink
