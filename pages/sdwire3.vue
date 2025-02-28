@@ -88,7 +88,7 @@
               </button>
             </div>
             <div class="flex flex-row space-x-4 pt-4 font-light">
-              <a href="https://github.com/Badger-Embedded/badgerd-SDWire3" rel="nofollow,external" target="_blank"
+              <a href="https://github.com/Badger-Embedded/SDWire3" rel="nofollow,external" target="_blank"
                 ><svg
                   class="button--github h-6 w-6 text-zinc-600 hover:text-zinc-800"
                   xmlns="http://www.w3.org/2000/svg"
@@ -106,13 +106,7 @@
                   /></svg
               ></a>
               <a href="#quick-start" class="text-zinc-700 hover:text-zinc-900">How-To</a>
-              <a
-                href="https://docs.dasharo.com/transparent-validation/sd-wire/usage-validation/#environment-preparation"
-                target="_blank"
-                rel="nofollow,external"
-                class="text-zinc-700 hover:text-zinc-900"
-                >Docs</a
-              >
+              <a href="https://github.com/Badger-Embedded/sdwire-cli" class="text-zinc-700 hover:text-zinc-900">CLI</a>
             </div>
           </div>
           <div class="flex flex-col p-4">
@@ -154,7 +148,6 @@
                   <div v-else-if="product.ignore_stock" class="flex text-sm font-light text-orange-600">
                     Open for Pre-Order
                   </div>
-                  <div class="flex text-sm font-light">For orders over 5 piece 10% discount at checkout!</div>
                 </div>
                 <div class="flex flex-col space-y-2">
                   <div class="flex space-x-2">
@@ -214,13 +207,16 @@
                 >
                 us to get a quote.
               </p>
+              <div class="flex text-sm font-light">For orders over 5 piece 10% discount at checkout!</div>
               <hr class="mt-4" />
             </div>
             <div class="flex flex-col justify-around text-sm">
               <p class="">
-                The Badger<span class="font-bold text-red-700">'</span>d way of the infamous SDWire. It can be used to
-                automate testing sdcard interface or in 3D printing or to create a fully remote working place. In our
-                version of SDWire, we used USB-C interface to communicate with host.
+                The Badger<span class="font-bold text-red-700">'</span>d SDWire3 is an improvement over SDWireC with
+                USB3 and SDR104 support. It can be used to automate testing sdcard interface or in 3D printing or to
+                create a fully remote working place. In our version of SDWire, we used USB-C interface to communicate
+                with host. SDWireC had a known limitation that it was only compatible up-to SDR50 speeds, with the new
+                SDWire3 we are enabling it to be used in new generation target devices like Raspberry Pi 5
                 <br />
                 <br />
                 SDWire3 allows to flash SD card connected to the DUT (Device Under Test), without physical contact with
@@ -228,6 +224,14 @@
                 control are served through the same USB connection. The PCB board is designed in such way that it fits
                 into micro SD card slots. Thanks to this, there is no need for special cables with a micro SD adapter,
                 like in the muxPi product. It can even be used as SD card reader on steroids.
+                <a
+                  href="https://pypi.org/project/sdwire/"
+                  rel="nofollow,external"
+                  class="text-blue-500 hover:text-blue-700"
+                  >sdwire</a
+                >
+                cli tool available in PyPi provides an easy way to interact with both SDWireC and SDWire devices using
+                same interface.
                 <br />
                 <br />
                 Based on Tizen SDWire:
@@ -243,8 +247,8 @@
                 Go to <a href="#quick-start" class="text-blue-500 hover:text-blue-700">Quick Start</a> guide to start
                 testing it immediately!
                 <br />
-                All the SDWire3 products that will be shipped is tested on micro SD card slot of Raspberry Pi 3 Model B
-                Version 1.2, using Gnome Disk Benchmark tool.
+                All the SDWire3 products that will be shipped is tested on micro SD card slot of Raspberry Pi 5 using
+                Gnome Disk Benchmark tool.
                 <br />
                 <br />
                 SDWire3 is tested and verified on following SD cards in house:
@@ -270,9 +274,9 @@
         <hr class="lg:mt-16" />
         <h4 class="my-8 px-4 text-center text-lg lg:my-12">Python CLI App</h4>
         <p class="">
-          For the ones who wants to try the board easily (even in windows), we have a python application which you can
-          install using pip as shown below. If you are in a system where you can use apt (Ubuntu/Debian/Raspbian etc.)
-          then we would recommend you to use apt to install the sdwire as shown below. Source code of the CLI
+          For the ones who wants to try the board easily (only supports Linux), we have a python application which you
+          can install using pip as shown below. If you are in a system where you can use apt (Ubuntu/Debian/Raspbian
+          etc.) then we would recommend you to use apt to install the sdwire as shown below. Source code of the CLI
           application can be found
           <a
             href="https://github.com/badger-Embedded/sdwire-cli/"
@@ -292,10 +296,6 @@ sdwire switch --help
 sudo add-apt-repository ppa:tchavadar/badgerd # for stable builds
 sudo add-apt-repository ppa:tchavadar/badgerd-unstable # for daily builds
 sudo apt install python3-sdwire</code>
-        <p class="">
-          Please keep in mind that new CLI doesnt have all the functionalities of old CLI application yet if you need
-          those functionalities, please the guide below to unstall old CLI application.
-        </p>
       </div>
     </div>
   </div>
