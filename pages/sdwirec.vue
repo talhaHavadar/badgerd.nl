@@ -215,6 +215,10 @@
             </div>
             <div class="flex flex-col justify-around text-sm">
               <p class="">
+                Check out the new generation SDWire3 available
+                <a href="/sdwire3" target="_blank" class="text-blue-500 hover:text-blue-700">here</a>.
+                <br />
+                <br />
                 The Badger<span class="font-bold text-red-700">'</span>d way of the infamous SDWire. It can be used to
                 automate testing sdcard interface or in 3D printing or to create a fully remote working place. In our
                 version of SDWire, we used USB-C interface to communicate with host.

@@ -234,16 +234,6 @@
                 same interface.
                 <br />
                 <br />
-                Based on Tizen SDWire:
-                <a
-                  href="https://wiki.tizen.org/SDWire"
-                  target="_blank"
-                  rel="nofollow"
-                  class="text-blue-500 hover:text-blue-700"
-                  >Wiki</a
-                >
-                <br />
-                <br />
                 Go to <a href="#quick-start" class="text-blue-500 hover:text-blue-700">Quick Start</a> guide to start
                 testing it immediately!
                 <br />
@@ -324,7 +314,7 @@ export default {
   },
   head() {
     return {
-      title: 'Buy SDWire With USB-C | Quickstart With Badgerd SDWire3',
+      title: 'Buy SDWire3 With USB3 | Quickstart With Badgerd SDWire3',
       link: [
         {
           hid: 'canonical',
@@ -336,8 +326,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content:
-            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USB-C now it is SDWire3.',
+          content: 'New generation of SDWireC with SDR104 speeds and faster host interaction with USB3',
         },
         {
           hid: 'og:title',
@@ -347,8 +336,7 @@ export default {
         {
           hid: 'og:description',
           property: 'og:description',
-          content:
-            'Our way of implementing the infamous sdwire board by Tizen. Explore our variant of sdwire with an USB-C now it is SDWire3.',
+          content: 'New generation of SDWireC with SDR104 speeds and faster host interaction with USB3',
         },
         {
           hid: 'og:type',
@@ -358,7 +346,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://www.badgerd.nl/SDWire3/badgerd-SDWire3-cad.png',
+          content: 'https://www.badgerd.nl/sdwire3/badgerd-sdwire3.png',
         },
         {
           hid: 'og:url',
@@ -379,9 +367,9 @@ export default {
         '@context': 'http://schema.org',
         '@id': 'https://badgerd.nl/#SDWire3',
         '@type': 'Product',
-        url: 'https://badgerd.nl/SDWire3/',
-        name: 'Badgerd SDWire3 | SDWire',
-        mainEntityOfPage: 'https://badgerd.nl/SDWire3/',
+        url: 'https://badgerd.nl/sdwire3/',
+        name: 'Badgerd SDWire3 | SDWire | Next Gen.',
+        mainEntityOfPage: 'https://badgerd.nl/sdwire3/',
         image: 'https://www.badgerd.nl/SDWire3/SDWire3-5.jpg',
         description: 'USB-C Variant of standard SDWire product, now we are calling it as SDWire3',
         brand: {
@@ -401,7 +389,7 @@ export default {
               '@type': 'Person',
               name: 'Talha',
             },
-            datePublished: '2023-01-19',
+            datePublished: '2025-03-01',
             reviewBody:
               'It does what you expect from an SDWire device. And having it with USB-C is another plus for me.',
             name: 'First User',
@@ -419,8 +407,8 @@ export default {
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
             price: 85,
-            sku: 'badgerd_SDWire3',
-            priceValidUntil: '2024-06-31',
+            sku: 'badgerd_sdwire3',
+            priceValidUntil: '2026-06-31',
           },
         ],
       },
@@ -438,7 +426,13 @@ export default {
             '@type': 'ListItem',
             position: 2,
             name: 'SDWire3',
-            item: 'https://badgerd.nl/SDWire3/',
+            item: 'https://badgerd.nl/sdwire3/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'SDWireC',
+            item: 'https://badgerd.nl/sdwirec/',
           },
           {
             '@type': 'ListItem',
