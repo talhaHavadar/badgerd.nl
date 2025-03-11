@@ -281,11 +281,18 @@
 # use --help to see how to use the application
 sdwire --help
 sdwire switch --help
+sudo sdwire list # to list the devices detected
 
-# For Ubuntu/Debian/Raspbian users please use apt instead of pip
+# For Ubuntu users please use apt instead of pip
 sudo add-apt-repository ppa:tchavadar/badgerd # for stable builds
 sudo add-apt-repository ppa:tchavadar/badgerd-unstable # for daily builds
-sudo apt install python3-sdwire</code>
+sudo apt install python3-sdwire
+
+# For Rasbian/Debian users please use apt instead of pip directly
+echo -e "deb https://ppa.launchpadcontent.net/tchavadar/badgerd/ubuntu noble main" | sudo tee -a /etc/apt/sources.list.d/badgerd.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B35AA5B4E400B24A
+sudo apt install python3-sdwire
+# Do not hesitate to open issue in our github repo: https://github.com/Badger-Embedded/sdwire-cli/issues</code>
       </div>
     </div>
   </div>

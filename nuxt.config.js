@@ -96,6 +96,7 @@ export default {
       },
     },
     '/api': {
+      //target: 'http://0.0.0.0:8000',
       target: 'https://governor.badgerd.nl',
       pathRewrite: {
         '^/api': '',
