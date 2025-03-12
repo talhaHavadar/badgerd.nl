@@ -129,7 +129,7 @@
                     </div>
                   </div>
 
-                  <input type="hidden" name="codename" value="badgerd_SDWire3" />
+                  <input type="hidden" name="codename" value="badgerd_sdwire3" />
                   <div class="font-semibold">
                     €100.00 <span class="text-xs font-light">(incl. VAT and Free Shipping)</span>
                   </div>
@@ -163,7 +163,7 @@
                           {{ n }}
                         </option>
                       </template>
-                      <template v-else-if="product.current_stock > 20 || product.ignore_stock">
+                      <template v-else-if="product.current_stock >= 20 || product.ignore_stock">
                         <option v-for="n in 20" :key="n" :selected="n == 1" :value="n">
                           {{ n }}
                         </option>
@@ -309,7 +309,6 @@ export default {
     const products = (await $axios.get(`/api/stripe/products`)).data
     const product = products.find((p) => p.codename === 'badgerd_sdwire3')
     const shippingRates = (await $axios.get(`/api/shippingrates`)).data
-    product.current_stock = 0
     let countries = []
 
     if (Object.prototype.hasOwnProperty.call(shippingRates, 'countries')) {

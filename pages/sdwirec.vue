@@ -167,7 +167,7 @@
                           {{ n }}
                         </option>
                       </template>
-                      <template v-else-if="product.current_stock > 20 || product.ignore_stock">
+                      <template v-else-if="product.current_stock >= 20 || product.ignore_stock">
                         <option v-for="n in 20" :key="n" :selected="n == 1" :value="n">
                           {{ n }}
                         </option>
