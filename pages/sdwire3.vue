@@ -207,7 +207,7 @@
                 >
                 us to get a quote.
               </p>
-              <div class="flex text-sm font-light">For orders over 5 piece 10% discount at checkout!</div>
+              <!-- <div class="flex text-sm font-light">For orders over 5 piece 10% discount at checkout!</div> -->
               <hr class="mt-4" />
             </div>
             <div class="flex flex-col justify-around text-sm">
@@ -306,9 +306,8 @@ sudo apt install python3-sdwire
 <script>
 export default {
   async asyncData({ $axios }) {
-    // const products = (await $axios.get(`/api/stripe/products`)).data
-    // const product = products.find((p) => p.codename === 'badgerd_sdwire3')
-    const product = {}
+    const products = (await $axios.get(`/api/stripe/products`)).data
+    const product = products.find((p) => p.codename === 'badgerd_sdwire3')
     const shippingRates = (await $axios.get(`/api/shippingrates`)).data
     product.current_stock = 0
     let countries = []
