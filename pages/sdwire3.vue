@@ -241,15 +241,20 @@
                 Gnome Disk Benchmark tool.
                 <br />
                 <br />
-                SDWire3 is tested and verified on following SD cards in house:
+                SDWire3 is tested and verified in house:
                 <br />
                 <br />
               </p>
               <ul class="list-disc pl-10">
-                <li>SanDisk Ultra A1 Micro SDHC U1 Class 10</li>
-                <li>Samsung PRO Plus A2 Micro SDXC U3 Class V30</li>
-                <li>SanDisk Extreme A2 Micro SDXC U3 Class V30</li>
-                <li>Samsung Evo A1 Micro SDHC</li>
+                <li>
+                  <a
+                    rel="nofollow,external"
+                    href="https://www.amazon.nl/dp/B06XWMQ81P?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1"
+                    class="text-blue-500 hover:text-blue-700"
+                    >SanDisk Extreme</a
+                  >
+                  A1 - U3 Class V30 (Verified to be working with Raspberry Pi 5 [8gb/4gb])
+                </li>
               </ul>
             </div>
           </div>
@@ -377,7 +382,7 @@ export default {
         url: 'https://badgerd.nl/sdwire3/',
         name: 'Badgerd SDWire3 | SDWire | Next Gen.',
         mainEntityOfPage: 'https://badgerd.nl/sdwire3/',
-        image: 'https://www.badgerd.nl/SDWire3/SDWire3-5.jpg',
+        image: 'https://www.badgerd.nl/sdwire3/sdwire3-1.jpg',
         description: 'USB-C Variant of standard SDWire product, now we are calling it as SDWire3',
         brand: {
           logo: 'https://badgerd.nl/logo-nobg.png',
