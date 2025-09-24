@@ -35,8 +35,14 @@
         >
       </div>
       <div class="w-1/6" />
-      <div style="christmas-message flex-basis: 100%; height: 0" v-show="new Date().getFullYear() < 2024"></div>
-      <div class="christmas-message flex flex-grow flex-col" v-show="new Date().getFullYear() < 2024">
+      <div
+        style="christmas-message flex-basis: 100%; height: 0"
+        v-show="new Date().getMonth() == 9 && new Date().getFullYear() == 2025"
+      ></div>
+      <div
+        class="christmas-message flex flex-grow flex-col"
+        v-show="new Date().getMonth() == 9 && new Date().getFullYear() == 2025"
+      >
         <ul class="lightrope">
           <li></li>
           <li></li>
@@ -83,9 +89,9 @@
         </ul>
         <div class="min-h-[5rem] flex-grow items-center justify-center bg-red-700 font-bold text-zinc-300">
           <p class="mt-12 p-3 text-center">
-            Merry Christmas! <br />
-            We will be on Christmas break until the 01/01/2024. Please be aware that the orders you made will be shipped
-            after 01/01/2024
+            We are on a break! <br />
+            We will be on Holiday + Series of Events break until the 01/11/2025. Please be aware that the orders you
+            made will be shipped after 01/11/2025
           </p>
         </div>
       </div>
