@@ -150,7 +150,7 @@
                     In Stock
                   </div>
                   <div v-else-if="product.ignore_stock" class="flex text-sm font-light text-orange-600">
-                    Open for Pre-Order
+                    Only Available for Bulk Orders
                   </div>
                 </div>
                 <div class="flex flex-col space-y-2">
@@ -167,9 +167,9 @@
                           {{ n }}
                         </option>
                       </template>
-                      <template v-else-if="product.current_stock >= 20 || product.ignore_stock">
-                        <option v-for="n in 20" :key="n" :selected="n == 1" :value="n">
-                          {{ n }}
+                      <template v-else-if="product.current_stock >= 96 || product.ignore_stock">
+                        <option v-for="n in 96" :key="n + 4" :selected="n + 4 == 5" :value="n + 4">
+                          {{ n + 4 }}
                         </option>
                       </template>
                     </select>
