@@ -20,7 +20,7 @@
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
     "nuxt-jsonld": "v1",
-    "tw-elements": "^1.0.0-alpha13",
+    "tw-elements": "^2.0.0",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
