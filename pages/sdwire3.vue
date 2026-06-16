@@ -234,6 +234,16 @@
                 same interface.
                 <br />
                 <br />
+                Based on SDSwap:
+                <a
+                  href="https://github.com/Mr-Bossman/SD_Swap"
+                  target="_blank"
+                  rel="nofollow"
+                  class="text-blue-500 hover:text-blue-700"
+                  >Source</a
+                >
+                <br />
+                <br />
                 Go to <a href="#quick-start" class="text-blue-500 hover:text-blue-700">Quick Start</a> guide to start
                 testing it immediately!
                 <br />
