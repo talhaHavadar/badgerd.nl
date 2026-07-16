@@ -33,7 +33,7 @@
     "@nuxtjs/google-fonts": "^3.0.0-0",
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/tailwindcss": "^5.3.3",
-    "autoprefixer": "^10.4.13",
+    "autoprefixer": "^10.4.27",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^4.0.0",
