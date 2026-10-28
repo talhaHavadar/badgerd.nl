@@ -303,9 +303,19 @@ sudo add-apt-repository ppa:tchavadar/badgerd # for stable builds
 sudo add-apt-repository ppa:tchavadar/badgerd-unstable # for daily builds
 sudo apt install python3-sdwire
 
-# For Rasbian/Debian users please use apt instead of pip directly
-echo -e "deb https://ppa.launchpadcontent.net/tchavadar/badgerd/ubuntu noble main" | sudo tee -a /etc/apt/sources.list.d/badgerd.list
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B35AA5B4E400B24A
+# For Raspberry Pi OS/Debian users (bookworm, trixie) please use apt instead of pip directly
+# (the PPA is built for Ubuntu, so we use its "resolute" suite)
+sudo apt install -y curl gnupg ca-certificates
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x9272F44EA10223C73B884BADB35AA5B4E400B24A" | sudo gpg --dearmor --yes -o /etc/apt/keyrings/badgerd.gpg
+sudo tee /etc/apt/sources.list.d/badgerd.sources &gt;/dev/null &lt;&lt;EOF
+Types: deb
+URIs: https://ppa.launchpadcontent.net/tchavadar/badgerd/ubuntu
+Suites: resolute
+Components: main
+Signed-By: /etc/apt/keyrings/badgerd.gpg
+EOF
+sudo apt update
 sudo apt install python3-sdwire
 # Do not hesitate to open issue in our github repo: https://github.com/Badger-Embedded/sdwire-cli/issues</code>
       </div>
