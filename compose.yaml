@@ -5,7 +5,9 @@ services:
       dockerfile: Containerfile
     image: badgerd-web:latest
     container_name: badgerd-web
-    restart: unless-stopped
+    # `always`, not `unless-stopped`: podman-restart.service (enabled in the deploy
+    # user's session, with lingering) only restarts restart=always containers at boot.
+    restart: always
     ports:
       # nginx on the host terminates TLS and proxies to this port.
       - "127.0.0.1:${HOST_PORT:-5000}:5000"

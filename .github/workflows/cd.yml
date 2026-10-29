@@ -9,7 +9,29 @@ concurrency:
 jobs:
   deployment:
     runs-on: self-hosted
+    env:
+      HOST_PORT: "5001"
+      # docker-compose is also installed on the server; it would need the podman API socket.
+      PODMAN_COMPOSE_PROVIDER: podman-compose
     steps:
+      # The runner is a system service without a login session. Point rootless podman
+      # at the deploy user's systemd session so containers are owned by user@.service
+      # (not the runner's cgroup), share state with SSH sessions, and are restarted
+      # at boot by podman-restart.service.
+      - name: Use the deploy user's podman session
+        run: |
+          user="$(id -un)"
+          uid="$(id -u)"
+          if [ "$(loginctl show-user "$user" -p Linger --value 2>/dev/null)" != yes ]; then
+            echo "::error::Lingering is disabled for $user, so containers won't survive a reboot. Run: sudo loginctl enable-linger $user"
+            exit 1
+          fi
+          export XDG_RUNTIME_DIR="/run/user/$uid"
+          if [ "$(systemctl --user is-enabled podman-restart.service 2>/dev/null)" != enabled ]; then
+            echo "::warning::podman-restart.service is not enabled; run: systemctl --user enable podman-restart.service"
+          fi
+          echo "XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" >> "$GITHUB_ENV"
+          echo "DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus" >> "$GITHUB_ENV"
       - name: Checkout main branch
         uses: actions/checkout@v4
       # One-time cutover from the Nuxt app: free :5000 and drop it from pm2 so it
@@ -23,11 +45,12 @@ jobs:
           fi
       # The Containerfile runs `go test ./...`, so a failing test aborts the deploy.
       - name: Build and (re)start the container
-        run: HOST_PORT=5001 podman compose up -d --build
+        # Empty RUNNER_TRACKING_ID keeps the runner's orphan-process cleanup away from conmon.
+        run: RUNNER_TRACKING_ID="" podman compose up -d --build
       - name: Health check
         run: |
           for i in $(seq 1 30); do
-            curl -fsS http://127.0.0.1:5001/healthz && exit 0
+            curl -fsS "http://127.0.0.1:${HOST_PORT}/healthz" && exit 0
             sleep 1
           done
           podman logs --tail 50 badgerd-web
