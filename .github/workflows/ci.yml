@@ -10,8 +10,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      TAILWIND_VERSION: v3.4.17
-      TAILWIND_SHA256: 7d24f7fa191d2193b78cd5f5a42a6093e14409521908529f42d80b11fde1f1d4
+      TAILWIND_VERSION: v4.3.3
+      TAILWIND_SHA256: dc61b3ac6b8c9ca874c0cc4c57b2409791a64c5540404ca5f5367360babc313a
     steps:
       - uses: actions/checkout@v7
 
@@ -28,7 +28,7 @@ jobs:
           curl -fsSL -o bin/tailwindcss "https://github.com/tailwindlabs/tailwindcss/releases/download/${TAILWIND_VERSION}/tailwindcss-linux-x64"
           echo "${TAILWIND_SHA256}  bin/tailwindcss" | sha256sum -c -
           chmod +x bin/tailwindcss
-          bin/tailwindcss -c web/tailwind.config.js -i web/css/input.css -o web/static/css/app.css --minify
+          bin/tailwindcss -i web/css/input.css -o web/static/css/app.css --minify
 
       - name: Vet
         run: go vet ./...

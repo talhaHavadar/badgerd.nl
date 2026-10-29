@@ -1,6 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4: classes are auto-detected from everything under web/ (templ, Go, JS); see Justfile `css`. */
+@import 'tailwindcss' source('..');
+
+/* Keep the v3 Preflight defaults the site was designed with. */
+@layer base {
+  /* v4 defaults borders (incl. <hr>) to currentcolor; v3 used gray-200. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  /* v4 resets buttons to cursor: default. */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
 
 /*
  * Subset of tw-elements component styles the site relied on (captured from the
@@ -104,16 +121,6 @@
     background-position: right 0.75rem center;
     background-size: 16px 12px;
   }
-  .form-select:focus {
-    box-shadow: 0 0 0 1px rgb(37, 99, 235);
-  }
-  .form-select:disabled {
-    background-color: #e9ecef;
-  }
-  .form-select:-moz-focusring {
-    color: transparent;
-    text-shadow: 0 0 0 #212529;
-  }
 
   .visually-hidden {
     position: absolute !important;
@@ -125,6 +132,23 @@
     clip: rect(0, 0, 0, 0) !important;
     white-space: nowrap !important;
     border: 0 !important;
+  }
+}
+
+/*
+ * State overrides for .form-select. They must beat the select's own utilities (bg-white, text-gray-700), which in v4
+ * always win over @layer components, so they live in the utilities layer and win on specificity as they did in v3.
+ */
+@layer utilities {
+  .form-select:focus {
+    box-shadow: 0 0 0 1px rgb(37, 99, 235);
+  }
+  .form-select:disabled {
+    background-color: #e9ecef;
+  }
+  .form-select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #212529;
   }
 }
 
