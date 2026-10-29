@@ -3,7 +3,9 @@ name: Publish image
 # ghcr.io/<owner>/<repo>. Pull requests only build; nothing is pushed and the
 # registry token is never used.
 #
-# Tags: main -> latest, YYYYMMDD, sha-<short>;  v* git tags -> <tag>.
+# Tags: main -> latest, staging, YYYYMMDD, sha-<short>;  v* git tags -> <tag>.
+# The server's podman auto-update deploys `staging` (staging.badgerd.nl) within a
+# minute; promote.yml moves a staging build to `prod` (badgerd.nl).
 on:
   push:
     branches:
@@ -52,7 +54,7 @@ jobs:
             fi
             tags+=("$GITHUB_REF_NAME")
           else
-            tags+=(latest "$(date -u +%Y%m%d)" "sha-${GITHUB_SHA::7}")
+            tags+=(latest staging "$(date -u +%Y%m%d)" "sha-${GITHUB_SHA::7}")
           fi
           {
             echo "IMAGE=$image"

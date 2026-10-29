@@ -1,0 +1,104 @@
+name: Promote to production
+# Promotes an already-published image to production by re-tagging it in the
+# registry (no rebuild): <source> -> `prod` and an immutable
+# `prod-YYYYMMDD-HHMMSS` history tag. Within a minute the server's
+# podman-auto-update.timer sees the new `prod` digest and restarts the prod
+# replicas one at a time, each gated on /healthz (see README "Deployment").
+#
+# Rollback: run this workflow again with `source` set to a known-good build:
+#   - a previous production tag, e.g. `prod-20261029-174512`
+#     (list them under Packages, or check the summaries of earlier runs), or
+#   - a main build, e.g. `sha-3f474e6` (every main build is tagged sha-<short>).
+# The server also rolls a replica back on its own if a new image never gets
+# healthy (podman auto-update --rollback).
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "Tag to promote: `staging` (default), or an older `sha-<short>` / `prod-YYYYMMDD-HHMMSS` to roll back"
+        required: true
+        default: staging
+        type: string
+concurrency:
+  group: promote-production
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  promote:
+    name: Promote ${{ inputs.source }} to prod
+    runs-on: ubuntu-latest
+    # Add required reviewers to this environment to gate promotions.
+    environment: production
+    permissions:
+      contents: read
+      packages: write
+    env:
+      REGISTRY: ghcr.io
+      SOURCE: ${{ inputs.source }}
+    steps:
+      - name: Validate input
+        run: |
+          set -euo pipefail
+          if ! [[ "$SOURCE" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}$ ]]; then
+            echo "::error::'$SOURCE' is not a valid image tag"
+            exit 1
+          fi
+          if [ "$SOURCE" = prod ]; then
+            echo "::error::'prod' is the target; pick staging, a sha-<short> or a prod-<timestamp> tag"
+            exit 1
+          fi
+          # Registry paths must be lowercase (owner may contain capitals).
+          echo "IMAGE=${REGISTRY}/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+      # The token reaches skopeo only through stdin.
+      - name: Log in to GitHub Container Registry
+        env:
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: printf '%s' "$REGISTRY_TOKEN" | skopeo login "$REGISTRY" --username "$REGISTRY_USER" --password-stdin
+      # Resolve the tag to a digest once, so a main push landing mid-run can't
+      # change what gets promoted.
+      - name: Resolve source image
+        run: |
+          set -euo pipefail
+          digest="$(skopeo inspect --format '{{.Digest}}' "docker://${IMAGE}:${SOURCE}")"
+          revision="$(skopeo inspect --format '{{index .Labels "org.opencontainers.image.revision"}}' "docker://${IMAGE}@${digest}")"
+          previous="$(skopeo inspect --format '{{.Digest}}' "docker://${IMAGE}:prod" 2>/dev/null || echo none)"
+          {
+            echo "DIGEST=$digest"
+            echo "REVISION=$revision"
+            echo "PREVIOUS=$previous"
+            echo "STAMP=prod-$(date -u +%Y%m%d-%H%M%S)"
+          } >> "$GITHUB_ENV"
+      - name: Tag as prod
+        run: |
+          set -euo pipefail
+          if [ "$PREVIOUS" = "$DIGEST" ]; then
+            echo "::notice::prod already points at ${DIGEST}; adding the history tag only"
+          fi
+          # History tag first, `prod` (what the server follows) last.
+          for tag in "$STAMP" prod; do
+            skopeo copy --all --preserve-digests "docker://${IMAGE}@${DIGEST}" "docker://${IMAGE}:${tag}"
+          done
+          actual="$(skopeo inspect --format '{{.Digest}}' "docker://${IMAGE}:prod")"
+          if [ "$actual" != "$DIGEST" ]; then
+            echo "::error::prod resolves to ${actual}, expected ${DIGEST}"
+            exit 1
+          fi
+      - name: Summary
+        run: |
+          {
+            echo "### Promoted \`${SOURCE}\` to \`prod\`"
+            echo
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Image | \`${IMAGE}@${DIGEST}\` |"
+            echo "| Commit | ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${REVISION} |"
+            echo "| Tags | \`prod\`, \`${STAMP}\` |"
+            echo "| Previous prod | \`${PREVIOUS}\` |"
+            echo
+            echo "Roll back by re-running this workflow with the previous \`prod-<timestamp>\` or \`sha-<short>\` tag as \`source\`."
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Log out
+        if: always()
+        run: skopeo logout "$REGISTRY" || true

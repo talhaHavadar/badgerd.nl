@@ -33,7 +33,7 @@ RUN go tool templ generate -path web \
 
 # ---- runtime stage ----
 # Static assets are embedded in the binary, so the image is a single file.
-# Health checks are defined in compose.yaml (`badgerd-web -healthcheck`).
+# Health checks are defined in deploy/quadlet/*.container (`badgerd-web -healthcheck`).
 FROM gcr.io/distroless/static-debian12:nonroot
 COPY --from=build /out/badgerd-web /app/badgerd-web
 ENV PORT=5000

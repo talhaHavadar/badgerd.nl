@@ -1,0 +1,30 @@
+# badgerd.nl prod replica B on 127.0.0.1:5002 (nginx upstream). Installed to ~/.config/containers/systemd/.
+# `podman auto-update` (timer) pulls new `:prod` digests and restarts the replicas one at a time.
+[Unit]
+Description=badgerd.nl prod replica B (127.0.0.1:5002)
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+ContainerName=badgerd-prod-b
+Image=ghcr.io/talhahavadar/badgerd.nl:prod
+AutoUpdate=registry
+PublishPort=127.0.0.1:5002:5000
+EnvironmentFile=%h/.config/badgerd/prod.env
+# Exec form: the distroless image has no /bin/sh.
+HealthCmd=["/app/badgerd-web", "-healthcheck"]
+HealthInterval=30s
+HealthTimeout=3s
+HealthRetries=3
+
+[Service]
+# The unit only counts as started once /healthz answers. On podman 4.9 (no --sdnotify=healthy) this is what
+# makes auto-update wait before restarting the other replica, and roll back if the new image never gets healthy.
+ExecStartPost=/usr/bin/curl -fsS -o /dev/null --retry 30 --retry-delay 1 --retry-all-errors --max-time 2 http://127.0.0.1:5002/healthz
+Restart=always
+RestartSec=5
+# Covers the first image pull plus the health wait above.
+TimeoutStartSec=180
+
+[Install]
+WantedBy=default.target
