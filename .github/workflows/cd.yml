@@ -1,34 +1,29 @@
 name: Continuous Deployment
-
 on:
   push:
     branches:
       - main
-
 concurrency:
   group: deploy
   cancel-in-progress: false
-
 jobs:
   deployment:
     runs-on: self-hosted
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v4
-
       # One-time cutover from the Nuxt app: free :5000 and drop it from pm2 so it
       # doesn't come back on reboot. No-op once the pm2 process is gone.
       - name: Retire Nuxt pm2 process
+        if: false
         run: |
           if command -v pm2 >/dev/null && pm2 describe badgerd-nl >/dev/null 2>&1; then
             pm2 delete badgerd-nl
             pm2 save
           fi
-
       # The Containerfile runs `go test ./...`, so a failing test aborts the deploy.
       - name: Build and (re)start the container
-        run: HOST_PORT=5000 podman compose up -d --build
-
+        run: HOST_PORT=5001 podman compose up -d --build
       - name: Health check
         run: |
           for i in $(seq 1 30); do
@@ -37,6 +32,5 @@ jobs:
           done
           podman logs --tail 50 badgerd-web
           exit 1
-
       - name: Prune old images
         run: podman image prune -f
