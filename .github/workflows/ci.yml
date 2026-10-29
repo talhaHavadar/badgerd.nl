@@ -1,6 +1,6 @@
 name: CI
 
-# Vet, test and build on every push/PR. Deployment is cd.yml (push to main).
+# Vet, test and build on every push/PR. Images: publish.yml (main -> staging), promote.yml (-> prod).
 on:
   push:
     branches: [main]

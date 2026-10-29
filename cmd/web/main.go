@@ -8,7 +8,7 @@
 //	GOVERNOR_BASE_URL  backend for stock, shipping and checkout (default https://governor.badgerd.nl)
 //	GIPHY_BASE_URL     upstream for /gif/* (default https://media.giphy.com)
 //	STATIC_DIR         serve assets from this directory instead of the embedded copy (development)
-//	TZ                 local time zone for date-based banners (compose sets Europe/Amsterdam)
+//	TZ                 local time zone for date-based banners (deploy/env/*.env set Europe/Amsterdam)
 package main
 
 import (
