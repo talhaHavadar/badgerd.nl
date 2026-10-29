@@ -13,7 +13,7 @@ jobs:
       TAILWIND_VERSION: v3.4.17
       TAILWIND_SHA256: 7d24f7fa191d2193b78cd5f5a42a6093e14409521908529f42d80b11fde1f1d4
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-go@v5
         with:
