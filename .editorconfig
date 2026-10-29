@@ -9,5 +9,11 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+[*.{go,templ}]
+indent_style = tab
+
+[Justfile]
+indent_size = 4
+
 [*.md]
 trim_trailing_whitespace = false

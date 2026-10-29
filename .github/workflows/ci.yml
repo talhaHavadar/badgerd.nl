@@ -1,28 +1,10 @@
-name: Go site
+name: CI
 
-# Builds and tests the Go + templ rewrite (migration_guide.md). Production
-# deploys still go through cd.yml (Nuxt) until cutover (guide §11).
+# Vet, test and build on every push/PR. Deployment is cd.yml (push to main).
 on:
   push:
-    branches: [main, go-migration]
-    paths: &paths
-      - 'cmd/**'
-      - 'internal/**'
-      - 'web/**'
-      - 'go.mod'
-      - 'go.sum'
-      - 'Justfile'
-      - 'Containerfile'
-      - 'compose.yaml'
-      - '.github/workflows/go.yml'
+    branches: [main]
   pull_request:
-    paths: *paths
-  workflow_dispatch:
-    inputs:
-      deploy_staging:
-        description: 'Deploy to the staging port (127.0.0.1:5001) on the self-hosted server'
-        type: boolean
-        default: false
 
 jobs:
   test:
@@ -56,16 +38,3 @@ jobs:
 
       - name: Build
         run: CGO_ENABLED=0 go build -trimpath -o bin/badgerd-web ./cmd/web
-
-  staging:
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy_staging
-    needs: test
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Build and (re)start the staging container
-        run: HOST_PORT=5001 podman compose up -d --build
-
-      - name: Prune old images
-        run: podman image prune -f

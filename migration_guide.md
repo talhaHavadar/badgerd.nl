@@ -1,6 +1,6 @@
 # Migration Guide: Nuxt 2 → Go + templ
 
-> Status: **Phases 0–5 implemented on branch `go-migration`; Phase 6 build/container files done (prod CD unchanged); Phase 7 (staging soak + cutover) pending.** See §15 for the implementation log and deviations from this plan.
+> Status: **Implemented on branch `go-migration`; the Nuxt app has been removed from the repo and `cd.yml` now deploys the Go container** — merging to `main` performs the cutover (§15.5). References below to `pages/*.vue`, `nuxt.config.js` etc. describe the former code base. See §15 for the implementation log and deviations from this plan.
 > Target stack: **Go (`net/http` stdlib) + [templ](https://templ.guide)** server, Tailwind via the **standalone CLI**, deployed as a single static binary.
 > Author aid: generated from a full audit of this repository and the live site `https://badgerd.nl/` on 2026-10-28.
 
@@ -635,7 +635,7 @@ Note `priceValidUntil:2024-12-31` is stale in the current site — refresh durin
 | Logos | `tools/logogen` (separate Go module), `web/source/logo-nobg.svg` | `logo-96/128.png` (3.7/5.5 KB) for nav, `logo-512.png` (74 KB) for JSON-LD |
 | Tests | `internal/*/*_test.go` | form-state table tests, governor shapes/cache/stale/timeout, handlers, stock states, degradation, redirects, proxies (POST/body/Host/XFF, cookie stripping, 502), robots/sitemap |
 | Regression | `regression/capture.sh`, `regression/compare.py` | stdlib-only diff of title/meta/OG/canonical/JSON-LD/visible text + robots/sitemap/proxy/redirects |
-| Build/deploy | `Justfile`, `Containerfile`, `compose.yaml`, `.containerignore`, `.github/workflows/go.yml` | image 38.5 MB; `go.yml` runs vet/test/build on push/PR and can deploy staging (`workflow_dispatch`) |
+| Build/deploy | `Justfile`, `Containerfile`, `compose.yaml`, `.containerignore`, `.github/workflows/{ci,cd}.yml` | image 38.5 MB; `ci.yml` runs vet/test/build on push/PR; `cd.yml` deploys the container (§15.5) |
 
 The Nuxt app is untouched and still deployable (root `tailwind.config.js`, `assets/`, `static/`, `cd.yml` unchanged).
 
@@ -665,12 +665,22 @@ The Nuxt app is untouched and still deployable (root `tailwind.config.js`, `asse
 
 ### 15.4 Findings / follow-ups
 
-- **Branch is one commit behind `origin/main`** (`672ba64 sdwire3: update instructions for Rasbian`, which production already serves). Its content is ported into `web/pages/sdwire3.templ`; rebase `go-migration` onto `origin/main` before merging (the only overlap is `pages/sdwire3.vue`, which this branch doesn't modify).
+- **Branch is one commit behind `origin/main`** (`672ba64 sdwire3: update instructions for Rasbian`, which production already serves). Its content is ported into `web/pages/sdwire3.templ`; rebase `go-migration` onto `origin/main` before merging. The only overlap is `pages/sdwire3.vue`, which this branch deletes (§15.5): resolve the modify/delete conflict with `git rm pages/sdwire3.vue`.
 - Carousel CSS: tw-elements only translates the *outgoing* slide with `.active.carousel-item-start/end`; dropping the `.active` qualifier makes the incoming slide fly past and snap back. Fixed in `web/css/input.css`; frame-sampled in Chromium to match production's trajectory.
 - The landing page's `og:image` is empty (as in production); consider a dedicated share image.
 - Tailwind is pinned to the **v3.4.17** standalone CLI: v4 (current "latest", which the §8.1 Containerfile snippet would have downloaded) is CSS-first and changes utility semantics.
 - templ pitfalls hit during the port: element text collapses whitespace (shell snippets use `@components.CodeBlock` with Go raw strings); a standalone `@` or a text line starting with `for`/`if`/`switch` must be wrapped in `{ "..." }`; prettier-style split closing tags (`</a\n>`) don't parse.
 - `podman build` ignores `HEALTHCHECK` for OCI images; the health check lives in `compose.yaml`.
 - `/success/` is still listed in the sitemap for parity; consider removing it (thank-you pages shouldn't be indexed).
-- Remaining before cutover (§11–12): deploy to `127.0.0.1:5001` on the server (`go.yml` → *Run workflow* → deploy_staging, or `just up`), add an nginx preview host, re-run `just regress https://<preview-host>`, do the manual checklist in §12.3 (notably a real Stripe checkout round-trip), then switch `cd.yml` to `podman compose up -d --build` with `HOST_PORT=5000`.
+- Still recommended before merging (§12.3): run the image on the server on a spare port (`HOST_PORT=5001 podman compose -p badgerd-preview up -d --build` with a different `container_name`, or `PORT=5001 bin/badgerd-web`), point an nginx preview host at it, re-run `just regress https://<preview-host>`, and do a real Stripe checkout round-trip.
+
+### 15.5 Nuxt removal and cutover (2026-10-29)
+
+On request, the Nuxt code base was removed instead of running both stacks for a release cycle (§11 step 5 brought forward):
+
+- Deleted: `pages/`, `layouts/`, `components/`, `plugins/`, `store/`, `content/`, `assets/`, `static/` (every asset was verified byte-identical under `web/static/` first), `nuxt.config.js`, `package.json`, `yarn.lock`, the root `tailwind.config.js`, prettier/eslint configs and `jsconfig.json`. `.gitignore`/`.containerignore`/`.editorconfig` were trimmed to the Go stack; dependabot now watches `gomod` (root + `tools/logogen`) and GitHub Actions instead of npm.
+- `.github/workflows/cd.yml` (push to `main`, self-hosted runner): deletes the `badgerd-nl` pm2 process if it still exists (frees :5000, `pm2 save` so it doesn't return on reboot), runs `HOST_PORT=5000 podman compose up -d --build` (the image build runs `go test`), health-checks `127.0.0.1:5000/healthz`, prunes old images. nginx keeps `proxy_pass` to `127.0.0.1:5000` — no nginx change.
+- `compose.yaml` now defaults to host port 5000. The staging job was removed from CI (`.github/workflows/ci.yml`): with a shared `container_name` it would have replaced the production container.
+- Prerequisites on the server before merging: `podman` with `podman compose` (podman ≥ 4.7 plus `podman-compose` or docker-compose as provider) available to the runner user; for reboot persistence of a rootless container, `systemctl --user enable podman-restart.service` and `loginctl enable-linger <runner-user>` (or a Quadlet unit, §10).
+- Rollback: to go back to an earlier Go build, revert on `main` (or check out the commit on the server and run `HOST_PORT=5000 podman compose up -d --build`). To go back to Nuxt, `podman compose down` on the server, check out the pre-merge commit, `yarn && yarn build`, and re-register the pm2 process (`PORT=5000 pm2 start yarn --name badgerd-nl -- start && pm2 save`) — reverting alone isn't enough because the old `cd.yml` only *restarts* `badgerd-nl`, which the new `cd.yml` deleted. The pre-cutover snapshot in `regression/baseline/` (git-ignored, local) stays the parity reference for `just regress`.
 

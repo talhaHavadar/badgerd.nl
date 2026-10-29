@@ -5,23 +5,38 @@ on:
     branches:
       - main
 
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
 jobs:
   deployment:
     runs-on: self-hosted
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '18.x'
+      # One-time cutover from the Nuxt app: free :5000 and drop it from pm2 so it
+      # doesn't come back on reboot. No-op once the pm2 process is gone.
+      - name: Retire Nuxt pm2 process
+        run: |
+          if command -v pm2 >/dev/null && pm2 describe badgerd-nl >/dev/null 2>&1; then
+            pm2 delete badgerd-nl
+            pm2 save
+          fi
 
-      - name: Install dependencies
-        run: yarn
+      # The Containerfile runs `go test ./...`, so a failing test aborts the deploy.
+      - name: Build and (re)start the container
+        run: HOST_PORT=5000 podman compose up -d --build
 
-      - name: Build application
-        run: yarn build
+      - name: Health check
+        run: |
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:5000/healthz && exit 0
+            sleep 1
+          done
+          podman logs --tail 50 badgerd-web
+          exit 1
 
-      - name: Restart Server App
-        run: pm2 restart badgerd-nl
+      - name: Prune old images
+        run: podman image prune -f
