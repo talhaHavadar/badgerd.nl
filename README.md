@@ -8,17 +8,27 @@ Requirements: Go 1.26+, [just](https://github.com/casey/just), curl. templ is pi
 the Tailwind v3 standalone CLI is downloaded (checksum-verified) into `bin/` by `just tools`.
 
 ```bash
-just build        # templ generate -> Tailwind CSS -> bin/badgerd-web (static assets embedded)
-just run          # build and serve on :5000 (PORT=5001 just run for another port)
-just test         # go test ./...
-just image        # podman build -t badgerd-web:latest
+just build         # templ generate -> Tailwind CSS -> bin/badgerd-web (static assets embedded)
+just run           # build and serve on :5000 (PORT=5001 just run for another port)
+just test          # go test ./...
+just image         # podman build -t badgerd-web:latest
 just quadlet-check # validate deploy/quadlet units
-just logos        # regenerate logo PNGs from web/source/logo-nobg.svg
+just deploy        # deploy quadlet units
+just logos         # regenerate logo PNGs from web/source/logo-nobg.svg
 ```
 
-Runtime configuration (env): `PORT` (5000), `BASE_URL` (`https://badgerd.nl`), `GOVERNOR_BASE_URL`
-(`https://governor.badgerd.nl`), `GIPHY_BASE_URL` (`https://media.giphy.com`), `STATIC_DIR` (serve assets from disk
-while developing, e.g. `STATIC_DIR=web/static`), `TZ`.
+Runtime configuration (env):
+
+```
+# PORT defaults to 5000
+# PORT=5000
+# serve assets from disk while developing
+# STATIC_DIR=web/static
+BASE_URL=https://badgerd.nl
+GOVERNOR_BASE_URL=https://governor.badgerd.nl
+GIPHY_BASE_URL=https://media.giphy.com
+TZ=Europe/Amsterdam
+```
 
 Layout:
 
@@ -77,21 +87,7 @@ Quadlet units can't be `enable`d; `WantedBy=default.target` starts them at boot,
 (`sudo loginctl enable-linger <user>`; `just deploy` checks it). To change an environment's settings (e.g. a staging
 `GOVERNOR_BASE_URL`), edit `deploy/env/<env>.env`, commit, and `just deploy` on the server.
 
-One-time cutover from the podman-compose container, keeping a healthy backend behind nginx throughout (needs `:staging`
-from a merge and `:prod` from one _Promote to production_ run):
-
-1. `just deploy`: starts both staging replicas and prod-b on :5002; prod-a is skipped because the old container still
-   holds :5000.
-2. Switch both nginx sites to the upstreams below (prod still lists :5000, served by the old container), then
-   `sudo nginx -t && sudo systemctl reload nginx`.
-3. Retire the old container (nginx fails over to :5002) and start prod-a:
-
-   ```bash
-   pod="$(podman inspect badgerd-web --format '{{.PodName}}')"
-   podman rm -f badgerd-web
-   [ -n "$pod" ] && podman pod rm -f "$pod"
-   just deploy
-   ```
+### nginx upstreams config
 
 nginx upstreams (`upstream` blocks go at the top of the site file, outside `server {}`). `proxy_next_upstream` retries
 a request on the other replica when one refuses connections during a restart:
