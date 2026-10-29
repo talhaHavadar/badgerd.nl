@@ -131,7 +131,7 @@
 
                   <input type="hidden" name="codename" value="badgerd_sdwire3" />
                   <div class="font-semibold">
-                    €100.00 <span class="text-xs font-light">(incl. VAT and Free Shipping)</span>
+                    €100.00 <span class="text-xs font-light">(Free Shipping)</span>
                   </div>
                   <div
                     v-if="product.current_stock == 0 && !product.ignore_stock"
@@ -376,7 +376,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://www.badgerd.nl/sdwire3/badgerd-sdwire3.png',
+          content: 'https://www.badgerd.nl/sdwire3/sdwire3-1.jpg',
         },
         {
           hid: 'og:url',

@@ -1,0 +1,82 @@
+package components
+
+import (
+	"strconv"
+
+	"badgerd.nl/internal/catalog"
+	"badgerd.nl/internal/governor"
+)
+
+const selectClass = "form-select-sm form-select m-0 block appearance-none rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat py-2 text-sm font-normal text-gray-700 transition ease-in-out focus:border-blue-500 focus:bg-white focus:text-zinc-700 focus:outline-none"
+
+// ProductForm is the purchase form shared by every product page. It posts
+// same-origin to /api/stripe/checkout, which is proxied to governor.
+templ ProductForm(p catalog.Product, f catalog.Form, countries []governor.Country) {
+	<form action="/api/stripe/checkout" method="post">
+		<div class="flex flex-wrap space-y-5 sm:flex-nowrap sm:space-y-2 sm:space-x-8">
+			<div class="flex flex-col">
+				<div class="flex items-center text-lg font-semibold">
+					<p>{ p.Name }</p>
+					switch f.CountTone {
+						case catalog.ToneLow:
+							<div class="pl-2 text-xs font-normal text-orange-600">{ f.CountLabel }</div>
+						case catalog.ToneOK:
+							<div class="pl-2 text-xs font-normal text-green-600">{ f.CountLabel }</div>
+					}
+				</div>
+				<input type="hidden" name="codename" value={ p.Codename }/>
+				<div class="font-semibold">
+					{ p.PriceLabel }
+					if p.PriceNote != "" {
+						<span class="text-xs font-light">{ p.PriceNote }</span>
+					}
+					if p.PlusShipping {
+						+ Shipping
+					}
+				</div>
+				switch f.Availability {
+					case catalog.OutOfStock:
+						<div class="flex text-sm font-light text-red-600">{ f.AvailLabel }</div>
+					case catalog.InStock:
+						<div class="flex text-sm font-bold text-green-600">{ f.AvailLabel }</div>
+					case catalog.PreOrder:
+						<div class="flex text-sm font-light text-orange-600">{ f.AvailLabel }</div>
+				}
+			</div>
+			<div class="flex flex-col space-y-2">
+				<div class="flex space-x-2">
+					<select class={ selectClass, "px-6" } aria-label="Quantity" name="quantity" disabled?={ f.Disabled } required>
+						for _, n := range f.Quantities {
+							<option value={ strconv.Itoa(n) } selected?={ n == f.DefaultQty }>{ strconv.Itoa(n) }</option>
+						}
+					</select>
+					<select class={ selectClass, "px-8" } aria-label="Country" name="country_code" disabled?={ f.Disabled } required>
+						<option value="" disabled selected>Your Country</option>
+						for _, c := range countries {
+							<option value={ c.Code }>{ c.Name }</option>
+						}
+					</select>
+				</div>
+				<button type="submit" disabled?={ f.Disabled } class="inline-block w-full min-w-[6rem] rounded border border-zinc-700 bg-zinc-100 px-6 py-2.5 text-xs font-semibold uppercase leading-tight text-zinc-700 shadow-md transition duration-150 ease-in-out hover:bg-zinc-200 hover:shadow-lg focus:bg-zinc-700 focus:text-zinc-200 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-zinc-800 active:shadow-lg disabled:border-zinc-200 disabled:text-zinc-400">
+					{ f.ButtonLabel }
+				</button>
+			</div>
+		</div>
+	</form>
+	<div class="mt-16 mb-8">
+		if f.Reserved > 0 {
+			<div class="text-xs font-normal text-red-600">
+				{ strconv.Itoa(f.Reserved) } items reserved, might be yours, try again in 30 minutes
+			</div>
+		}
+		if f.ShowContact {
+			<p class="text-xs font-light">
+				<span class="font-semibold">{ p.ContactPrompt }</span>
+				<br/>
+				<a href={ templ.SafeURL("mailto:" + p.ContactEmail) } rel="nofollow" class="text-blue-500 hover:text-blue-700">Contact</a>
+				us to get a quote.
+			</p>
+		}
+		<hr class="mt-4"/>
+	</div>
+}

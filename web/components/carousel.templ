@@ -1,0 +1,34 @@
+package components
+
+import (
+	"strconv"
+
+	"badgerd.nl/internal/catalog"
+)
+
+// Carousel replaces the tw-elements carousel with markup driven by
+// /js/carousel.js (prev/next, indicators, 5s autoplay, pause on hover).
+templ Carousel(id string, images []catalog.Image) {
+	<div id={ id } class="slide carousel relative max-h-[828px] max-w-[828px] lg:w-[50vw]" data-carousel data-interval="5000">
+		<div class="carousel-indicators absolute right-0 bottom-0 left-0 mb-4 flex justify-center p-0">
+			for i := range images {
+				<button type="button" data-slide-to={ strconv.Itoa(i) } class={ templ.KV("active", i == 0) } aria-current?={ i == 0 } aria-label={ "Slide " + strconv.Itoa(i+1) }></button>
+			}
+		</div>
+		<div class="carousel-inner relative w-full overflow-hidden">
+			for i, img := range images {
+				<div class={ "carousel-item relative float-left w-full", templ.KV("active", i == 0) }>
+					<img src={ img.Src } class="block w-full" alt={ img.Alt } title={ img.Alt } loading="eager" width="828" height="828"/>
+				</div>
+			}
+		</div>
+		<button class="carousel-control-prev absolute top-0 bottom-0 left-0 flex items-center justify-center border-0 p-0 text-center hover:no-underline hover:outline-none focus:no-underline focus:outline-none" type="button" data-slide="prev">
+			<span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next absolute top-0 bottom-0 right-0 flex items-center justify-center border-0 p-0 text-center hover:no-underline hover:outline-none focus:no-underline focus:outline-none" type="button" data-slide="next">
+			<span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
+}

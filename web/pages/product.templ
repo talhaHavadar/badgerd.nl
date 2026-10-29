@@ -1,0 +1,38 @@
+package pages
+
+import (
+	"badgerd.nl/internal/catalog"
+	"badgerd.nl/internal/governor"
+	"badgerd.nl/web/components"
+)
+
+templ product(page components.Page, p catalog.Product, c productContent, f catalog.Form, countries []governor.Country) {
+	@components.Layout(page) {
+		<div>
+			if c.banner != nil {
+				@c.banner
+			}
+			<div class={ "items-top relative flex flex-col justify-center bg-zinc-100 subpixel-antialiased sm:items-center sm:pt-0", c.minHeight }>
+				<div class="mx-auto max-w-[1656px] sm:px-6 lg:px-8">
+					<div class="flex flex-row flex-wrap items-center p-4 lg:flex-nowrap">
+						<div class="flex flex-col px-2">
+							@components.Carousel("carouselIndicators", p.Images)
+							<div class="flex flex-row space-x-4 pt-4 font-light">
+								@components.GitHubLink(c.github)
+								@c.links
+							</div>
+						</div>
+						<div class="flex flex-col p-4">
+							@components.ProductForm(p, f, countries)
+							<div class="flex flex-col justify-around text-sm">
+								@c.description
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="lg:mt-16"/>
+			@c.guide
+		</div>
+	}
+}

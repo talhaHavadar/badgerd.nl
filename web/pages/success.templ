@@ -1,0 +1,36 @@
+package pages
+
+import "badgerd.nl/web/components"
+
+// Success is the post-checkout thank-you page. The order number is rendered
+// server-side; /js/success.js resolves the product link and picks a gif.
+templ Success(page components.Page, orderID string) {
+	@components.Layout(page) {
+		<div class="items-top relative flex min-h-[calc(100vh-3rem)] justify-center bg-zinc-100">
+			<div class="mx-auto w-full text-zinc-700 sm:px-6 lg:px-8">
+				<div class="flex flex-col items-center space-x-2 p-4 pt-16">
+					<img id="celebration-gif" class="w-full max-w-4xl md:w-[80%] 2xl:w-[50%]" alt=""/>
+					<h2 class="mt-10 text-center text-4xl font-extrabold">Thank You!</h2>
+					<h2 class="my-2 text-center text-lg font-bold">Order# { orderID }</h2>
+					<p class="mt-2 w-[80%] text-center">
+						You made us this happy by just buying this <a id="product-link" href="#" class="text-blue-500">beauty</a>.
+						<br/>
+						Please keep your order number safe. Your shipping confirmation will be send to your email.
+					</p>
+				</div>
+			</div>
+		</div>
+	}
+}
+
+templ NotFound(page components.Page) {
+	@components.Layout(page) {
+		<div class="items-top relative flex min-h-[calc(100vh-3rem)] justify-center bg-gray-100 sm:items-center sm:pt-0">
+			<div class="mx-auto max-w-5xl p-8 text-center text-zinc-700">
+				<h2 class="my-5 text-4xl font-extrabold">404</h2>
+				<p>This page could not be found.</p>
+				<p class="mt-4"><a href="/" class="text-blue-500 hover:text-blue-700">Back to the store</a></p>
+			</div>
+		</div>
+	}
+}
