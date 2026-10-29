@@ -26,10 +26,16 @@ RUN go mod download
 COPY cmd ./cmd
 COPY internal ./internal
 COPY web ./web
+# Reported by /healthz; publish.yml sets them. Declared late so they don't bust the cached layers above.
+ARG VERSION=
+ARG COMMIT=
+ARG BUILD_TIME=
 RUN go tool templ generate -path web \
  && tailwindcss -c web/tailwind.config.js -i web/css/input.css -o web/static/css/app.css --minify \
  && go test ./... \
- && CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/badgerd-web ./cmd/web
+ && CGO_ENABLED=0 GOOS=linux go build -trimpath \
+      -ldflags="-s -w -X main.version=${VERSION} -X main.commit=${COMMIT} -X main.buildTime=${BUILD_TIME}" \
+      -o /out/badgerd-web ./cmd/web
 
 # ---- runtime stage ----
 # Static assets are embedded in the binary, so the image is a single file.

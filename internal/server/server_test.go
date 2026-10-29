@@ -2,11 +2,13 @@ package server
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"reflect"
 	"regexp"
 	"strings"
 	"testing"
@@ -283,5 +285,38 @@ func TestRobotsAndSitemap(t *testing.T) {
 		if got[i] != exp {
 			t.Errorf("loc[%d] = %q, want %q", i, got[i], exp)
 		}
+	}
+}
+
+func TestHealthz(t *testing.T) {
+	now := time.Date(2026, time.October, 1, 12, 0, 0, 0, time.UTC)
+	s := New(Config{
+		BaseURL:     "https://badgerd.nl",
+		GovernorURL: mustURL(t, "http://governor.invalid"),
+		GiphyURL:    mustURL(t, "http://giphy.invalid"),
+		Now:         func() time.Time { return now },
+		Logger:      discardLogger(),
+		Info:        Info{Commit: "abc123", Environment: "staging", ImageDigest: "sha256:feed"},
+	}, &fakeStock{})
+	now = now.Add(90 * time.Second)
+
+	res, body := get(t, s, "/healthz")
+	if res.StatusCode != http.StatusOK || res.Header.Get("Content-Type") != "application/json" {
+		t.Fatalf("got %d %q", res.StatusCode, res.Header.Get("Content-Type"))
+	}
+	var got map[string]any
+	if err := json.Unmarshal([]byte(body), &got); err != nil {
+		t.Fatalf("%v: %s", err, body)
+	}
+	want := map[string]any{
+		"status":         "ok",
+		"commit":         "abc123",
+		"environment":    "staging",
+		"image_digest":   "sha256:feed",
+		"started_at":     "2026-10-01T12:00:00Z",
+		"uptime_seconds": float64(90),
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %v, want %v", got, want)
 	}
 }

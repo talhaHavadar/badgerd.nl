@@ -4,6 +4,7 @@ package server
 
 import (
 	"context"
+	"encoding/json"
 	"log/slog"
 	"mime"
 	"net/http"
@@ -22,6 +23,16 @@ type Config struct {
 	GiphyURL    *url.URL // upstream for /gif/*
 	Logger      *slog.Logger
 	Now         func() time.Time // defaults to time.Now
+	Info        Info             // reported by /healthz
+}
+
+// Info describes the running instance; empty fields are omitted from /healthz.
+type Info struct {
+	Version     string `json:"version,omitempty"`
+	Commit      string `json:"commit,omitempty"`
+	BuildTime   string `json:"build_time,omitempty"`
+	Environment string `json:"environment,omitempty"`
+	ImageDigest string `json:"image_digest,omitempty"`
 }
 
 // StockSource provides live product data (implemented by *governor.Client).
@@ -36,6 +47,7 @@ type Server struct {
 	stock   StockSource
 	log     *slog.Logger
 	now     func() time.Time
+	started time.Time
 	handler http.Handler
 }
 
@@ -62,6 +74,7 @@ func New(cfg Config, stock StockSource) *Server {
 	if s.now == nil {
 		s.now = time.Now
 	}
+	s.started = s.now()
 	s.handler = s.routes()
 	return s
 }
@@ -82,10 +95,7 @@ func (s *Server) routes() http.Handler {
 
 	mux.HandleFunc("GET /sitemap.xml", s.handleSitemap)
 	mux.HandleFunc("GET /robots.txt", s.handleRobots)
-	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		w.Write([]byte("ok\n"))
-	})
+	mux.HandleFunc("GET /healthz", s.handleHealthz)
 
 	mux.Handle("/api/", newProxy(s.cfg.GovernorURL, "/api", true, s.log))
 	mux.Handle("GET /gif/", newProxy(s.cfg.GiphyURL, "/gif", false, s.log))
@@ -95,6 +105,23 @@ func (s *Server) routes() http.Handler {
 	mux.HandleFunc("/", s.handleFiles)
 
 	return s.logRequests(trailingSlash(mux))
+}
+
+func (s *Server) handleHealthz(w http.ResponseWriter, r *http.Request) {
+	now := s.now()
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Cache-Control", "no-store")
+	json.NewEncoder(w).Encode(struct {
+		Status string `json:"status"`
+		Info
+		StartedAt     string `json:"started_at"`
+		UptimeSeconds int64  `json:"uptime_seconds"`
+	}{
+		Status:        "ok",
+		Info:          s.cfg.Info,
+		StartedAt:     s.started.UTC().Format(time.RFC3339),
+		UptimeSeconds: int64(now.Sub(s.started).Seconds()),
+	})
 }
 
 func (s *Server) logRequests(next http.Handler) http.Handler {
