@@ -46,6 +46,7 @@ jobs:
           # Registry paths must be lowercase (owner may contain capitals).
           image="${REGISTRY}/${GITHUB_REPOSITORY,,}"
           tags=()
+          version=
           if [ "$GITHUB_REF_TYPE" = tag ]; then
             # Valid OCI tag: [A-Za-z0-9_][A-Za-z0-9_.-]{0,127}
             if ! [[ "$GITHUB_REF_NAME" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}$ ]]; then
@@ -53,12 +54,14 @@ jobs:
               exit 1
             fi
             tags+=("$GITHUB_REF_NAME")
+            version="$GITHUB_REF_NAME"
           else
             tags+=(latest staging "$(date -u +%Y%m%d)" "sha-${GITHUB_SHA::7}")
           fi
           {
             echo "IMAGE=$image"
             echo "TAGS=${tags[*]}"
+            echo "VERSION=$version"
             echo "CREATED=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           } >> "$GITHUB_ENV"
       # The token reaches podman only through stdin; it is never interpolated
@@ -79,6 +82,10 @@ jobs:
             --label "org.opencontainers.image.created=${CREATED}"
             --label "org.opencontainers.image.title=badgerd.nl"
             --label "org.opencontainers.image.description=badgerd.nl Go + templ web server"
+            # Reported by /healthz.
+            --build-arg "VERSION=${VERSION}"
+            --build-arg "COMMIT=${GITHUB_SHA}"
+            --build-arg "BUILD_TIME=${CREATED}"
           )
           # Registry layer cache (read and write) only when we're logged in.
           if [ "$PUBLISH" = true ]; then

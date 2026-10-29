@@ -9,6 +9,8 @@
 //	GIPHY_BASE_URL     upstream for /gif/* (default https://media.giphy.com)
 //	STATIC_DIR         serve assets from this directory instead of the embedded copy (development)
 //	TZ                 local time zone for date-based banners (deploy/env/*.env set Europe/Amsterdam)
+//	ENVIRONMENT        deployment name reported by /healthz (staging, prod)
+//	IMAGE_DIGEST       container image digest reported by /healthz (written by the Quadlet unit's ExecStartPre)
 package main
 
 import (
@@ -21,6 +23,7 @@ import (
 	"net/url"
 	"os"
 	"os/signal"
+	"runtime/debug"
 	"syscall"
 	"time"
 	_ "time/tzdata" // distroless has no zoneinfo; TZ (e.g. Europe/Amsterdam) drives the break banner window
@@ -29,6 +32,9 @@ import (
 	"badgerd.nl/internal/server"
 	"badgerd.nl/web"
 )
+
+// Set at link time (-ldflags "-X main.commit=..."; see Containerfile).
+var version, commit, buildTime string
 
 func main() {
 	healthcheck := flag.Bool("healthcheck", false, "probe http://127.0.0.1:$PORT/healthz and exit 0 if healthy (for container health checks)")
@@ -69,6 +75,13 @@ func run(logger *slog.Logger, port string) error {
 		GovernorURL: govURL,
 		GiphyURL:    giphyURL,
 		Logger:      logger,
+		Info: server.Info{
+			Version:     version,
+			Commit:      buildCommit(),
+			BuildTime:   buildTime,
+			Environment: os.Getenv("ENVIRONMENT"),
+			ImageDigest: os.Getenv("IMAGE_DIGEST"),
+		},
 	}, gov)
 
 	srv := &http.Server{
@@ -116,6 +129,33 @@ func probe(port string) int {
 		return 1
 	}
 	return 0
+}
+
+// buildCommit prefers the link-time commit, falling back to the VCS stamp Go
+// embeds when building from a git checkout (`just build`).
+func buildCommit() string {
+	if commit != "" {
+		return commit
+	}
+	info, ok := debug.ReadBuildInfo()
+	if !ok {
+		return ""
+	}
+	var rev, dirty string
+	for _, s := range info.Settings {
+		switch s.Key {
+		case "vcs.revision":
+			rev = s.Value
+		case "vcs.modified":
+			if s.Value == "true" {
+				dirty = "-dirty"
+			}
+		}
+	}
+	if rev == "" {
+		return ""
+	}
+	return rev + dirty
 }
 
 func env(key, def string) string {

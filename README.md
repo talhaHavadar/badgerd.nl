@@ -28,6 +28,8 @@ BASE_URL=https://badgerd.nl
 GOVERNOR_BASE_URL=https://governor.badgerd.nl
 GIPHY_BASE_URL=https://media.giphy.com
 TZ=Europe/Amsterdam
+# deployment name reported by /healthz (staging, prod)
+ENVIRONMENT=prod
 ```
 
 Layout:
@@ -62,6 +64,9 @@ run promote.yml ─────────────▶ ghcr.io/talhahavadar/
   replicas one at a time. Each unit counts as started only once `/healthz` answers (`ExecStartPost`), so nginx keeps
   serving from the other replica. If the new image never gets healthy, `podman auto-update` rolls that replica
   back to the previous image.
+- `/healthz` returns JSON describing the replica: `version` (v* tags), `commit`, `build_time` (build args from
+  `publish.yml`), `environment` (`ENVIRONMENT` in `deploy/env/<env>.env`), `image_digest` (the unit's `ExecStartPre`
+  writes the tag's digest to `$XDG_RUNTIME_DIR/<unit>.image.env`), `started_at` and `uptime_seconds`.
 
 **Rollback:** run _Promote to production_ with `source` set to an earlier `prod-YYYYMMDD-HHMMSS` (listed in earlier
 run summaries) or `sha-<short>` tag. The server picks it up within a minute.
