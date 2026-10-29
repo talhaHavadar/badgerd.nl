@@ -34,7 +34,7 @@ jobs:
       PUBLISH: ${{ github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # Don't leave the token in .git/config (it would be readable by every later step).
           persist-credentials: false

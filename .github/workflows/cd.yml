@@ -33,7 +33,7 @@ jobs:
           echo "XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" >> "$GITHUB_ENV"
           echo "DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus" >> "$GITHUB_ENV"
       - name: Checkout main branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       # One-time cutover from the Nuxt app: free :5000 and drop it from pm2 so it
       # doesn't come back on reboot. No-op once the pm2 process is gone.
       - name: Retire Nuxt pm2 process
