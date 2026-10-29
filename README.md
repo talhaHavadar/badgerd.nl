@@ -11,7 +11,6 @@ the Tailwind v3 standalone CLI is downloaded (checksum-verified) into `bin/` by 
 just build        # templ generate -> Tailwind CSS -> bin/badgerd-web (static assets embedded)
 just run          # build and serve on :5000 (PORT=5001 just run for another port)
 just test         # go test ./...
-just regress http://localhost:5001   # capture a snapshot and diff it against regression/baseline
 just image        # podman build; `just up` / `just down` for podman compose (127.0.0.1:${HOST_PORT:-5000})
 just logos        # regenerate logo PNGs from web/source/logo-nobg.svg
 ```
@@ -37,5 +36,10 @@ text starting with `for`/`if`/`switch` or containing a standalone `@` must be wr
 
 Pushing to `main` runs `.github/workflows/cd.yml` on the self-hosted runner: it builds the image with
 `podman compose up -d --build` (tests run inside the build) and serves it on `127.0.0.1:5000`, where nginx proxies to
-it. `.github/workflows/ci.yml` runs vet/test/build on pushes and pull requests. To roll back, revert the offending
+it. `.github/workflows/ci.yml` runs vet/test/build on pushes and pull requests.
+
+`.github/workflows/publish.yml` builds the image (tests run inside the build), smoke-tests it and publishes it to
+`ghcr.io/talhahavadar/badgerd.nl`: `latest`, `YYYYMMDD` and `sha-<short>` from `main`, `<tag>` from `v*` git tags.
+Pull requests only build. It authenticates with the job's short-lived `GITHUB_TOKEN` (`packages: write`), which is
+passed to `podman login --password-stdin` via an environment variable and is never used on pull requests. To roll back, revert the offending
 commit on `main` (or redeploy an older checkout with `just up`).
