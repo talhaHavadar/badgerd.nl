@@ -27,7 +27,7 @@ jobs:
       - name: Health check
         run: |
           for i in $(seq 1 30); do
-            curl -fsS http://127.0.0.1:5000/healthz && exit 0
+            curl -fsS http://127.0.0.1:5001/healthz && exit 0
             sleep 1
           done
           podman logs --tail 50 badgerd-web
