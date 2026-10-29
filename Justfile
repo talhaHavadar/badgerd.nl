@@ -48,11 +48,6 @@ vet: generate
 logos:
     cd tools/logogen && go run . -svg ../../web/source/logo-nobg.svg -png ../../web/static/logo-nobg.png -out ../../web/static
 
-# capture a snapshot (default: local server) and compare it with the production baseline
-regress base="http://localhost:5000" out="regression/candidate":
-    ./regression/capture.sh {{base}} {{out}}
-    python3 regression/compare.py regression/baseline {{out}}
-
 # build the OCI image with podman (see Containerfile)
 image tag="badgerd-web:latest":
     podman build -t {{tag}} -f Containerfile .

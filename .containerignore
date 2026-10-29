@@ -3,6 +3,5 @@
 .github
 bin
 tools
-regression
 **/*_templ.go
 web/static/css/app.css
