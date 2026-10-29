@@ -1,0 +1,90 @@
+package pages
+
+import "badgerd.nl/web/components"
+
+type indexCard struct {
+	gridClass string
+	title     string
+	href      string
+	blurb     string
+	features  []string
+	image     string
+	alt       string
+}
+
+var indexCards = []indexCard{
+	{
+		gridClass: "grid min-h-[calc(100vh-4rem)] items-center lg:grid-cols-2",
+		title:     "Badgerd SDWire3",
+		href:      "/sdwire3/",
+		blurb:     "New generation SDWire. Faster, easier, reliable. Now with SDR104 speeds.",
+		features:  []string{"Hardware Lab", "Flash SDCard", "Modern Interface", "SDR104 Speeds", "3D Printing", "Pi 5 Compatible"},
+		image:     "/sdwire3/sdwire3-1.jpg",
+		alt:       "SDWire3",
+	},
+	{
+		gridClass: "grid min-h-[calc(100vh-3rem)] items-center lg:grid-cols-2",
+		title:     "Badgerd nRFNANO",
+		href:      "/nrfnano/",
+		blurb:     "The Badger'd nRFNANO, is a tiny BLE/IoT development board that enables users to work with nRF52840 ic, superfast with the help of UF2 bootloader.",
+		features:  []string{"nice!nano compatible", "ProMicro Form Factor", "UF2 Bootloader", "Built-in Charger", "1MB Flash", "TC Debugging"},
+		image:     "/nrfnano/nrfnano_0.jpg",
+		alt:       "nRFNANO",
+	},
+	{
+		gridClass: "mt-12 grid items-center lg:grid-cols-2",
+		title:     "Badgerd SDWireC",
+		href:      "/sdwirec/",
+		blurb:     "The Badger'd way of the infamous SDWire. In our version of SDWire, we used USB-C interface to communicate with host.",
+		features:  []string{"Hardware Lab", "Flash SDCard", "Modern Interface", "SDWire v1.4", "3D Printing", "No Wiring"},
+		image:     "/sdwirec/sdwirec-1.jpg",
+		alt:       "SDWireC",
+	},
+}
+
+templ Index(page components.Page) {
+	@components.Layout(page) {
+		<div class="items-top relative flex min-h-[calc(100vh-3rem)] justify-center bg-gray-100 sm:items-center sm:pt-0">
+			<div class="mx-auto sm:px-6 lg:px-8">
+				<div class="container px-6">
+					<section class="mb-32 text-center text-gray-800 lg:text-left">
+						<div class="py-12 md:px-12">
+							<div class="container mx-auto xl:px-32">
+								for _, c := range indexCards {
+									@card(c)
+								}
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	}
+}
+
+templ card(c indexCard) {
+	<div class={ c.gridClass }>
+		<div class="mb-12 md:mt-12 lg:mt-0 lg:mb-0">
+			<div class="relative block rounded-lg px-6 pt-12 pb-6 shadow-lg md:px-12 lg:-mr-14" style="background: hsla(0, 0%, 100%, 0.55); backdrop-filter: blur(30px); z-index: 1">
+				<div class="mb-6 flex items-center">
+					<h1 class="text-3xl font-bold">{ c.title }</h1>
+					<a href={ templ.SafeURL(c.href) } class="ml-4 text-2xl font-bold text-blue-500 transition-all ease-in-out after:content-[attr(after)] hover:text-[1.6rem] hover:text-blue-600">Buy &gt;</a>
+				</div>
+				<p class="mb-6 text-gray-500">{ c.blurb }</p>
+				<div class="grid gap-x-6 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
+					for _, f := range c.features {
+						<div class="mb-6">
+							<p class="flex items-center">
+								@components.CheckIcon()
+								{ f }
+							</p>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+		<div class="md:mb-12 lg:mb-0">
+			<img src={ c.image } class="rotate-lg-6 w-full rounded-lg shadow-lg" alt={ c.alt } title={ c.alt } loading="eager"/>
+		</div>
+	</div>
+}

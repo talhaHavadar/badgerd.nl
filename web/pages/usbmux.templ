@@ -1,0 +1,178 @@
+package pages
+
+import "badgerd.nl/web/components"
+
+templ usbmuxBanner() {
+	<div class="relative w-full bg-blue-400 p-4 text-center font-medium text-slate-200">
+		10% of your purchase of USBMux will be donated to
+		<a href="https://oceanfdn.org/" rel="nofollow" target="_blank">The Ocean Foundation</a>
+		<span class="block text-sm font-light">Thank you for supporting efforts to save our oceans!</span>
+	</div>
+}
+
+templ usbmuxLinks() {
+	<a href="#quick-start" class="text-zinc-700 hover:text-zinc-900">How-To</a>
+}
+
+templ usbmuxDescription() {
+	<p class="">
+		USBMux is a device that helps you to control connection of three different usb ports. USB-mux has three
+		USB 2.0 ports, Host, DUT and Device.
+		<br/>
+		<br/>
+		The Host port is used to control the USBMux with our cli software tool.
+		<br/>
+		<br/>
+		The Device port is used to connect USB devices like USB flash storage devices, mouses etc.
+		<br/>
+		<br/>
+		The DUT port is used to connect the device under test. It allows device itself to act as USB host or USB
+		device. You can also control USB ID pin using our usb-mux-ctrl cli tool.
+		<br/>
+		<br/>
+		The USBMux uses the analog switches and power transistors to create connections between all these three
+		ports. It allows you to connect
+		<span class="font-semibold">Host to Device</span>, <span class="font-semibold">Device to DUT</span> and
+		<span class="font-semibold">Host to DUT</span> using cli tool.
+		<br/>
+		<br/>
+		You can connect your host to the device port to write data to a connected flash storage before
+		connecting DUT to Device port. Or you can connect your DUT to the host port to test DUT device in its
+		device functionality.
+		<br/>
+		<br/>
+		Go to <a href="#quick-start" class="text-blue-500 hover:text-blue-700">Quick Start</a> guide to start
+		testing it immediately!
+	</p>
+}
+
+templ usbmuxGuide() {
+	<div class="my-4 flex justify-center">
+		<div class="max-w-7xl space-y-4 px-6 sm:px-16 lg:px-32">
+			<h1 id="quick-start" class="my-8 px-4 text-center text-lg font-bold lg:my-12">How to use Badgerd's USBMux?</h1>
+			<p class="">
+				Let's install the command line application that will help us control the Badgerd USBMux device. We have
+				already created a PPA to make the installation of the application easy for you. So let's execute the following
+				commands to install the application. If you want to build the application from the source please follow the
+				instructions
+				<a href="#build-from-source" class="text-blue-500 hover:text-blue-700">here</a>.
+			</p>
+			@components.CodeBlock(`sudo add-apt-repository ppa:tchavadar/badgerd
+sudo apt update
+sudo apt install badgerd-muxer`)
+			<p>
+				Once the installation is completed successfully. Now you can see the demonstrations steps to see what you can
+				do with the Badgerd USBMux.
+				<a href="#demonstration" class="text-blue-500 hover:text-blue-700">Jump the demonstration steps here.</a>
+			</p>
+			<p id="build-from-source" class="">Building the badgerd-muxer from source.</p>
+			@components.CodeBlock(`sudo apt install build-essential libftdi1-dev libpopt-dev cmake pkg-config`)
+			<p>Now it is time to install the software to control the USBMux.</p>
+			@components.CodeBlock(`git clone https://github.com/Badger-Embedded/muxer.git badgerd-muxer && cd badgerd-muxer`)
+			<p>Build and install the badgerd-muxer application by executing standard cmake build commands.</p>
+			@components.CodeBlock(`mkdir build && cd build
+cmake ..
+make
+sudo make install`)
+			<p>Commands above will install `badgerd-muxer` into /usr/local/bin</p>
+			<p id="demonstration">
+				Since we have the tools we need, now we can continue on actually using the USBMux. For the purpose of
+				demonstration, we will use the USBMux with two different USB storage connected to DUT and DEVICE ports. We
+				also need a USB Type B cable to connect USBMux to our computer. (In this case I am using my
+				<span class="text-orange-600">Ubuntu</span> host)
+			</p>
+			<ol class="list-decimal space-y-2 pl-4">
+				<li>First connect 2 USB Storage devices to DUT and DEVICE ports</li>
+				<li>Connect USB Type B cable to USBMux</li>
+				<li>
+					Let's check if our USBMux is already configured or not (we are sending them pre-configured but it is best to
+					check)
+					<ul class="mt-2 list-disc space-y-2 pl-8">
+						<li>
+							<p>In your computer's terminal run the following command:</p>
+							@components.CodeBlock(`sudo dmesg -w`)
+						</li>
+						<li>Connect your computer to USBMux using USB cable connected to HOST port of the USBMux</li>
+						<li>
+							Then you should be able to see 'idVendor', 'idProduct', 'SerialNumber'(alphanumeric) of the USBMux. We
+							are going to use these values to configure if our USBMux is not configured yet. Let's check that!
+						</li>
+						<li>
+							<p>In another terminal window, run the following command:</p>
+							@components.CodeBlock(`sudo badgerd-muxer --list`)
+							<p>If you see following output in terminal, this means that your USBMux is not configured.</p>
+							@components.CodeBlock(`Number of FTDI devices found: 0`)
+							<p>Let's configure it otherwise you can continue on step 4</p>
+							<ul class="mt-2 list-[square] space-y-2 pl-12">
+								<li>
+									<p>Run the following command to configure USBMux:</p>
+									@components.CodeBlock(`badgerd-muxer --device-serial={SerialNumber} --vendor=0x{idVendor} --product=0x{idProduct} --set-serial=bdgrd_usbmux_101`)
+									<p>Remember that all these values are coming from 'dmesg' output.</p>
+								</li>
+								<li>
+									<p>
+										After the configuration of the USBMux, you might need to re-connect the USBMux by plugging out and
+										in the USB cable. Now we should be able to see our USBMux is recognized by 'badgerd-muxer'
+									</p>
+									@components.CodeBlock(`badgerd-muxer --list
+Number of FTDI devices found: 1
+Dev: 0, Manufacturer: Badgerd Technologies, Serial: bdgrd_usbmux_101, Description: USBMUX`)
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>To connect the USB Storage Device on `DEVICE` port to your computer</p>
+					@components.CodeBlock(`badgerd-muxer --device-serial=bdgrd_usbmux_101 --device`)
+				</li>
+				<li>
+					Do whatever you want to do with this USB Device, you can change the content of it, you are free to do
+					anything that USB2.0 is capable of.
+				</li>
+				<li>
+					<p>To connect USB Storage Device on `DUT` port to your computer</p>
+					@components.CodeBlock(`badgerd-muxer --device-serial=bdgrd_usbmux_101 --dut`)
+				</li>
+				<li>
+					<p>
+						This scenario will help you to switch between usb devices easily. But USBMux is not just about this. With
+						the help of USBMux, you can also create connection between `DEVICE` and `DUT` ports.
+					</p>
+				</li>
+				<li>
+					<p>
+						Let's say you have a USB Device that you want to test connected to `DUT` port of USBMux, you can connect
+						the USB Device on `DEVICE` port of USBMux to `DUT` port by simply running the following command
+					</p>
+					@components.CodeBlock(`badgerd-muxer --device-serial=bdgrd_usbmux_101 --dut-device`)
+				</li>
+				<li>
+					<p>
+						This way you can simply change the content in USB Storage Device on `DEVICE` port of USBMux by connecting
+						it to host as explained in step 4. And then connect it back to DUT.
+					</p>
+				</li>
+				<li>
+					<p>
+						This is not all, there is a reason why we picked micro usb port for DUT port of USBMux. With the help of
+						USBMux, you can manipulate the id value of the micro usb port on `DUT` so that you can test the behaviour
+						of the `DUT` on different conditions
+					</p>
+				</li>
+				<li>
+					<p>To manupulate the id pin of micro usb port (DUT), you can run the following command</p>
+					@components.CodeBlock(`badgerd-muxer --device-serial=bdgrd_usbmux_101 --set-id-pin=1 # 1 to set it high, 0 to set it low`)
+				</li>
+				<li>
+					<p>To check the status of USBMux you can run the following command.</p>
+					@components.CodeBlock(`$ badgerd-muxer --device-serial=bdgrd_usbmux_101 --status
+DUT USB-ID State: 0 and DUT is connected to DEVICE [0:1]
+`)
+				</li>
+			</ol>
+			<br/>
+			<p>Hope this quick start guide helps you to give our USBMux a kickstart. See you in another challenge!</p>
+		</div>
+	</div>
+}

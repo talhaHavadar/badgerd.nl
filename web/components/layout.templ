@@ -1,0 +1,144 @@
+package components
+
+import (
+	"badgerd.nl/internal/seo"
+	"badgerd.nl/web"
+)
+
+// Page is the per-request data the shared layout needs.
+type Page struct {
+	Meta      seo.Meta
+	ShowBreak bool     // seasonal "we are on a break" banner, see BreakNotice
+	Scripts   []string // static JS paths (relative to web/static) loaded with defer
+}
+
+templ Layout(p Page) {
+	<!DOCTYPE html>
+	<html lang="en" style="font-family: Montserrat">
+		<head>
+			<meta charset="utf-8"/>
+			<title>{ p.Meta.Title }</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<meta name="description" content={ p.Meta.Description }/>
+			if p.Meta.OG != nil {
+				<meta property="og:title" content={ p.Meta.OG.Title }/>
+				<meta property="og:description" content={ p.Meta.OG.Description }/>
+				<meta property="og:type" content={ p.Meta.OG.Type }/>
+				<meta property="og:image" content={ p.Meta.OG.Image }/>
+				<meta property="og:url" content={ p.Meta.OG.URL }/>
+				<meta property="og:locale" content={ p.Meta.OG.Locale }/>
+			}
+			<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+			<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+			<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+			<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+			<link rel="manifest" href="/site.webmanifest"/>
+			if p.Meta.Canonical != "" {
+				<link rel="canonical" href={ p.Meta.Canonical }/>
+			}
+			<link rel="dns-prefetch" href="https://fonts.gstatic.com/"/>
+			<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="anonymous"/>
+			<link rel="preconnect" href="https://fonts.googleapis.com/"/>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"/>
+			<link rel="stylesheet" href={ web.AssetURL("css/app.css") }/>
+			@jsonLD(p.Meta)
+			for _, src := range p.Scripts {
+				<script src={ web.AssetURL(src) } defer></script>
+			}
+		</head>
+		<body>
+			<div class="bg-zinc-100">
+				@nav(p.ShowBreak)
+				{ children... }
+				@footer()
+			</div>
+		</body>
+	</html>
+}
+
+templ jsonLD(m seo.Meta) {
+	if ld, err := m.JSONLDScript(); err == nil && ld != "" {
+		@templ.Raw(`<script type="application/ld+json">` + ld + `</script>`)
+	}
+}
+
+templ navLink(href, label string) {
+	<a href={ templ.SafeURL(href) } class="mx-4 flex items-center justify-center p-2 transition-all ease-in-out hover:font-medium hover:text-zinc-50">{ label }</a>
+}
+
+templ nav(showBreak bool) {
+	<div class="flex flex-wrap items-center justify-start bg-zinc-700 text-sm font-normal text-zinc-200 subpixel-antialiased">
+		<div class="w-1/6"></div>
+		<a href="/" class="mx-4 p-1">
+			@Logo()
+		</a>
+		<div class="flex flex-grow flex-wrap justify-center">
+			@navLink("/", "STORE")
+			@navLink("/sdwire3/", "SDWire3")
+			@navLink("/nrfnano/", "nRFNANO")
+			@navLink("/sdwirec/", "SDWireC")
+			@navLink("/usbmux/", "USBMux")
+		</div>
+		<div class="w-1/6"></div>
+		if showBreak {
+			@breakBanner()
+		}
+	</div>
+}
+
+templ breakBanner() {
+	<div class="christmas-message" style="flex-basis: 100%; height: 0"></div>
+	<div class="christmas-message flex flex-grow flex-col">
+		<ul class="lightrope">
+			for range 42 {
+				<li></li>
+			}
+		</ul>
+		<div class="min-h-[5rem] flex-grow items-center justify-center bg-red-700 font-bold text-zinc-300">
+			<p class="mt-12 p-3 text-center">
+				We are on a break! 
+				<br/>
+				{ BreakNotice.Message }
+			</p>
+		</div>
+	</div>
+}
+
+templ footerLink(href string) {
+	<a href={ templ.SafeURL(href) } class="p-1 hover:text-zinc-800">
+		{ children... }
+	</a>
+}
+
+templ footer() {
+	<div class="flex min-h-[20vh] w-full flex-row flex-wrap justify-between border border-t-gray-300 bg-gray-100 p-8 text-zinc-600 subpixel-antialiased">
+		<div class="flex flex-col items-start justify-end font-thin subpixel-antialiased">
+			<p class="font-light">
+				* Shipments outside the EU may require customers to pay additional costs for Tax&Duties depending on the laws
+				of destination country.
+			</p>
+			<p>KvK# 87317427</p>
+			<p>Copyright © 2023 Badgerd Technologies B.V. All rights reserved.</p>
+		</div>
+		<div class="flex flex-grow flex-col items-end">
+			<div class="flex flex-grow items-end">
+				@GitHubLink("https://github.com/Badger-Embedded")
+			</div>
+			<div class="flex items-end">
+				<a href="mailto:info@badgerd.nl" rel="nofollow" class="p-1 hover:text-zinc-800">Contact</a>
+				@footerLink("/refund/") {
+					Refund
+				}
+				@footerLink("/terms/") {
+					Terms <span class="hidden sm:inline">of Service</span>
+				}
+				@footerLink("/privacy/") {
+					Privacy
+				}
+				@footerLink("/legal/") {
+					Legal Notice
+				}
+			</div>
+		</div>
+	</div>
+}

@@ -183,7 +183,7 @@
 
                   <input type="hidden" name="codename" value="badgerd_usbmux" />
                   <div class="font-semibold">
-                    €180.00 <span class="text-xs font-light">(incl. VAT)</span> + Shipping
+                    €180.00 + Shipping
                   </div>
                   <div
                     v-if="product.current_stock == 0 && !product.ignore_stock"
@@ -508,7 +508,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://www.badgerd.nl/usbmux/badgerd-usbmux-og.png',
+          content: 'https://www.badgerd.nl/usbmux/usbmux-1.jpg',
         },
         {
           hid: 'og:url',

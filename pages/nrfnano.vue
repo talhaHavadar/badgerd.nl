@@ -131,7 +131,7 @@
 
                   <input type="hidden" name="codename" value="badgerd_nrfnano" />
                   <div class="font-semibold">
-                    €19.00 <span class="text-xs font-light">(incl. VAT*)</span> + Shipping
+                    €19.00 + Shipping
                   </div>
                   <div
                     v-if="product.current_stock == 0 && !product.ignore_stock"
@@ -368,7 +368,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://www.badgerd.nl/nrfnano/nrfnano-0.jpg',
+          content: 'https://www.badgerd.nl/nrfnano/nrfnano_0.jpg',
         },
         {
           hid: 'og:url',

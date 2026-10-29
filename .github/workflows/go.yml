@@ -1,0 +1,71 @@
+name: Go site
+
+# Builds and tests the Go + templ rewrite (migration_guide.md). Production
+# deploys still go through cd.yml (Nuxt) until cutover (guide §11).
+on:
+  push:
+    branches: [main, go-migration]
+    paths: &paths
+      - 'cmd/**'
+      - 'internal/**'
+      - 'web/**'
+      - 'go.mod'
+      - 'go.sum'
+      - 'Justfile'
+      - 'Containerfile'
+      - 'compose.yaml'
+      - '.github/workflows/go.yml'
+  pull_request:
+    paths: *paths
+  workflow_dispatch:
+    inputs:
+      deploy_staging:
+        description: 'Deploy to the staging port (127.0.0.1:5001) on the self-hosted server'
+        type: boolean
+        default: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      TAILWIND_VERSION: v3.4.17
+      TAILWIND_SHA256: 7d24f7fa191d2193b78cd5f5a42a6093e14409521908529f42d80b11fde1f1d4
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Generate templ code
+        run: go tool templ generate -path web
+
+      - name: Build CSS
+        run: |
+          mkdir -p bin
+          curl -fsSL -o bin/tailwindcss "https://github.com/tailwindlabs/tailwindcss/releases/download/${TAILWIND_VERSION}/tailwindcss-linux-x64"
+          echo "${TAILWIND_SHA256}  bin/tailwindcss" | sha256sum -c -
+          chmod +x bin/tailwindcss
+          bin/tailwindcss -c web/tailwind.config.js -i web/css/input.css -o web/static/css/app.css --minify
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test
+        run: go test ./...
+
+      - name: Build
+        run: CGO_ENABLED=0 go build -trimpath -o bin/badgerd-web ./cmd/web
+
+  staging:
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy_staging
+    needs: test
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and (re)start the staging container
+        run: HOST_PORT=5001 podman compose up -d --build
+
+      - name: Prune old images
+        run: podman image prune -f

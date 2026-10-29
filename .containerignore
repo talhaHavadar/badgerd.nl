@@ -1,0 +1,19 @@
+# Only cmd/, internal/, web/ and go.mod/go.sum are needed to build the image.
+.git
+.github
+node_modules
+.nuxt
+dist
+assets
+static
+pages
+layouts
+components
+plugins
+store
+content
+bin
+tools
+regression
+**/*_templ.go
+web/static/css/app.css
