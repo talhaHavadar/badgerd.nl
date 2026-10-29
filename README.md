@@ -5,7 +5,7 @@ stock from `governor.badgerd.nl` and same-origin `/api` + `/gif` reverse proxies
 see [migration_guide.md](migration_guide.md) for the design and the migration log.
 
 Requirements: Go 1.26+, [just](https://github.com/casey/just), curl. templ is pinned in `go.mod` (`go tool templ`);
-the Tailwind v3 standalone CLI is downloaded (checksum-verified) into `bin/` by `just tools`.
+the Tailwind v4 standalone CLI is downloaded (checksum-verified) into `bin/` by `just tools`.
 
 ```bash
 just build         # templ generate -> Tailwind CSS -> bin/badgerd-web (static assets embedded)
@@ -39,7 +39,7 @@ Layout:
 - `internal/governor` — typed governor client (stock, shipping rates) with timeout and short cache.
 - `internal/catalog` — static product data and the stock → purchase-form rules.
 - `internal/seo` — per-page meta and JSON-LD.
-- `web/components`, `web/pages` — templ views; `web/css/input.css` + `web/tailwind.config.js` — styles;
+- `web/components`, `web/pages` — templ views; `web/css/input.css` — styles (Tailwind v4, CSS-first config);
   `web/static` — assets served at `/` (embedded into the binary).
 
 Shell snippets in templ must use ``@components.CodeBlock(`...`)`` (templ collapses whitespace in element text), and

@@ -4,9 +4,9 @@
 # ---- build stage ----
 FROM docker.io/library/golang:1.26 AS build
 ARG TARGETARCH=amd64
-ARG TAILWIND_VERSION=v3.4.17
-ARG TAILWIND_SHA256_AMD64=7d24f7fa191d2193b78cd5f5a42a6093e14409521908529f42d80b11fde1f1d4
-ARG TAILWIND_SHA256_ARM64=69b1378b8133192d7d2feb12a116fa12d035594f58db3eff215879e4ad8cf39b
+ARG TAILWIND_VERSION=v4.3.3
+ARG TAILWIND_SHA256_AMD64=dc61b3ac6b8c9ca874c0cc4c57b2409791a64c5540404ca5f5367360babc313a
+ARG TAILWIND_SHA256_ARM64=55fd0b241214eff3de1e8ee4f22796662f2d2e7a49bcfca7477cfd0bac398195
 WORKDIR /src
 
 RUN set -eu; \
@@ -31,7 +31,7 @@ ARG VERSION=
 ARG COMMIT=
 ARG BUILD_TIME=
 RUN go tool templ generate -path web \
- && tailwindcss -c web/tailwind.config.js -i web/css/input.css -o web/static/css/app.css --minify \
+ && tailwindcss -i web/css/input.css -o web/static/css/app.css --minify \
  && go test ./... \
  && CGO_ENABLED=0 GOOS=linux go build -trimpath \
       -ldflags="-s -w -X main.version=${VERSION} -X main.commit=${COMMIT} -X main.buildTime=${BUILD_TIME}" \

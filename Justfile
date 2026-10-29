@@ -2,8 +2,8 @@
 # Requires: go (1.26+), just, curl. `just tools` downloads the pinned Tailwind CLI.
 
 # templ is pinned in go.mod (`tool` directive) and run with `go tool templ`.
-tailwind_version := "v3.4.17"
-tailwind_sha256  := "7d24f7fa191d2193b78cd5f5a42a6093e14409521908529f42d80b11fde1f1d4" # tailwindcss-linux-x64
+tailwind_version := "v4.3.3"
+tailwind_sha256  := "dc61b3ac6b8c9ca874c0cc4c57b2409791a64c5540404ca5f5367360babc313a" # tailwindcss-linux-x64
 tailwind         := "./bin/tailwindcss"
 templ            := "go tool templ"
 bin              := "bin/badgerd-web"
@@ -13,7 +13,8 @@ default: build
 # download the pinned Tailwind standalone CLI (no Node needed)
 tools:
     mkdir -p bin
-    test -x {{tailwind}} || curl -fsSL -o {{tailwind}} https://github.com/tailwindlabs/tailwindcss/releases/download/{{tailwind_version}}/tailwindcss-linux-x64
+    # (re)download when missing or when the pin changed
+    echo "{{tailwind_sha256}}  {{tailwind}}" | sha256sum -c --quiet --status 2>/dev/null || curl -fsSL -o {{tailwind}} https://github.com/tailwindlabs/tailwindcss/releases/download/{{tailwind_version}}/tailwindcss-linux-x64
     echo "{{tailwind_sha256}}  {{tailwind}}" | sha256sum -c --quiet
     chmod +x {{tailwind}}
 
@@ -28,7 +29,7 @@ fmt:
 
 # compile + minify Tailwind CSS
 css: tools
-    {{tailwind}} -c web/tailwind.config.js -i web/css/input.css -o web/static/css/app.css --minify
+    {{tailwind}} -i web/css/input.css -o web/static/css/app.css --minify
 
 # full build: templ -> css -> static Go binary (assets embedded)
 build: generate css

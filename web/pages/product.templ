@@ -17,7 +17,7 @@ templ product(page components.Page, p catalog.Product, c productContent, f catal
 					<div class="flex flex-row flex-wrap items-center p-4 lg:flex-nowrap">
 						<div class="flex flex-col px-2">
 							@components.Carousel("carouselIndicators", p.Images)
-							<div class="flex flex-row space-x-4 pt-4 font-light">
+							<div class="flex flex-row gap-4 pt-4 font-light">
 								@components.GitHubLink(c.github)
 								@c.links
 							</div>
