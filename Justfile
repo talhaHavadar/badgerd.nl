@@ -57,7 +57,7 @@ regress base="http://localhost:5000" out="regression/candidate":
 image tag="badgerd-web:latest":
     podman build -t {{tag}} -f Containerfile .
 
-# bring the app up via podman compose
+# bring the app up via podman compose (127.0.0.1:${HOST_PORT:-5000})
 up:
     podman compose up -d --build
 
