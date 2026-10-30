@@ -44,10 +44,10 @@ var indexCards = []indexCard{
 
 templ Index(page components.Page) {
 	@components.Layout(page) {
-		<div class="items-top relative flex min-h-[calc(100vh-3rem)] justify-center bg-gray-100 sm:items-center sm:pt-0">
+		<div class="items-top relative flex min-h-[calc(100vh-3rem)] justify-center bg-surface-alt sm:items-center sm:pt-0">
 			<div class="mx-auto sm:px-6 lg:px-8">
 				<div class="container px-6">
-					<section class="mb-32 text-center text-gray-800 lg:text-left">
+					<section class="mb-32 text-center text-fg-card lg:text-left">
 						<div class="py-12 md:px-12">
 							<div class="container mx-auto xl:px-32">
 								for _, c := range indexCards {
@@ -65,12 +65,12 @@ templ Index(page components.Page) {
 templ card(c indexCard) {
 	<div class={ c.gridClass }>
 		<div class="mb-12 md:mt-12 lg:mt-0 lg:mb-0">
-			<div class="relative block rounded-lg px-6 pt-12 pb-6 shadow-lg md:px-12 lg:-mr-14" style="background: hsla(0, 0%, 100%, 0.55); backdrop-filter: blur(30px); z-index: 1">
+			<div class="glass-card relative block rounded-lg px-6 pt-12 pb-6 shadow-lg md:px-12 lg:-mr-14">
 				<div class="mb-6 flex items-center">
 					<h1 class="text-3xl font-bold">{ c.title }</h1>
-					<a href={ templ.SafeURL(c.href) } class="ml-4 text-2xl font-bold text-blue-500 transition-all ease-in-out after:content-[attr(after)] hover:text-[1.6rem] hover:text-blue-600">Buy &gt;</a>
+					<a href={ templ.SafeURL(c.href) } class="ml-4 text-2xl font-bold text-link transition-all ease-in-out after:content-[attr(after)] hover:text-[1.6rem] hover:text-link-hover">Buy &gt;</a>
 				</div>
-				<p class="mb-6 text-gray-500">{ c.blurb }</p>
+				<p class="mb-6 text-fg-card-muted">{ c.blurb }</p>
 				<div class="grid gap-x-6 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
 					for _, f := range c.features {
 						<div class="mb-6">

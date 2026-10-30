@@ -11,7 +11,7 @@ templ usbmuxBanner() {
 }
 
 templ usbmuxLinks() {
-	<a href="#quick-start" class="text-zinc-700 hover:text-zinc-900">How-To</a>
+	<a href="#quick-start" class="text-fg-soft hover:text-fg-strong">How-To</a>
 }
 
 templ usbmuxDescription() {
@@ -41,7 +41,7 @@ templ usbmuxDescription() {
 		device functionality.
 		<br/>
 		<br/>
-		Go to <a href="#quick-start" class="text-blue-500 hover:text-blue-700">Quick Start</a> guide to start
+		Go to <a href="#quick-start" class="text-link hover:text-link-hover">Quick Start</a> guide to start
 		testing it immediately!
 	</p>
 }
@@ -55,7 +55,7 @@ templ usbmuxGuide() {
 				already created a PPA to make the installation of the application easy for you. So let's execute the following
 				commands to install the application. If you want to build the application from the source please follow the
 				instructions
-				<a href="#build-from-source" class="text-blue-500 hover:text-blue-700">here</a>.
+				<a href="#build-from-source" class="text-link hover:text-link-hover">here</a>.
 			</p>
 			@components.CodeBlock(`sudo add-apt-repository ppa:tchavadar/badgerd
 sudo apt update
@@ -63,7 +63,7 @@ sudo apt install badgerd-muxer`)
 			<p>
 				Once the installation is completed successfully. Now you can see the demonstrations steps to see what you can
 				do with the Badgerd USBMux.
-				<a href="#demonstration" class="text-blue-500 hover:text-blue-700">Jump the demonstration steps here.</a>
+				<a href="#demonstration" class="text-link hover:text-link-hover">Jump the demonstration steps here.</a>
 			</p>
 			<p id="build-from-source" class="">Building the badgerd-muxer from source.</p>
 			@components.CodeBlock(`sudo apt install build-essential libftdi1-dev libpopt-dev cmake pkg-config`)
@@ -79,7 +79,7 @@ sudo make install`)
 				Since we have the tools we need, now we can continue on actually using the USBMux. For the purpose of
 				demonstration, we will use the USBMux with two different USB storage connected to DUT and DEVICE ports. We
 				also need a USB Type B cable to connect USBMux to our computer. (In this case I am using my
-				<span class="text-orange-600">Ubuntu</span> host)
+				<span class="text-warn">Ubuntu</span> host)
 			</p>
 			<ol class="list-decimal space-y-2 pl-4">
 				<li>First connect 2 USB Storage devices to DUT and DEVICE ports</li>
