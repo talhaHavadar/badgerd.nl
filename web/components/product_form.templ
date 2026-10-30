@@ -7,7 +7,7 @@ import (
 	"badgerd.nl/internal/governor"
 )
 
-const selectClass = "form-select-sm form-select m-0 block appearance-none rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat py-2 text-sm font-normal text-gray-700 transition ease-in-out focus:border-blue-500 focus:bg-white focus:text-zinc-700 focus:outline-hidden disabled:opacity-70"
+const selectClass = "form-select-sm form-select m-0 block appearance-none rounded border border-solid border-line-strong bg-field bg-clip-padding bg-no-repeat py-2 text-sm font-normal text-fg-field transition ease-in-out focus:border-blue-500 focus:bg-field focus:text-fg-soft focus:outline-hidden disabled:opacity-70"
 
 // ProductForm is the purchase form shared by every product page. It posts
 // same-origin to /api/stripe/checkout, which is proxied to governor.
@@ -19,9 +19,9 @@ templ ProductForm(p catalog.Product, f catalog.Form, countries []governor.Countr
 					<p>{ p.Name }</p>
 					switch f.CountTone {
 						case catalog.ToneLow:
-							<div class="pl-2 text-xs font-normal text-orange-600">{ f.CountLabel }</div>
+							<div class="pl-2 text-xs font-normal text-warn">{ f.CountLabel }</div>
 						case catalog.ToneOK:
-							<div class="pl-2 text-xs font-normal text-green-600">{ f.CountLabel }</div>
+							<div class="pl-2 text-xs font-normal text-ok">{ f.CountLabel }</div>
 					}
 				</div>
 				<input type="hidden" name="codename" value={ p.Codename }/>
@@ -36,11 +36,11 @@ templ ProductForm(p catalog.Product, f catalog.Form, countries []governor.Countr
 				</div>
 				switch f.Availability {
 					case catalog.OutOfStock:
-						<div class="flex text-sm font-light text-red-600">{ f.AvailLabel }</div>
+						<div class="flex text-sm font-light text-danger">{ f.AvailLabel }</div>
 					case catalog.InStock:
-						<div class="flex text-sm font-bold text-green-600">{ f.AvailLabel }</div>
+						<div class="flex text-sm font-bold text-ok">{ f.AvailLabel }</div>
 					case catalog.PreOrder:
-						<div class="flex text-sm font-light text-orange-600">{ f.AvailLabel }</div>
+						<div class="flex text-sm font-light text-warn">{ f.AvailLabel }</div>
 				}
 			</div>
 			<div class="flex flex-col gap-2">
@@ -57,7 +57,7 @@ templ ProductForm(p catalog.Product, f catalog.Form, countries []governor.Countr
 						}
 					</select>
 				</div>
-				<button type="submit" disabled?={ f.Disabled } class="inline-block w-full min-w-24 rounded border border-zinc-700 bg-zinc-100 px-6 py-2.5 text-xs font-semibold uppercase leading-tight text-zinc-700 shadow-md transition duration-150 ease-in-out hover:bg-zinc-200 hover:shadow-lg focus:bg-zinc-700 focus:text-zinc-200 focus:shadow-lg focus:outline-hidden focus:ring-0 active:bg-zinc-800 active:shadow-lg disabled:border-zinc-200 disabled:text-zinc-400">
+				<button type="submit" disabled?={ f.Disabled } class="inline-block w-full min-w-24 rounded border border-btn-border bg-btn px-6 py-2.5 text-xs font-semibold uppercase leading-tight text-btn-fg shadow-md transition duration-150 ease-in-out hover:bg-btn-hover hover:shadow-lg focus:bg-btn-focus focus:text-btn-focus-fg focus:shadow-lg focus:outline-hidden focus:ring-0 active:bg-btn-active active:shadow-lg disabled:border-line-soft disabled:text-fg-disabled">
 					{ f.ButtonLabel }
 				</button>
 			</div>
@@ -65,7 +65,7 @@ templ ProductForm(p catalog.Product, f catalog.Form, countries []governor.Countr
 	</form>
 	<div class="mt-16 mb-8">
 		if f.Reserved > 0 {
-			<div class="text-xs font-normal text-red-600">
+			<div class="text-xs font-normal text-danger">
 				{ strconv.Itoa(f.Reserved) } items reserved, might be yours, try again in 30 minutes
 			</div>
 		}
@@ -73,7 +73,7 @@ templ ProductForm(p catalog.Product, f catalog.Form, countries []governor.Countr
 			<p class="text-xs font-light">
 				<span class="font-semibold">{ p.ContactPrompt }</span>
 				<br/>
-				<a href={ templ.SafeURL("mailto:" + p.ContactEmail) } rel="nofollow" class="text-blue-500 hover:text-blue-700">Contact</a>
+				<a href={ templ.SafeURL("mailto:" + p.ContactEmail) } rel="nofollow" class="text-link hover:text-link-hover">Contact</a>
 				us to get a quote.
 			</p>
 		}

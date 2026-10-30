@@ -148,7 +148,7 @@ func TestProductStockStates(t *testing.T) {
 		{
 			name:    "low stock",
 			product: governor.Product{CurrentStock: 5, ReservedStock: 2},
-			want: []string{"In Stock", `text-orange-600">Last 5 items`, `<option value="5">5</option>`,
+			want: []string{"In Stock", `text-warn">Last 5 items`, `<option value="5">5</option>`,
 				"2 items reserved, might be yours, try again in 30 minutes", ">Buy</button>", `<option value="NL">Netherlands</option>`,
 				`<div class="font-semibold">€180.00 + Shipping</div>`},
 			reject: []string{`<option value="6">`, `name="quantity" disabled`, "incl. VAT"},

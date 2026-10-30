@@ -1,15 +1,132 @@
 /* Tailwind v4: classes are auto-detected from everything under web/ (templ, Go, JS); see Justfile `css`. */
 @import 'tailwindcss' source('..');
 
-/* Keep the v3 Preflight defaults the site was designed with. */
+/*
+ * Light/dark theme. `.dark` on <html> is set before first paint by the inline script in components.Layout (OS
+ * preference unless the nav toggle stored an override; see /js/theme.js), so `dark:` follows that class too.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Semantic colours: templates use these (bg-surface, text-link, border-line, ...) instead of palette colours, so a
+ * theme is just a set of values below. The nav, break banner and USBMux banner keep palette colours on purpose: they
+ * are already dark/saturated and look the same in both themes.
+ */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-field: var(--field);
+  --color-code: var(--code);
+  --color-fg: var(--fg);
+  --color-fg-soft: var(--fg-soft);
+  --color-fg-strong: var(--fg-strong);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-muted-hover: var(--fg-muted-hover);
+  --color-fg-card: var(--fg-card);
+  --color-fg-card-muted: var(--fg-card-muted);
+  --color-fg-field: var(--fg-field);
+  --color-fg-disabled: var(--fg-disabled);
+  --color-icon: var(--icon);
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-line-strong: var(--line-strong);
+  --color-btn: var(--btn);
+  --color-btn-hover: var(--btn-hover);
+  --color-btn-active: var(--btn-active);
+  --color-btn-fg: var(--btn-fg);
+  --color-btn-border: var(--btn-border);
+  --color-btn-focus: var(--btn-focus);
+  --color-btn-focus-fg: var(--btn-focus-fg);
+}
+
 @layer base {
+  :root {
+    color-scheme: light;
+    --surface: --theme(--color-zinc-100);
+    --surface-alt: --theme(--color-gray-100);
+    --field: --theme(--color-white);
+    --code: #fafafa;
+    --fg: --theme(--color-black);
+    --fg-soft: --theme(--color-zinc-700);
+    --fg-strong: --theme(--color-zinc-900);
+    --fg-muted: --theme(--color-zinc-600);
+    --fg-muted-hover: --theme(--color-zinc-800);
+    --fg-card: --theme(--color-gray-800);
+    --fg-card-muted: --theme(--color-gray-500);
+    --fg-field: --theme(--color-gray-700);
+    --fg-disabled: --theme(--color-zinc-400);
+    --icon: --theme(--color-gray-900);
+    --link: --theme(--color-blue-500);
+    --link-hover: --theme(--color-blue-700);
+    --ok: --theme(--color-green-600);
+    --warn: --theme(--color-orange-600);
+    --danger: --theme(--color-red-600);
+    --accent: --theme(--color-red-700);
+    --line: --theme(--color-gray-200);
+    --line-soft: --theme(--color-zinc-200);
+    --line-strong: --theme(--color-gray-300);
+    --btn: --theme(--color-zinc-100);
+    --btn-hover: --theme(--color-zinc-200);
+    --btn-active: --theme(--color-zinc-800);
+    --btn-fg: --theme(--color-zinc-700);
+    --btn-border: --theme(--color-zinc-700);
+    --btn-focus: --theme(--color-zinc-700);
+    --btn-focus-fg: --theme(--color-zinc-200);
+    --glass: hsla(0, 0%, 100%, 0.55);
+    --select-disabled: #e9ecef;
+    --select-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  }
+
+  .dark {
+    color-scheme: dark;
+    --surface: --theme(--color-zinc-900);
+    --surface-alt: --theme(--color-zinc-900);
+    --field: --theme(--color-zinc-800);
+    --code: --theme(--color-zinc-800);
+    --fg: --theme(--color-zinc-200);
+    --fg-soft: --theme(--color-zinc-300);
+    --fg-strong: --theme(--color-zinc-50);
+    --fg-muted: --theme(--color-zinc-400);
+    --fg-muted-hover: --theme(--color-zinc-200);
+    --fg-card: --theme(--color-zinc-200);
+    --fg-card-muted: --theme(--color-zinc-400);
+    --fg-field: --theme(--color-zinc-200);
+    --fg-disabled: --theme(--color-zinc-500);
+    --icon: --theme(--color-zinc-100);
+    --link: --theme(--color-blue-400);
+    --link-hover: --theme(--color-blue-300);
+    --ok: --theme(--color-green-400);
+    --warn: --theme(--color-orange-400);
+    --danger: --theme(--color-red-400);
+    --accent: --theme(--color-red-500);
+    --line: --theme(--color-zinc-700);
+    --line-soft: --theme(--color-zinc-700);
+    --line-strong: --theme(--color-zinc-600);
+    --btn: --theme(--color-zinc-800);
+    --btn-hover: --theme(--color-zinc-700);
+    --btn-active: --theme(--color-zinc-300);
+    --btn-fg: --theme(--color-zinc-200);
+    --btn-border: --theme(--color-zinc-500);
+    --btn-focus: --theme(--color-zinc-200);
+    --btn-focus-fg: --theme(--color-zinc-800);
+    --glass: hsla(240, 4%, 16%, 0.55);
+    --select-disabled: --theme(--color-zinc-700);
+    --select-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23d4d4d8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  }
+
   /* v4 defaults borders (incl. <hr>) to currentcolor; v3 used gray-200. */
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--line, currentcolor);
   }
 
   /* v4 resets buttons to cursor: default. */
@@ -117,7 +234,7 @@
 
   .form-select {
     -moz-padding-start: calc(0.75rem - 3px);
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-image: var(--select-arrow);
     background-position: right 0.75rem center;
     background-size: 16px 12px;
   }
@@ -133,6 +250,22 @@
     white-space: nowrap !important;
     border: 0 !important;
   }
+
+  /* Frosted landing-page product card (pages/index.templ). */
+  .glass-card {
+    z-index: 1;
+    background: var(--glass);
+    backdrop-filter: blur(30px);
+  }
+
+  /*
+   * Dark theme: soft-cap image highlights at ~80% (white -> #ccc) with the #dim-highlights filter defined in
+   * components.Layout. Pixels below ~60% are untouched, so already-dark photos don't get darker. Scoped to <main> so
+   * the nav logo is left alone; opt an image out with data-no-dim.
+   */
+  .dark main img:not([data-no-dim]) {
+    filter: url(#dim-highlights);
+  }
 }
 
 /*
@@ -144,7 +277,7 @@
     box-shadow: 0 0 0 1px rgb(37, 99, 235);
   }
   .form-select:disabled {
-    background-color: #e9ecef;
+    background-color: var(--select-disabled);
   }
   .form-select:-moz-focusring {
     color: transparent;

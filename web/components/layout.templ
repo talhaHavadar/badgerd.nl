@@ -41,19 +41,59 @@ templ Layout(p Page) {
 			<link rel="preconnect" href="https://fonts.googleapis.com/"/>
 			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"/>
 			<link rel="stylesheet" href={ web.AssetURL("css/app.css") }/>
+			@templ.Raw(themeInitScript)
 			@jsonLD(p.Meta)
+			<script src={ web.AssetURL("js/theme.js") } defer></script>
 			for _, src := range p.Scripts {
 				<script src={ web.AssetURL(src) } defer></script>
 			}
 		</head>
 		<body>
-			<div class="bg-zinc-100">
+			@dimHighlightsFilter()
+			<div class="bg-surface text-fg">
 				@nav(p.ShowBreak)
-				{ children... }
+				<main>
+					{ children... }
+				</main>
 				@footer()
 			</div>
 		</body>
 	</html>
+}
+
+// themeInitScript sets the theme class before first paint (no light flash): the stored nav-toggle choice, else the OS
+// preference. Kept inline and tiny on purpose; the toggle itself lives in /js/theme.js.
+const themeInitScript = `<script>(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}` +
+	`var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;` +
+	`document.documentElement.classList.toggle('dark',d)})()</script>`
+
+	// dimHighlightsFilter is the SVG filter used by `.dark main img` (see web/css/input.css): per channel it is the
+	// identity up to 0.6, then eases into a 0.8 ceiling, so highlights are capped without darkening the rest. It must
+	// live in the page itself, as not every browser resolves CSS filter references to external files.
+
+templ dimHighlightsFilter() {
+	<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+		<filter id="dim-highlights" color-interpolation-filters="sRGB">
+			<feComponentTransfer>
+				<feFuncR type="table" tableValues="0 .1 .2 .3 .4 .5 .6 .675 .74 .785 .8"></feFuncR>
+				<feFuncG type="table" tableValues="0 .1 .2 .3 .4 .5 .6 .675 .74 .785 .8"></feFuncG>
+				<feFuncB type="table" tableValues="0 .1 .2 .3 .4 .5 .6 .675 .74 .785 .8"></feFuncB>
+			</feComponentTransfer>
+		</filter>
+	</svg>
+}
+
+// themeToggle switches between light and dark; aria-pressed is kept in sync by /js/theme.js.
+templ themeToggle() {
+	<button type="button" data-theme-toggle aria-pressed="false" aria-label="Dark theme" title="Toggle dark theme" class="block rounded p-2 text-zinc-200 transition-all ease-in-out hover:text-zinc-50">
+		<svg class="h-5 w-5 dark:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+		</svg>
+		<svg class="hidden h-5 w-5 dark:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<circle cx="12" cy="12" r="4"></circle>
+			<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+		</svg>
+	</button>
 }
 
 templ jsonLD(m seo.Meta) {
@@ -67,7 +107,7 @@ templ navLink(href, label string) {
 }
 
 templ nav(showBreak bool) {
-	<div class="flex flex-wrap items-center justify-start bg-zinc-700 text-sm font-normal text-zinc-200 subpixel-antialiased">
+	<div class="relative flex flex-wrap items-center justify-start bg-zinc-700 text-sm font-normal text-zinc-200 subpixel-antialiased">
 		<div class="w-1/6"></div>
 		<a href="/" class="mx-4 p-1">
 			@Logo()
@@ -80,6 +120,9 @@ templ nav(showBreak bool) {
 			@navLink("/usbmux/", "USBMux")
 		</div>
 		<div class="w-1/6"></div>
+		<div class="absolute top-1.5 right-2 sm:right-4">
+			@themeToggle()
+		</div>
 		if showBreak {
 			@breakBanner()
 		}
@@ -105,13 +148,13 @@ templ breakBanner() {
 }
 
 templ footerLink(href string) {
-	<a href={ templ.SafeURL(href) } class="p-1 hover:text-zinc-800">
+	<a href={ templ.SafeURL(href) } class="p-1 hover:text-fg-muted-hover">
 		{ children... }
 	</a>
 }
 
 templ footer() {
-	<div class="flex min-h-[20vh] w-full flex-row flex-wrap justify-between border border-t-gray-300 bg-gray-100 p-8 text-zinc-600 subpixel-antialiased">
+	<div class="flex min-h-[20vh] w-full flex-row flex-wrap justify-between border border-t-line-strong bg-surface-alt p-8 text-fg-muted subpixel-antialiased">
 		<div class="flex flex-col items-start justify-end font-thin subpixel-antialiased">
 			<p class="font-light">
 				* Shipments outside the EU may require customers to pay additional costs for Tax&Duties depending on the laws
@@ -125,7 +168,7 @@ templ footer() {
 				@GitHubLink("https://github.com/Badger-Embedded")
 			</div>
 			<div class="flex items-end">
-				<a href="mailto:info@badgerd.nl" rel="nofollow" class="p-1 hover:text-zinc-800">Contact</a>
+				<a href="mailto:info@badgerd.nl" rel="nofollow" class="p-1 hover:text-fg-muted-hover">Contact</a>
 				@footerLink("/refund/") {
 					Refund
 				}

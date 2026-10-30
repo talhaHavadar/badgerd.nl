@@ -45,6 +45,11 @@ Layout:
 Shell snippets in templ must use ``@components.CodeBlock(`...`)`` (templ collapses whitespace in element text), and
 text starting with `for`/`if`/`switch` or containing a standalone `@` must be wrapped in `{ "..." }`.
 
+Light/dark theme: follows the OS, with a nav toggle (`web/static/js/theme.js`) that remembers an explicit override.
+Templates use semantic colours (`bg-surface`, `text-fg-soft`, `text-link`, `border-line`, …) defined once per theme
+in `web/css/input.css`; use those instead of palette colours (`text-zinc-700`) so new markup works in both themes. In
+dark mode, images inside `<main>` get their highlights capped by an SVG filter; add `data-no-dim` to opt one out.
+
 ## Deployment
 
 ```
