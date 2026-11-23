@@ -8,9 +8,6 @@ tailwind         := "./bin/tailwindcss"
 templ            := "go tool templ"
 bin              := "bin/badgerd-web"
 
-# pure-Go build everywhere (no C compiler needed for templ, vet or tests)
-export CGO_ENABLED := "0"
-
 default: build
 
 # download the pinned Tailwind standalone CLI (no Node needed)
