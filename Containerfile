@@ -2,7 +2,7 @@
 # Build: podman build -t badgerd-web -f Containerfile .   (or: just image)
 
 # ---- build stage ----
-FROM docker.io/library/golang:1.26 AS build
+FROM docker.io/library/golang:1.27 AS build
 ARG TARGETARCH=amd64
 ARG TAILWIND_VERSION=v4.3.3
 ARG TAILWIND_SHA256_AMD64=dc61b3ac6b8c9ca874c0cc4c57b2409791a64c5540404ca5f5367360babc313a
